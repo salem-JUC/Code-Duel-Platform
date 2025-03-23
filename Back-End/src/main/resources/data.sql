@@ -1,33 +1,34 @@
-INSERT INTO users (username, email, password_hash, rating, total_matches, wins, losses)
+INSERT INTO "user" (userID, Username, Email, Password, Role, Score)
 VALUES
-    ('alice', 'alice@example.com', 'hashed_password_1', 1200, 5, 3, 2),
-    ('bob', 'bob@example.com', 'hashed_password_2', 1300, 10, 7, 3),
-    ('charlie', 'charlie@example.com', 'hashed_password_3', 1100, 8, 4, 4);
+(1, 'Alice', 'alice@example.com', 123456, 'E', 100),
+(2, 'Bob', 'bob@example.com', 654321, 'E', 85),
+(3, 'Charlie', 'charlie@example.com', 987654, 'E', 120);
 
-INSERT INTO challenges (title, description, difficulty, sample_input, sample_output)
+INSERT INTO "match" (matchID, status)
 VALUES
-    ('Two Sum', 'Find two numbers that add up to a target.', 'Easy', '[2, 7, 11, 15]\n9', '[0, 1]'),
-    ('Palindrome Check', 'Check if a string is a palindrome.', 'Medium', '"racecar"', 'true'),
-    ('Binary Search', 'Implement binary search on a sorted array.', 'Hard', '[1, 2, 3, 4, 5]\n3', '2');
+(1, 'E'),
+(2, 'E'),
+(3, 'E');
 
-INSERT INTO matches (player1_id, player2_id, challenge_id, winner_id, status, started_at, ended_at)
+INSERT INTO Challenge (ChallengeID, Title, Description, Difficulty, Sample)
 VALUES
-    (1, 2, 1, 1, 'Completed', '2023-10-01 10:00:00', '2023-10-01 10:30:00'),
-    (2, 3, 2, NULL, 'Pending', '2023-10-02 11:00:00', NULL),
-    (1, 3, 3, 3, 'Completed', '2023-10-03 12:00:00', '2023-10-03 12:45:00');
+(1, 'Two Sum', 'Find two numbers that add up to a target.', 'E', 'Sample Input: [2, 7, 11, 15], 9'),
+(2, 'Palindrome Check', 'Check if a string is a palindrome.', 'E', 'Sample Input: "racecar"'),
+(3, 'Fibonacci Sequence', 'Generate the nth Fibonacci number.', 'E', 'Sample Input: 5');
 
-INSERT INTO match_submissions (match_id, user_id, code, "language", status, submitted_at)
+INSERT INTO TestCase (testCaseID, ChallengeID, "input", ExpectedOutput)
 VALUES
-    (1, 1, 'def two_sum(nums, target): ...', 'Python', 'Accepted', '2023-10-01 10:15:00'),
-    (1, 2, 'public class Solution { ... }', 'Java', 'Wrong Answer', '2023-10-01 10:20:00'),
-    (3, 1, 'function binarySearch(arr, target) { ... }', 'JavaScript', 'Runtime Error', '2023-10-03 12:10:00'),
-    (3, 3, 'int binarySearch(int arr[], int target) { ... }', 'C++', 'Accepted', '2023-10-03 12:30:00');
+(1, 1, '[2, 7, 11, 15], 9', '[0, 1]'),
+(2, 1, '[3, 2, 4], 6', '[1, 2]'),
+(3, 2, '"racecar"', 'true'),
+(4, 2, '"hello"', 'false'),
+(5, 3, '5', '5'),
+(6, 3, '7', '13');
 
-INSERT INTO test_cases (challenge_id, "input", expected_output)
+
+INSERT INTO Submission (submissionID, ChallengeID, submitterID, Result, Code, ProgrammingLanguage)
 VALUES
-    (1, '[2, 7, 11, 15]\n9', '[0, 1]'),
-    (1, '[3, 2, 4]\n6', '[1, 2]'),
-    (2, '"racecar"', 'true'),
-    (2, '"hello"', 'false'),
-    (3, '[1, 2, 3, 4, 5]\n3', '2'),
-    (3, '[1, 2, 3, 4, 5]\n6', '-1');
+(1, 1, 1, 'Success', 'public class Solution {...}', 'E'),
+(2, 1, 2, 'Failure', 'public class Solution {...}', 'E'),
+(3, 2, 3, 'Success', 'public class Solution {...}', 'E'),
+(4, 3, 1, 'Success', 'public class Solution {...}', 'E');
