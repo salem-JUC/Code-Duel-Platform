@@ -33,6 +33,16 @@ public class TestCase {
         this.challengeID = challengeID;
     }
 
+    @Override
+    public String toString() {
+        return "TestCase{" +
+                "testCaseID=" + testCaseID +
+                ", challengeID=" + challengeID +
+                ", input='" + input + '\'' +
+                ", expectedOutput='" + expectedOutput + '\'' +
+                '}';
+    }
+
     public String getInput() {
         return input;
     }

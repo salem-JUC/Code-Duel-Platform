@@ -12,6 +12,14 @@ public class Match {
         this.status = status;
     }
 
+    @Override
+    public String toString() {
+        return "Match{" +
+                "matchID=" + matchID +
+                ", status='" + status + '\'' +
+                '}';
+    }
+
     // Getters and Setters
     public Long getMatchID() {
         return matchID;

@@ -6,6 +6,19 @@ public class User {
     private String email;
     private Long password;
     private String role;
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "userID=" + userID +
+                ", username='" + username + '\'' +
+                ", email='" + email + '\'' +
+                ", password=" + password +
+                ", role='" + role + '\'' +
+                ", score=" + score +
+                '}';
+    }
+
     private Integer score;
 
     // Constructors

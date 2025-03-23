@@ -33,6 +33,16 @@ public class UserPlayMatch {
         this.matchID = matchID;
     }
 
+    @Override
+    public String toString() {
+        return "UserPlayMatch{" +
+                "userID=" + userID +
+                ", matchID=" + matchID +
+                ", userScore=" + userScore +
+                ", result='" + result + '\'' +
+                '}';
+    }
+
     public Integer getUserScore() {
         return userScore;
     }

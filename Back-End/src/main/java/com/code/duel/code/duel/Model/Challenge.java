@@ -18,6 +18,17 @@ public class Challenge {
         this.sample = sample;
     }
 
+    @Override
+    public String toString() {
+        return "Challenge{" +
+                "challengeID=" + challengeID +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", difficulty='" + difficulty + '\'' +
+                ", sample='" + sample + '\'' +
+                '}';
+    }
+
     // Getters and Setters
     public Long getChallengeID() {
         return challengeID;
