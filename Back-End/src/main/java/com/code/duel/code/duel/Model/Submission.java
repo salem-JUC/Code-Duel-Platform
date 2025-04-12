@@ -19,6 +19,13 @@ public class Submission {
         this.code = code;
         this.programmingLanguage = programmingLanguage;
     }
+    public Submission(Long submissionID, Long challengeID, Long submitterID, String code, String programmingLanguage) {
+        this.submissionID = submissionID;
+        this.challengeID = challengeID;
+        this.submitterID = submitterID;
+        this.code = code;
+        this.programmingLanguage = programmingLanguage;
+    }
 
     // Getters and Setters
     public Long getSubmissionID() {

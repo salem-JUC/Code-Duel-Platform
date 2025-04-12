@@ -2,7 +2,7 @@ CREATE TABLE "user" (
     userID BIGINT PRIMARY KEY,
     Username VARCHAR(255),
     Email VARCHAR(255),
-    Password BIGINT,
+    Password VARCHAR(255),
     Role ENUM('E') NOT NULL,
     Score INT
 );
