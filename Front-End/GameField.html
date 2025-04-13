@@ -10,8 +10,7 @@
 <div class="Q-container">
     <canvas class="Q-canvas" id="myCanvas" width="600" height="100">
     </canvas>
-    <div class="Q-text">
-       Q1 -  Write a Java program that takes two integers as input, adds them together, and checks if divisible by 3
+    <div id="challengeDiv" class="Q-text">
     </div>
 </div>
 
@@ -21,66 +20,133 @@
     <canvas class="game-canvas" width="352" height="198">
         <img src="/Asset/Haert.png" class="H1">
         <img src="/Asset/Haert.png" class="H2">
-
-
     </canvas>
   
    </div>
    <div class = "text-container">
-    <form >
+    <form>
     <textarea placeholder="Start Coding"></textarea>
     <input onclick="duel()" value="Duel" class="submit">
 </form></div>
 <div class="P1-container">
     <div class="P1"></div>
-    <div class="user1">User1 <div id="p1-score"></div></div>
+    <div class="user1">
+        <div id="player1Div"></div>
+        <div id="p1HealthDiv"></div>
+    </div>
+    
+    
     
     
 </div>
 </div>
 <div class="P2-container">
     <div class="P2"></div>
-    <div class="user2">User2 <div id="p2-score"></div></div>
+    <div class="user1">
+        <div id="player2Div"></div>
+        <div id="p2HealthDiv"></div>
+    </div>
     
 </div>
 <script>
-    let playerHealth = 3;
-    let opponentHealth = 3;
-
-    const playerHealthDiv = document.getElementById("p1-score");
-    const opponentHealthDiv = document.getElementById("p2-score");
-    playerHealthDiv.innerHTML = playerHealth
-    opponentHealthDiv.innerHTML = opponentHealth
+    // variable init
+    let player;
+    let opponentPlayer;
+    let matchId;
+    let currentChallenge;
+    fetchPlayers()
+    fetchChallenge()
+    // DOM getting
+    const player1Div = document.getElementById("player1Div")
+    const player2Div = document.getElementById("player2Div")
+    const p1HealthDiv = document.getElementById("p1HealthDiv");
+    const p2HealthDiv = document.getElementById("p2HealthDiv");
+    const challengeDiv = document.getElementById("challengeDiv");
+    updatePlayers()
+    updateChallenge()
+    
+    
 
     function updateHealth() {
-        playerHealthDiv.innerHTML = playerHealth
-        opponentHealthDiv.innerHTML = opponentHealth
+        p1HealthDiv.innerHTML = player.health
+        p2HealthDiv.innerHTML = opponentPlayer.health
+    }
+    function updateChallenge() {
+        challengeDiv.innerHTML = currentChallenge.description + "<br>" + currentChallenge.sampleInput
     }
 
+    function endGame() {
+        alert(' wins!');
+        window.location.href = 'gameover.html'; // Redirect to the end screen
+    }
 
-function endGame() {
-    alert(' wins!');
-    window.location.href = 'gameover.html'; // Redirect to the end screen
-}
-
-function duel() {
-    result = submitSolution()
-    
-    if (result == true) {
-        opponentHealth--;
-        if(opponentHealth == 0){
-            endGame()
-        }
-    } else {
+    function duel() {
+        result = submitSolution()
+        if (result == true) {
+            opponentPlayer.health--;
+            if(opponentPlayer.health == 0){
+                endGame()
+            }
+        } else {
         
+        }
+        fetchChallenge()
+        updateChallenge()
+        updateHealth()
     }
-    updateHealth()
-}
 
-function submitSolution() {
-    // request API (challengeId, MatchId , userId , code)
-    return true;
-}
+    function submitSolution() {
+        // request API (challengeId, MatchId , userId , code)
+        return true;
+    }
+
+    function fetchPlayers() {
+        // call API to get match players and health , body match id
+        player = {
+            id : 101,
+            username : "KhalidX7x",
+            health:3
+        }
+        opponentPlayer = {
+            id : 202,
+            username : "O_Ali",
+            health:3
+        }
+        matchId = 12345;
+    }
+    function fetchChallenge() {
+        // call API to fetch random challenge
+        const codingChallenges = [
+            {
+                id: 1,
+                title: 'Two Sum',
+                description: 'Write a program that takes two numbers as input and returns their sum.',
+                difficulty: 'E',
+                sampleInput: 'Input:  5 12\noutput: 17'
+            },
+            {
+                id: 2,
+                title: 'Palindrome Check',
+                description: 'Check if a string is a palindrome.',
+                difficulty: 'E',
+                sampleInput: 'Input: "racecar"\noutput : true'
+            },
+            {
+                id: 3,
+                title: 'Fibonacci Sequence',
+                description: 'Generate the nth Fibonacci number.',
+                difficulty: 'E',
+                sampleInput: 'Input: 7\nOutput: 13'
+            }
+        ];
+        currentChallenge = codingChallenges[Math.floor(Math.random() * 3)];
+    }
+    function updatePlayers() {
+        player1Div.innerHTML =player.username
+        player2Div.innerHTML= opponentPlayer.username
+        p1HealthDiv.innerHTML = player.health
+        p2HealthDiv.innerHTML = opponentPlayer.health
+    }
 
 </script>
 </html>

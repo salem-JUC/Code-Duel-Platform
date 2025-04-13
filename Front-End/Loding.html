@@ -2,14 +2,20 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="styleL.css">
+    <link rel="stylesheet" href="/Style/styleL.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
 <body>
-    <div class="loader"></div>
-    <div class="loaderr"></div>
+    <div class="loader"><div class="match-id-text">Match ID: <span id="matchIdSpan">123ABC</span></div></div>
+    
+    
 
     
 </body>
+<script>
+    const matchIdSpan = document.getElementById("matchIdSpan");
+    // call api and get match id
+    matchIdSpan.innerHTML = "54321"
+</script>
 </html>

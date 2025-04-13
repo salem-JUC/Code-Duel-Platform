@@ -2,25 +2,25 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="stylepp.css">
+    <link rel="stylesheet" href="/Style/stylepp.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Profile Page</title>
 </head>
-<body background="./PpBG.png">
+<body background="/Asset/PpBG.png">
     
    
         <div class="card">
           
-          <img src="./Pirate Ninja.jpg" alt="Person" class="card__image">
-          <p class="card__name">User1</p>
+          <img src="/Asset/Pirate Ninja.jpg" alt="Person" class="card__image">
+          <p id="usernameP" class="card__name">User1</p>
           <div class="grid-container">
       
             <div class="grid-child-posts">
-              Level : 10
+              Level : <span id="userScoreSpan">10</span>
             </div>
       
             <div class="grid-child-followers">
-            Win/Lose : 10/8
+              Win/Lose : 10/8
             </div>
       
           </div>
@@ -33,4 +33,25 @@
  
       
 </body>
+<script>
+
+  const user = getUser()
+  const usernameP = document.getElementById("usernameP")
+  const userScoreSpan = document.getElementById("userScoreSpan")
+
+  usernameP.innerHTML = user.username
+  userScoreSpan.innerHTML = user.score
+
+  function getUser() {
+    // call api and get user details , body : user id
+    const user = {
+            id : 101,
+            username : "KhalidX7x",
+            email : "khalidX7x@gmail.com",
+            score : 22
+        }
+    return user;
+  }
+
+</script>
 </html>

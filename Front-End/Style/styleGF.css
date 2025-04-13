@@ -65,7 +65,7 @@
     transform: translate(-50%, -50%) scale(2);
 }
   .game-container .game-canvas {
-  background: url(/Asset/City1.png);
+  background: url("/Asset/City1.png");
   background-size:cover;
     image-rendering: pixelated;
 
@@ -156,11 +156,11 @@ input.submit:focus {
 }
 
 .P1 {
-    background-image: url('./Pirate%20Ninja.jpg');
+    background-image: url('/Asset//Pirate\ Ninja.jpg');
 }
 
 .P2 {
-    background-image: url('./P22.png');
+    background-image: url('/Asset/P22.png');
 }
 
 .user1, .user2 {
