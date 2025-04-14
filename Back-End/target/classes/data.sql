@@ -4,17 +4,19 @@ VALUES
 (2, 'Bob', 'bob@example.com', 654321, 'E', 85),
 (3, 'Charlie', 'charlie@example.com', 987654, 'E', 120);
 
-INSERT INTO "match" (matchID, status)
-VALUES
-(1, 'E'),
-(2, 'E'),
-(3, 'E');
-
 INSERT INTO Challenge (ChallengeID, Title, Description, Difficulty, Sample)
 VALUES
 (1, 'Two Sum', 'Find two numbers that add up to a target.', 'E', 'Sample Input: [2, 7, 11, 15], 9'),
 (2, 'Palindrome Check', 'Check if a string is a palindrome.', 'E', 'Sample Input: "racecar"'),
 (3, 'Fibonacci Sequence', 'Generate the nth Fibonacci number.', 'E', 'Sample Input: 5');
+
+INSERT INTO "match" (matchID,current_challenge_id, difficulty , programmingLanguage, status)
+VALUES
+(1,1, 'Easy' , 'Java' ,'PENDING'),
+(2,1 , 'Easy' , 'Java','PENDING'),
+(3,1 , 'Easy' , 'Java' ,'PENDING');
+
+
 
 INSERT INTO TestCase (testCaseID, ChallengeID, "input", ExpectedOutput)
 VALUES

@@ -3,17 +3,26 @@ package com.code.duel.code.duel.Model;
 public class UserPlayMatch {
     private Long userID;
     private Long matchID;
+    private String username;
     private Integer userScore;
-    private String result;
+
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
     // Constructors
     public UserPlayMatch() {}
 
-    public UserPlayMatch(Long userID, Long matchID, Integer userScore, String result) {
+    public UserPlayMatch(Long userID, Long matchID,String username, Integer userScore) {
         this.userID = userID;
         this.matchID = matchID;
+        this.username = username;
         this.userScore = userScore;
-        this.result = result;
     }
 
     // Getters and Setters
@@ -38,8 +47,8 @@ public class UserPlayMatch {
         return "UserPlayMatch{" +
                 "userID=" + userID +
                 ", matchID=" + matchID +
-                ", userScore=" + userScore +
-                ", result='" + result + '\'' +
+                ", username=" + username +
+                ", userScore=" + userScore + '\'' +
                 '}';
     }
 
@@ -51,11 +60,5 @@ public class UserPlayMatch {
         this.userScore = userScore;
     }
 
-    public String getResult() {
-        return result;
-    }
 
-    public void setResult(String result) {
-        this.result = result;
-    }
 }

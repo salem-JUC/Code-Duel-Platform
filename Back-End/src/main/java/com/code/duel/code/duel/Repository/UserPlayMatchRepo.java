@@ -15,8 +15,8 @@ public class UserPlayMatchRepo {
 
     // Save a new user_play_match entry
     public void save(UserPlayMatch userPlayMatch) {
-        String sql = "INSERT INTO user_play_match (userID, matchID, userScore, result) VALUES (?, ?, ?, ?)";
-        jdbcTemplate.update(sql, userPlayMatch.getUserID(), userPlayMatch.getMatchID(), userPlayMatch.getUserScore(), userPlayMatch.getResult());
+        String sql = "INSERT INTO user_play_match (userID, matchID,username, userScore) VALUES (?, ? , ?, ?)";
+        jdbcTemplate.update(sql, userPlayMatch.getUserID(), userPlayMatch.getMatchID(),userPlayMatch.getUsername(), userPlayMatch.getUserScore());
     }
 
     // Find all entries for a specific user
@@ -26,8 +26,8 @@ public class UserPlayMatchRepo {
                 new UserPlayMatch(
                         rs.getLong("userID"),
                         rs.getLong("matchID"),
-                        rs.getInt("userScore"),
-                        rs.getString("result")
+                        rs.getString("username"),
+                        rs.getInt("userScore")
                 ));
     }
 
@@ -38,15 +38,15 @@ public class UserPlayMatchRepo {
                 new UserPlayMatch(
                         rs.getLong("userID"),
                         rs.getLong("matchID"),
-                        rs.getInt("userScore"),
-                        rs.getString("result")
+                        rs.getString("username"),
+                        rs.getInt("userScore")
                 ));
     }
 
     // Update a user_play_match entry
     public void update(UserPlayMatch userPlayMatch) {
-        String sql = "UPDATE user_play_match SET userScore = ?, result = ? WHERE userID = ? AND matchID = ?";
-        jdbcTemplate.update(sql, userPlayMatch.getUserScore(), userPlayMatch.getResult(), userPlayMatch.getUserID(), userPlayMatch.getMatchID());
+        String sql = "UPDATE user_play_match SET userScore = ? WHERE userID = ? AND matchID = ?";
+        jdbcTemplate.update(sql, userPlayMatch.getUserScore(), userPlayMatch.getUserID(),userPlayMatch.getUsername() ,userPlayMatch.getMatchID());
     }
 
     // Delete a user_play_match entry
