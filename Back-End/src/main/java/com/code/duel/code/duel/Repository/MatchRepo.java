@@ -29,17 +29,17 @@ public class MatchRepo {
     }
 
     // Find a match by ID
-    public Optional<Match> findById(Long matchID) {
+    public Match findById(Long matchID) {
         String sql = "SELECT * FROM \"match\" WHERE matchID = ?";
 
-        return Optional.of(jdbcTemplate.queryForObject(sql, new Object[]{matchID}, (rs, rowNum) ->
+        return jdbcTemplate.queryForObject(sql, new Object[]{matchID}, (rs, rowNum) ->
                 new Match(
                         rs.getLong("matchID"),
                         rs.getLong("current_challenge_id"),
                         rs.getString("difficulty"),
                         rs.getString("programmingLanguage"),
                         rs.getString("status")
-                )));
+                ));
 
     }
 
@@ -64,6 +64,7 @@ public class MatchRepo {
                 match.getCurrentChallengeId(),
                 match.getMatchID());
     }
+
 
     // Update only the current challenge ID
     public void updateChallenge(Long matchId, Long challengeId) {

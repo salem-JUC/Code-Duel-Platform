@@ -1,13 +1,14 @@
 package com.code.duel.code.duel.Service;
 
 import com.code.duel.code.duel.Exception.MatchNotFoundException;
-import com.code.duel.code.duel.Model.Difficulty;
 import com.code.duel.code.duel.Model.Match;
 import com.code.duel.code.duel.Model.UserPlayMatch;
+import com.code.duel.code.duel.Repository.ChallengeRepo;
 import com.code.duel.code.duel.Repository.MatchRepo;
 import com.code.duel.code.duel.Repository.UserPlayMatchRepo;
 import com.code.duel.code.duel.Repository.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -19,6 +20,8 @@ public class MatchService {
     UserPlayMatchRepo userPlayMatchRepo;
     @Autowired
     UserRepo userRepo;
+    @Autowired
+    ChallengeRepo challengeRepo;
 
     long idIncrement = 1000;
     public Match createMatch(Long playerId , String difficulty , String programmingLanguage){
@@ -43,14 +46,26 @@ public class MatchService {
     }
 
     public Match joinMatch(Long matchId , Long playerId){
-        Match wantedMatch = matchRepo.findById(matchId);
-        if (wantedMatch == null)
+        Match wantedMatch;
+        try {
+            wantedMatch = matchRepo.findById(matchId);
+        }catch (EmptyResultDataAccessException e){
+            throw new MatchNotFoundException(matchId);
+        }
+        if (!wantedMatch.getStatus().equals("PENDING"))
             throw new MatchNotFoundException(matchId);
         UserPlayMatch userPlayMatch = new UserPlayMatch(playerId, wantedMatch.getMatchID(),userRepo.findById(playerId).getUsername() , 3);
         userPlayMatchRepo.save(userPlayMatch);
         wantedMatch.setStatus("RUNNING");
         wantedMatch.setCurrentChallengeId(1L);
         matchRepo.update(wantedMatch);
+        assignChallenge(wantedMatch.getMatchID());
         return wantedMatch;
+    }
+
+    public void assignChallenge(Long matchId){
+        Match match = matchRepo.findById(matchId);
+        match.setCurrentChallengeId(challengeRepo.findRandomWithDifficulty(match.getDifficulty()).getChallengeID());
+        matchRepo.update(match);
     }
 }

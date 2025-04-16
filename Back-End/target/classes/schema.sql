@@ -10,7 +10,7 @@ CREATE TABLE Challenge (
     ChallengeID BIGINT PRIMARY KEY,
     Title VARCHAR(255),
     Description VARCHAR(255),
-    Difficulty ENUM('E') NOT NULL,
+    Difficulty ENUM('Easy' , 'Med' , 'Hard') NOT NULL,
     Sample VARCHAR(255)
 );
 

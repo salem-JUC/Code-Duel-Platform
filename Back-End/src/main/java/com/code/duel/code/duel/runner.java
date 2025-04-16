@@ -1,5 +1,6 @@
 package com.code.duel.code.duel;
 
+import com.code.duel.code.duel.Exception.MatchNotFoundException;
 import com.code.duel.code.duel.Model.Difficulty;
 import com.code.duel.code.duel.Model.Match;
 import com.code.duel.code.duel.Repository.MatchRepo;
@@ -18,9 +19,15 @@ public class runner implements CommandLineRunner {
 
     public void run(String... args) throws Exception {
 
-        Match newMatch = matchService.createMatch(2L , "Easy" , "Java");
-        matchService.joinMatch(1500L , 3L);
 
+        Match match = matchService.createMatch(2L , "Med", "Java");
+        System.out.println(match.getCurrentChallengeId() + " - CurrentChallengeId of created challenge");
+        Match joinedMatch;
+        try {
+             joinedMatch = matchService.joinMatch(match.getMatchID() , 3L);
+        }catch (MatchNotFoundException e){
+            System.out.println(e.getMessage());
+        }
 
     }
 }

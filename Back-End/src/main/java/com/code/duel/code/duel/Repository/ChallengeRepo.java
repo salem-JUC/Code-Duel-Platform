@@ -2,6 +2,7 @@ package com.code.duel.code.duel.Repository;
 
 import com.code.duel.code.duel.Model.Challenge;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -69,5 +70,24 @@ public class ChallengeRepo {
                         rs.getString("Difficulty"),
                         rs.getString("Sample")
                 )));
+    }
+
+    public Challenge findRandomWithDifficulty(String difficulty) {
+        String sql = "SELECT * FROM Challenge WHERE difficulty = ? ORDER BY RAND() LIMIT 1";
+        try {
+            return jdbcTemplate.queryForObject(
+                    sql,
+                    new Object[]{difficulty},
+                    (rs, rowNum) -> new Challenge(
+                            rs.getLong("ChallengeID"),
+                            rs.getString("Title"),
+                            rs.getString("Description"),
+                            rs.getString("Difficulty"),
+                            rs.getString("Sample")
+                    )
+            );
+        } catch (EmptyResultDataAccessException e) {
+            return null; // No matching challenge found
+        }
     }
 }
