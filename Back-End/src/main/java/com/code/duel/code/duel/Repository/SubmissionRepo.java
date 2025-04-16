@@ -46,6 +46,19 @@ public class SubmissionRepo {
                 ));
     }
 
+    public List<Submission> findBysubmitterId(Long submitterId) {
+        String sql = "SELECT * FROM Submission WHERE SUBMITTERID  = ?";
+        return jdbcTemplate.query(sql, new Object[]{submitterId}, (rs, rowNum) ->
+                new Submission(
+                        rs.getLong("submissionID"),
+                        rs.getLong("ChallengeID"),
+                        rs.getLong("submitterID"),
+                        rs.getString("Result"),
+                        rs.getString("Code"),
+                        rs.getString("ProgrammingLanguage")
+                ));
+    }
+
     // Update a submission
     public void update(Submission submission) {
         String sql = "UPDATE Submission SET ChallengeID = ?, submitterID = ?, Result = ?, Code = ?, ProgrammingLanguage = ? WHERE submissionID = ?";
