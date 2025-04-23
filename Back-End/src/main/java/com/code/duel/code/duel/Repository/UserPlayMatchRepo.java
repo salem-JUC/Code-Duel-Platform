@@ -46,12 +46,34 @@ public class UserPlayMatchRepo {
     // Update a user_play_match entry
     public void update(UserPlayMatch userPlayMatch) {
         String sql = "UPDATE user_play_match SET userScore = ? WHERE userID = ? AND matchID = ?";
-        jdbcTemplate.update(sql, userPlayMatch.getUserScore(), userPlayMatch.getUserID(),userPlayMatch.getUsername() ,userPlayMatch.getMatchID());
+        jdbcTemplate.update(sql, userPlayMatch.getUserScore(), userPlayMatch.getUserID() ,userPlayMatch.getMatchID());
     }
 
     // Delete a user_play_match entry
     public void delete(Long userID, Long matchID) {
         String sql = "DELETE FROM user_play_match WHERE userID = ? AND matchID = ?";
         jdbcTemplate.update(sql, userID, matchID);
+    }
+
+    public UserPlayMatch findByUserIDAndMatchID(Long playerId, Long matchId) {
+        String sql = "SELECT * FROM user_play_match WHERE userID = ? AND matchID = ?";
+        return jdbcTemplate.queryForObject(sql, new Object[]{playerId, matchId}, (rs, rowNum) ->
+                new UserPlayMatch(
+                        rs.getLong("userID"),
+                        rs.getLong("matchID"),
+                        rs.getString("username"),
+                        rs.getInt("userScore")
+                ));
+    }
+
+    public UserPlayMatch findTheOpponent(Long playerId, Long matchId) {
+        String sql = "SELECT * FROM user_play_match WHERE userID != ? AND matchID = ?";
+        return jdbcTemplate.queryForObject(sql, new Object[]{playerId, matchId}, (rs, rowNum) ->
+                new UserPlayMatch(
+                        rs.getLong("userID"),
+                        rs.getLong("matchID"),
+                        rs.getString("username"),
+                        rs.getInt("userScore")
+                ));
     }
 }

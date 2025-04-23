@@ -8,7 +8,7 @@
    
 }
   body{
-    background: url(/Asset/PpBG.png);
+    background: url(./Asset/PpBG.png);
     backdrop-filter: blur (2px);
   margin: 0;
   padding: 0;

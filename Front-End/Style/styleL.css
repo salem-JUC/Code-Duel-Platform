@@ -8,7 +8,7 @@ body{
     align-items: center;
     height: 100vh;
     
-    background: url("/Asset/PpBG.png") no-repeat center center;
+    background: url("../Asset/PpBG.png") no-repeat center center;
     background-size: cover;
 
     /* Blur effect */

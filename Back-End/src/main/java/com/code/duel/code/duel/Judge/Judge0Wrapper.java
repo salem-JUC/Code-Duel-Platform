@@ -8,6 +8,7 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
 public class Judge0Wrapper {
+
     public void submit() throws IOException, InterruptedException {
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create("https://judge0-extra-ce.p.rapidapi.com/submissions?base64_encoded=false&wait=true&fields=*"))
@@ -21,4 +22,5 @@ public class Judge0Wrapper {
         HttpResponse<String> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
         System.out.println(response.body());
     }
+
 }

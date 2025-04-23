@@ -1,6 +1,7 @@
 package com.code.duel.code.duel.Service;
 
 import com.code.duel.code.duel.Exception.MatchNotFoundException;
+import com.code.duel.code.duel.Mappers.ResponseMapper.MatchStatusResponseMapper;
 import com.code.duel.code.duel.Model.Match;
 import com.code.duel.code.duel.Model.UserPlayMatch;
 import com.code.duel.code.duel.Repository.ChallengeRepo;
@@ -67,5 +68,34 @@ public class MatchService {
         Match match = matchRepo.findById(matchId);
         match.setCurrentChallengeId(challengeRepo.findRandomWithDifficulty(match.getDifficulty()).getChallengeID());
         matchRepo.update(match);
+    }
+
+    public void handleCorrectSubmmission(Long matchId, Long playerId, Long challengeId){
+        Match match = matchRepo.findById(matchId);
+        if (match.getCurrentChallengeId() != challengeId)
+            throw new MatchNotFoundException(matchId);
+
+        // Decrease the opponent's score
+        UserPlayMatch opponent = userPlayMatchRepo.findTheOpponent(playerId, matchId);
+        opponent.setUserScore(opponent.getUserScore() - 1);
+        System.out.println(opponent.getUserScore() + " the oppnen user score before updaing");
+        userPlayMatchRepo.update(opponent);
+        if (opponent.getUserScore() <= 0) {
+            endMatch(matchId);
+        }else {
+            assignChallenge(matchId);
+        }
+    }
+
+    private void endMatch(Long matchId) {
+        Match match = matchRepo.findById(matchId);
+        match.setStatus("FINISHED");
+        matchRepo.update(match);
+    }
+
+    public MatchStatusResponseMapper getMatchStatus(Long matchId){
+        MatchStatusResponseMapper msrm = new MatchStatusResponseMapper();
+        // TODO: implement this
+        return msrm;
     }
 }

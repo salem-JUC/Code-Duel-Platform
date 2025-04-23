@@ -1,10 +1,6 @@
 package com.code.duel.code.duel.Controller;
 
-import com.code.duel.code.duel.Model.Submission;
-import com.code.duel.code.duel.RequestMapper.SubmissionRequestMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class GameController {

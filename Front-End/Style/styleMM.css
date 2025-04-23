@@ -9,42 +9,55 @@
 }
 .header {
     position: fixed;
-    top: 50%; /* Move down to 50% of the viewport */
-    left: 85%; /* Move right to 50% of the viewport */
-    transform: translate(-50%, -50%); /* Center the element precisely */
-    
+    top: 15%;
+    left: 50%;
+    transform: translateX(-50%);
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-
-    padding: 20px 100px;
     background: transparent;
     z-index: 99;
+    padding: 0;
+    gap: 30px;
+    
+}
+.welcome-container {
+    display: flex;
+    align-items: center;
+    gap: 15px;
 }
 
-.header p{
-    font-family: 'Maria', sans-serif;
-    font-size: 35px;
-    top: 25%; 
-    right: 0;
-    
-    border: none;
-    width: 425px;
-    height: 66px;
-    color: #fff;
-    z-index: 1;
-    display: flex;
-    background: transparent ;
-    position: fixed;
-    
+.bxs-user {
+    font-size: 28px; /* Match parent element's font size */
+    color: #ffffff; /* Use color instead of fill */
+    filter: drop-shadow(2px 2px 2px rgba(0, 0, 0, 0.5)); /* Darker shadow for contrast */
+    line-height: 1; /* Prevent extra spacing */
+    vertical-align: middle; /* Better alignment with text */
 }
+
+.headerP {
+    font-family: 'Maria', sans-serif;
+    font-size: 28px;
+    color: #ffffff;
+    position: relative;
+    left: auto;
+    bottom: auto;
+    margin: 0;
+    width: auto;
+    height: auto;
+    display: block;
+    text-align: center;
+}
+
 .Logo {
-    position: fixed;
-    top: 5%; 
-    left: 55%;
+    position: relative;
+    transform: none;
+    top: auto;
+    left: 25%;
+    margin: 0;
+    white-space: nowrap;
     transform: translateX(-50%); 
-    
+    margin-bottom: 280px; 
     font-family: 'Public Pixel', sans-serif;
     font-size: 50px;
     color: #ff1717;
@@ -70,17 +83,32 @@
     text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
 }
 
+
+.navbar {
+    display: flex;
+    flex-direction: row; /* Changed from column */
+    justify-content: center;
+    gap: 20px;
+    margin-top: 30px;
+    position: relative;
+    bottom: auto;
+    padding: 20px 10px;
+    z-index: 1000;
+}
+  
+  
+
 .navbar .btnlogin-popup,
 .navbar .btnregister-popup {
-    backdrop-filter: blur(6px);
-    left: 25%;
+    backdrop-filter: blur(8px);
+    background: rgba(0, 0, 0, 0.7);
     border: none;
     width: 425px;
     height: 66px;
     color: #fff;
     z-index: 1;
     display: flex;
-    background: black ;
+  
     position: relative;
     cursor: pointer;
  
@@ -88,14 +116,16 @@
 }
 .navbar .btnlogin-popup p,
 .navbar .btnregister-popup p {
-   font-family: 'PF Tempesta Five Compressed', sans-serif;
+    font-family: 'PF Tempesta Five Compressed', sans-serif;
     margin: 0;
-    align-self: center;
+    display: flex;
+    justify-content: center; /* Horizontal center */
+    align-items: center; /* Vertical center */
+    width: 100%; /* Full width of button */
+    height: 100%; /* Full height of button */
     font-size: 25px;
     font-weight: bold;
-    text-align: left;
-    width: 92%; /* Ensures the text spans the entire width of the container */
-  }
+}
 
   .navbar .btnlogin-popup::after,
   .navbar .btnregister-popup::after {
@@ -261,7 +291,14 @@
 
 .section{
     min-height: 100vh;
-    background:url('/Asset/MMBG.png') ;
+    background:url('../Asset/BG.png') ;
     background-size: cover;
     background-position: center;
 }
+
+
+  @keyframes pulse {
+    0% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(1.1); }
+    100% { opacity: 1; transform: scale(1); }
+  }

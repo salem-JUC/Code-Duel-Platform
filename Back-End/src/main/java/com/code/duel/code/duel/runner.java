@@ -23,11 +23,12 @@ public class runner implements CommandLineRunner {
         Match match = matchService.createMatch(2L , "Med", "Java");
         System.out.println(match.getCurrentChallengeId() + " - CurrentChallengeId of created challenge");
         Match joinedMatch;
-        try {
-             joinedMatch = matchService.joinMatch(match.getMatchID() , 3L);
-        }catch (MatchNotFoundException e){
-            System.out.println(e.getMessage());
-        }
+        joinedMatch = matchService.joinMatch(match.getMatchID() , 3L);
 
+        matchService.handleCorrectSubmmission(joinedMatch.getMatchID(), 3L, 3L);
+        matchService.handleCorrectSubmmission(joinedMatch.getMatchID(), 3L, 3L);
+        matchService.handleCorrectSubmmission(joinedMatch.getMatchID(), 3L, 3L);
+
+        matchService.joinMatch(match.getMatchID() , 1L);
     }
 }
