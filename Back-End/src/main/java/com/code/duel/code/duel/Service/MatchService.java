@@ -93,9 +93,19 @@ public class MatchService {
         matchRepo.update(match);
     }
 
-    public MatchStatusResponseMapper getMatchStatus(Long matchId){
+    public MatchStatusResponseMapper getMatchStatus(Long matchId , Long playerId){
         MatchStatusResponseMapper msrm = new MatchStatusResponseMapper();
         // TODO: implement this
+        Match match = matchRepo.findById(matchId);
+        msrm.setMatch(match);
+        msrm.setCurrentChallenge(challengeRepo.findById(match.getCurrentChallengeId()));
+        userPlayMatchRepo.findByMatchId(matchId).forEach(userPlayMatch -> {
+            if (userPlayMatch.getUserID() == playerId)
+                msrm.setUserPlayMatch1(userPlayMatch);
+            else
+                msrm.setUserPlayMatch2(userPlayMatch);
+        });
+
         return msrm;
     }
 }

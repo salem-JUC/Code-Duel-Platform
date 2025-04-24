@@ -29,6 +29,6 @@ public class runner implements CommandLineRunner {
         matchService.handleCorrectSubmmission(joinedMatch.getMatchID(), 3L, 3L);
         matchService.handleCorrectSubmmission(joinedMatch.getMatchID(), 3L, 3L);
 
-        matchService.joinMatch(match.getMatchID() , 1L);
+
     }
 }

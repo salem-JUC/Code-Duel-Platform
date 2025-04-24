@@ -19,4 +19,6 @@ public class SubmissionService {
     public List<Submission> getAllSubmissionsOfSubmitter(Long submitterId) {
         return submissionRepo.findBysubmitterId(submitterId);
     }
+
+
 }
