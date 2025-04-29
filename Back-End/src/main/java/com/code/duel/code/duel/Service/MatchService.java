@@ -78,7 +78,6 @@ public class MatchService {
         // Decrease the opponent's score
         UserPlayMatch opponent = userPlayMatchRepo.findTheOpponent(playerId, matchId);
         opponent.setUserScore(opponent.getUserScore() - 1);
-        System.out.println(opponent.getUserScore() + " the oppnen user score before updaing");
         userPlayMatchRepo.update(opponent);
         if (opponent.getUserScore() <= 0) {
             endMatch(matchId);
@@ -95,7 +94,7 @@ public class MatchService {
 
     public MatchStatusResponseMapper getMatchStatus(Long matchId , Long playerId){
         MatchStatusResponseMapper msrm = new MatchStatusResponseMapper();
-        // TODO: implement this
+
         Match match = matchRepo.findById(matchId);
         msrm.setMatch(match);
         msrm.setCurrentChallenge(challengeRepo.findById(match.getCurrentChallengeId()));
