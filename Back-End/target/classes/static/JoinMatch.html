@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="./Style/styleMMK.css" />
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <title>Code Duel</title>
+</head>
+<body>
+  <header class="header">
+    <a href="#" class="Logo"> Code Duel </a>
+    <div class="welcome-container">
+      <i class='bx bxs-user'></i>
+      <p class="headerP"><span id="userNameSpan"></span></p>
+    </div>
+  
+    <!-- Navbar under the welcome message -->
+    <div class="navbar">
+      <button class="btnlogin-popup" onclick="window.location.href='JoinR.html'">
+          <p>Join Random Match</p>
+      </button>
+      <button class="btnlogin-popup" onclick="window.location.href='JMWC.html'">
+          <p>Join Match with code</p>
+      </button>
+      <button class="btnlogin-popup" onclick="window.location.href='MatchMakingMenu.html'">
+        <p>Back</p>
+    </button>
+  </div>
+  </header>
+
+  <section class="section"></section>
+
+  <script>
+    // Original JavaScript remains the same
+    async function getUser() {
+      try {
+        const response = await fetch('/api/auth/me', {
+          credentials: 'include' // Include cookies for authentication
+        });
+        
+        if (!response.ok) {
+          throw new Error('Failed to fetch user data');
+        }
+        
+        const user = await response.json();
+        document.getElementById("userNameSpan").innerText = user.username;
+        return user;
+      } catch (error) {
+        console.error('Error fetching user:', error);
+        // Redirect to login if not authenticated
+        window.location.href = 'Homepage.html';
+        return null;
+      }
+    }
+    getUser()
+
+   
+  </script>
+</body>
+</html>

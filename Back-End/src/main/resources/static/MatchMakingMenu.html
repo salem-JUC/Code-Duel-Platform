@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="./Style/styleMMK.css" />
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <title>Code Duel</title>
+</head>
+<body>
+  <header class="header">
+    <a href="#" class="Logo"> Code Duel </a>
+    <div class="welcome-container">
+      <i class='bx bxs-user'></i>
+      <p class="headerP"><span id="userNameSpan"></span></p>
+    </div>
+
+    <!-- Navbar under the welcome message -->
+    <div class="navbar">
+      <button class="btnlogin-popup" onclick="createMatch()">
+          <p>Create Match</p>
+      </button>
+      <button onclick="window.location.href='JoinMatch.html'" class="btnlogin-popup">
+          <p>Join Match</p>
+      </button>
+      <button class="btnlogin-popup" onclick="window.location.href='MineMenu.html'">
+        <p>Back</p>
+    </button>
+  </div>
+
+
+<!-- Language Selector -->
+<div class="slider-container">
+  <div class="slider-track">
+    <div class="slider-label">Language</div>
+    <div class="slider-options-group">
+      <div class="slider-background"></div>
+      <button class="slider-option active" data-value="java">JAVA</button>
+      <button class="slider-option" data-value="python">Python</button>
+    </div>
+  </div>
+</div>
+
+<!-- Difficulty Selector -->
+<div class="slider-container">
+  <div class="slider-track">
+    <div class="slider-label">Difficulty</div>
+    <div class="slider-options-group">
+      <div class="slider-background"></div>
+      <button class="slider-option active" data-value="easy">Easy</button>
+      <button class="slider-option" data-value="normal">Normal</button>
+      <button class="slider-option" data-value="hard">Hard</button>
+    </div>
+  </div>
+</div></header>
+
+  <section class="section"></section>
+
+  <script>
+    async function fetchCurrentUser() {
+      try {
+        const response = await fetch('/api/auth/me', {
+          credentials: 'include' // Important for sending cookies
+        });
+        
+        if (!response.ok) {
+          if (response.status === 401) {
+            window.location.href = '/login'; // Redirect if unauthorized
+            return;
+          }
+          throw new Error('Failed to fetch user data');
+        }
+        
+        const user = await response.json();
+        document.getElementById("userNameSpan").innerText = user.username;
+      } catch (error) {
+        console.error('Error fetching user:', error);
+        return null;
+      }
+    }
+
+    //Create match function
+    async function createMatch() {
+      language = "Java"
+      difficulty = "Easy"
+      try {
+        const response = await fetch('/api/match/create', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            difficulty: "Easy",
+            programmingLanguage: "Java"
+          }),
+          credentials: 'include'
+        });
+        
+        if (!response.ok) throw new Error('Failed to create match');
+        const matchId = await response.json();
+        window.location.href = `WaitingRoom.html?matchId=${matchId}`;
+      } catch (error) {
+        console.error('Error creating match:', error);
+        throw error;
+      }
+    }
+    
+    fetchCurrentUser()
+
+
+    document.querySelectorAll('.slider-container').forEach(container => {
+      const options = container.querySelectorAll('.slider-option');
+      const background = container.querySelector('.slider-background');
+      const optionCount = options.length;
+      
+      container.style.setProperty('--options-count', optionCount);
+      
+      options.forEach((option, index) => {
+        option.addEventListener('click', function() {
+            options.forEach(opt => opt.classList.remove('active'));
+            this.classList.add('active');
+            
+            // Correct transform calculation
+            background.style.transform = `translateX(${index * 100}%)`;
+        });
+      });
+    });
+   
+  </script>
+</body>
+</html>

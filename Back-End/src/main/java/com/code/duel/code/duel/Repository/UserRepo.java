@@ -6,6 +6,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class UserRepo {
@@ -26,7 +27,7 @@ public class UserRepo {
                         rs.getLong("userID"),
                         rs.getString("Username"),
                         rs.getString("Email"),
-                        rs.getLong("Password"),
+                        rs.getString("Password"),
                         rs.getString("Role"),
                         rs.getInt("Score")
                 ));
@@ -40,7 +41,7 @@ public class UserRepo {
                         rs.getLong("userID"),
                         rs.getString("Username"),
                         rs.getString("Email"),
-                        rs.getLong("Password"),
+                        rs.getString("Password"),
                         rs.getString("Role"),
                         rs.getInt("Score")
                 ));
@@ -56,5 +57,18 @@ public class UserRepo {
     public void deleteById(Long userID) {
         String sql = "DELETE FROM \"user\" WHERE userID = ?";
         jdbcTemplate.update(sql, userID);
+    }
+
+    public Optional<User> findByUsername(String username) {
+        String sql = "SELECT * FROM \"user\" WHERE Username = ?";
+        return jdbcTemplate.query(sql, new Object[]{username}, (rs, rowNum) ->
+                new User(
+                        rs.getLong("userID"),
+                        rs.getString("Username"),
+                        rs.getString("Email"),
+                        rs.getString("Password"),
+                        rs.getString("Role"),
+                        rs.getInt("Score")
+                )).stream().findFirst();
     }
 }

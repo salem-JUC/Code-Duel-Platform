@@ -1,8 +1,8 @@
 INSERT INTO "user" (userID, Username, Email, Password, Role, Score)
 VALUES
-(1, 'Alice', 'alice@example.com', 123456, 'E', 100),
-(2, 'Bob', 'bob@example.com', 654321, 'E', 85),
-(3, 'Charlie', 'charlie@example.com', 987654, 'E', 120);
+(1, 'Alice', 'alice@example.com', '{noop}123456', 'E', 100),
+(2, 'Bob', 'bob@example.com', '{noop}654321', 'E', 85),
+(3, 'Charlie', 'charlie@example.com', '{noop}987654', 'E', 120);
 
 INSERT INTO Challenge (ChallengeID, Title, Description, Difficulty, Sample)
 VALUES

@@ -1,10 +1,16 @@
 package com.code.duel.code.duel.Model;
 
-public class User {
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import java.util.Collection;
+import java.util.Collections;
+
+public class User implements UserDetails {
     private Long userID;
     private String username;
     private String email;
-    private Long password;
+    private String password;
     private String role;
 
     @Override
@@ -24,7 +30,7 @@ public class User {
     // Constructors
     public User() {}
 
-    public User(Long userID, String username, String email, Long password, String role, Integer score) {
+    public User(Long userID, String username, String email, String password, String role, Integer score) {
         this.userID = userID;
         this.username = username;
         this.email = email;
@@ -58,11 +64,11 @@ public class User {
         this.email = email;
     }
 
-    public Long getPassword() {
+    public String getPassword() {
         return password;
     }
 
-    public void setPassword(Long password) {
+    public void setPassword(String password) {
         this.password = password;
     }
 
@@ -80,5 +86,30 @@ public class User {
 
     public void setScore(Integer score) {
         this.score = score;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return null;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
     }
 }

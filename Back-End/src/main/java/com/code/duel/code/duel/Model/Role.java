@@ -1,5 +1,12 @@
 package com.code.duel.code.duel.Model;
 
-public enum Role {
-    ADMIN, PLAYER
+import org.springframework.security.core.GrantedAuthority;
+
+public enum Role implements GrantedAuthority {
+    ADMIN, PLAYER;
+
+    @Override
+    public String getAuthority() {
+        return "ROLE_" + name();
+    }
 }

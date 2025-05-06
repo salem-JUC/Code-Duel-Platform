@@ -2,6 +2,7 @@ package com.code.duel.code.duel.Service;
 
 import com.code.duel.code.duel.Exception.MatchNotFoundException;
 import com.code.duel.code.duel.Mappers.ResponseMapper.MatchStatusResponseMapper;
+import com.code.duel.code.duel.Model.Challenge;
 import com.code.duel.code.duel.Model.Match;
 import com.code.duel.code.duel.Model.UserPlayMatch;
 import com.code.duel.code.duel.Repository.ChallengeRepo;
@@ -66,7 +67,9 @@ public class MatchService {
 
     public void assignChallenge(Long matchId){
         Match match = matchRepo.findById(matchId);
-        match.setCurrentChallengeId(challengeRepo.findRandomWithDifficulty(match.getDifficulty()).getChallengeID());
+        String difficulty = match.getDifficulty();
+        Challenge randomChallenge = challengeRepo.findRandomWithDifficulty(difficulty);
+        match.setCurrentChallengeId(randomChallenge.getChallengeID());
         matchRepo.update(match);
     }
 
@@ -97,7 +100,11 @@ public class MatchService {
 
         Match match = matchRepo.findById(matchId);
         msrm.setMatch(match);
-        msrm.setCurrentChallenge(challengeRepo.findById(match.getCurrentChallengeId()));
+        try {
+            msrm.setCurrentChallenge(challengeRepo.findById(match.getCurrentChallengeId()));
+        } catch (EmptyResultDataAccessException e) {
+            msrm.setCurrentChallenge(null);
+        }
         userPlayMatchRepo.findByMatchId(matchId).forEach(userPlayMatch -> {
             if (userPlayMatch.getUserID() == playerId)
                 msrm.setUserPlayMatch1(userPlayMatch);
@@ -106,5 +113,14 @@ public class MatchService {
         });
 
         return msrm;
+    }
+
+    public void submitCode(Long matchId, Long playerId, Long cha){
+
+    }
+
+    public boolean isMatchReady(Long matchId) {
+        Match match = matchRepo.findById(matchId);
+        return "RUNNING".equals(match.getStatus());
     }
 }

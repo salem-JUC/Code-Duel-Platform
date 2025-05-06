@@ -1,0 +1,75 @@
+
+@import url('https://fonts.cdnfonts.com/css/pf-tempesta-five');
+@import url('https://fonts.cdnfonts.com/css/public-pixel');
+@import url('https://fonts.cdnfonts.com/css/maria-2');
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    
+    background: url("../Asset/PpBG.png") no-repeat center center;
+    background-size: cover;
+
+    /* Blur effect */
+    backdrop-filter: blur(3px); /* Adjust the blur intensity */
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.loader {
+    width: fit-content;
+    font-weight: bold;
+    font-family: monospace;
+    font-size: 30px;
+    color:#7830a800;
+    background:linear-gradient(90deg,#ffffff calc(50% - 0.5ch),#C02942 0 calc(50% + 0.5ch),#ffffff 0) right/calc(200% + 1ch) 100%;
+    -webkit-background-clip:text;
+            background-clip:text;
+    animation: l8 2s infinite steps(11);
+  }
+  .loader:before {
+    content:"Waiting for Player..."
+  }
+  @keyframes l8 {to{background-position: left}}
+  /* HTML: <div class="loader"></div> */
+.loaderr{
+    width: 60px;
+    display: flex;
+    align-items: flex-start;
+    aspect-ratio: 1;
+  }
+  .loaderr:before,
+  .loaderr:after {
+    content: "";
+    flex: 1;
+    aspect-ratio: 1;
+    --g: conic-gradient(from -90deg at 10px 10px,#ffffff 90deg,#ffffff00 0);
+    background: var(--g), var(--g), var(--g);
+    filter: drop-shadow(30px 30px 0 #fdfdfd);
+    animation: l20 1s infinite;
+  }
+  .loaderr:after {
+    transform: scaleX(-1);
+  }
+  @keyframes l20 {
+     0%   {background-position:0     0, 10px 10px, 20px 20px}
+     33%  {background-position:10px  10px}
+     66%  {background-position:0    20px,10px 10px,20px 0   }
+     100% {background-position:0     0, 10px 10px, 20px 20px}
+  }
+
+  .match-id-text {
+    margin-top: 40px;
+    font-size: 18px;
+    font-family: 'Public Pixel', sans-serif;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.4);
+    padding: 10px 20px;
+    border-radius: 10px;
+    backdrop-filter: blur(5px);
+    box-shadow: 0 0 10px rgba(255,255,255,0.2);
+    text-align: center;
+}
+.match-id-text span {
+    color: #C02942;
+}

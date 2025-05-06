@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="./Style/styleMM.css" />
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <title>Code Duel</title>
+</head>
+<body>
+  <header class="header">
+    <a href="#" class="Logo"> Code Duel </a>
+    <div class="welcome-container">
+      <i class='bx bxs-user'></i>
+      <p class="headerP"><span id="userNameSpan"></span></p>
+    </div>
+  
+    <!-- Navbar under the welcome message -->
+    <div class="navbar">
+      <button class="btnlogin-popup" onclick="window.location.href='MatchMakingMenu.html'">
+          <p>MatchMaking</p>
+      </button>
+      <button class="btnlogin-popup" onclick="window.location.href='ProfilePage.html'">
+          <p>Edit Profile</p>
+      </button>
+  </div>
+  <!-- Add this button just before closing </body> tag -->
+   <div class="navbar">
+<button class="btnlogin-popup"  onclick="logout()">
+  
+  <p>Logout</p>
+</button>
+</div>
+  </header>
+
+  <section class="section"></section>
+
+  <script>
+    async function getUser() {
+      try {
+        const response = await fetch('/api/auth/me', {
+          credentials: 'include' // Include cookies for authentication
+        });
+        
+        if (!response.ok) {
+          throw new Error('Failed to fetch user data');
+        }
+        
+        const user = await response.json();
+        document.getElementById("userNameSpan").innerText = user.username;
+        return user;
+      } catch (error) {
+        console.error('Error fetching user:', error);
+        // Redirect to login if not authenticated
+        window.location.href = 'Homepage.html';
+        return null;
+      }
+    }
+
+    // Logout function
+    async function logout() {
+      try {
+        const response = await fetch('/api/auth/logout', {
+          method: 'POST',
+          credentials: 'include'
+        });
+        
+        if (response.ok) {
+          window.location.href = 'Homepage.html';
+        }
+      } catch (error) {
+        console.error('Logout failed:', error);
+      }
+    }
+
+    // Load user when page loads
+    document.addEventListener('DOMContentLoaded', () => {
+      getUser();
+    });
+
+   
+  </script>
+</body>
+</html>
