@@ -6,6 +6,8 @@ import com.code.duel.code.duel.Model.Match;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -20,6 +22,7 @@ public class MatchRepo {
     // Save a new match
     public void save(Match match) {
         String sql = "INSERT INTO \"match\" (matchID, current_challenge_id, difficulty, programmingLanguage,status ) VALUES (?,?,? ,?, ?)";
+
         jdbcTemplate.update(sql,
                 match.getMatchID(),
                 match.getCurrentChallengeId(),

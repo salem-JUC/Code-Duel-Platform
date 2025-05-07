@@ -2,12 +2,14 @@ package com.code.duel.code.duel.Controller;
 
 import com.code.duel.code.duel.Mappers.RequestMapper.MatchCreationRequest;
 import com.code.duel.code.duel.Model.Match;
+import com.code.duel.code.duel.Model.User;
 import com.code.duel.code.duel.Service.MatchService;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.messaging.simp.annotation.SubscribeMapping;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -92,9 +94,7 @@ public class MatchWebSocketController {
 //    }
 
     @MessageMapping("/match/{matchId}/wait")
-    public void handleWaitingRoomSubscription(
-            @DestinationVariable Long matchId,
-            Principal principal) {
+    public void handleWaitingRoomSubscription(@DestinationVariable Long matchId, Principal principal) {
 
         // Check match status every second
         ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();

@@ -16,6 +16,7 @@ public class SubmissionRepo {
     public void save(Submission submission) {
         String sql = "INSERT INTO Submission (submissionID, ChallengeID, submitterID, Result, Code, ProgrammingLanguage) VALUES (?, ?, ?, ?, ?, ?)";
         jdbcTemplate.update(sql, submission.getSubmissionID(), submission.getChallengeID(), submission.getSubmitterID(), submission.getResult(), submission.getCode(), submission.getProgrammingLanguage());
+
     }
 
     // Find a submission by ID

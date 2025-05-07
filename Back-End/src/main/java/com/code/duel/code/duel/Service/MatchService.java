@@ -39,7 +39,6 @@ public class MatchService {
         userPlayMatch1.setUserID(playerId);
         userPlayMatch1.setMatchID(newMatch.getMatchID());
         String username = userRepo.findById(playerId).getUsername();
-        System.out.println(username + " created match");
         userPlayMatch1.setUsername(username);
         userPlayMatch1.setUserScore(3); // init score
         userPlayMatchRepo.save(userPlayMatch1);

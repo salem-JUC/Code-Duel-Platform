@@ -34,7 +34,7 @@
 
         // Subscribe to ready notifications
             stompClient.subscribe(`/topic/match/${matchId}/ready`, () => {
-                window.location.href = `/match-room?matchId=${matchId}`;
+                window.location.href = `/GameField.html?matchId=${matchId}`;
             });
     
         // Tell server we're waiting

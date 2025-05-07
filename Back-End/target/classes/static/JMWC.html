@@ -44,10 +44,10 @@
             }
             throw new Error('Failed to join match');
         }
-        window.location.href = `/match-room?matchId=${matchId}`;
+        window.location.href = `/GameField.html?matchId=${matchId}`;
         
       } catch (error) {
-        console.error('Error Joining match:', error);
+        alert(error)
         throw error;
       }
     }

@@ -13,7 +13,7 @@ VALUES
 
 INSERT INTO "match" (matchID,current_challenge_id, difficulty , programmingLanguage, status)
 VALUES
-(1,1, 'Easy' , 'Java' ,'PENDING'),
+(1,2, 'Easy' , 'Java' ,'PENDING'),
 (2,1 , 'Easy' , 'Java','PENDING'),
 (3,1 , 'Easy' , 'Java' ,'PENDING'),
 (4,1 , 'Easy' , 'Java' ,'RUNNING');
@@ -26,8 +26,10 @@ VALUES
 (2, 1, '[3, 2, 4], 6', '[1, 2]'),
 (3, 2, '"racecar"', 'true'),
 (4, 2, '"hello"', 'false'),
-(5, 3, '5', '5'),
-(6, 3, '7', '13');
+(5, 2, '"12321"', 'true'),
+(6, 2, '"aabbaa"', 'true'),
+(7, 2 ,'"Racecar"' , 'false'),
+(8, 2, '"hi"' , 'false');
 
 
 INSERT INTO Submission (submissionID, ChallengeID, submitterID, Result, Code, ProgrammingLanguage)

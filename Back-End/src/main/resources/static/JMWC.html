@@ -47,7 +47,7 @@
         window.location.href = `/GameField.html?matchId=${matchId}`;
         
       } catch (error) {
-        console.error('Error Joining match:', error);
+        alert(error)
         throw error;
       }
     }

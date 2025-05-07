@@ -30,7 +30,7 @@ public class Judge0Wrapper {
                 "  \"expected_output\": \"" + expectedOutputEncoded + "\"\n" +
                 "}";
 
-        logger.info("Payload to submit: " + jsonPayload);
+
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create("https://judge0-extra-ce.p.rapidapi.com/submissions?base64_encoded=true&wait=true&fields=*"))
                 .header("x-rapidapi-key", "e3f6fcba8emsh427fb13a3e71224p128063jsn30301f1d3849")
@@ -40,11 +40,11 @@ public class Judge0Wrapper {
                 )
                 .build();
 
-        logger.info("Request to submit: " + request.headers());
+
 
         HttpResponse<String> response = HttpClient.newHttpClient()
                 .send(request, HttpResponse.BodyHandlers.ofString());
-        logger.info("Response from Judge0: " + response.body());
+
 
         ObjectMapper objectMapper = new ObjectMapper();
         JsonNode rootNode = objectMapper.readTree(response.body());
