@@ -29,7 +29,10 @@ VALUES
 (5, 2, '"12321"', 'true'),
 (6, 2, '"aabbaa"', 'true'),
 (7, 2 ,'"Racecar"' , 'false'),
-(8, 2, '"hi"' , 'false');
+(8, 2, '"hi"' , 'false'),
+(9, 4, '10 5' , '5'),
+(10, 4, '3 2' , '1'),
+(11, 4, '9 4' , '5');
 
 
 INSERT INTO Submission (submissionID, ChallengeID, submitterID, Result, Code, ProgrammingLanguage)

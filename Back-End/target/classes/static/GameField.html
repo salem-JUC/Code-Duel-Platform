@@ -4,13 +4,15 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="./Style/styleGF.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <!-- <script src="/Script/GameLogic.js"></script> -->
+    <title>Game Field</title>
+    <script src="https://cdn.jsdelivr.net/npm/sockjs-client/dist/sockjs.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js" integrity="sha512-iKDtgDyTHjAitUDdLljGhenhPwrbBfqTKWO1mkhSFH3A7blITC9MhYon6SjnMhp4o0rADGw9yAC6EW4t5a4K3g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
 </head>
 <div class="Q-container">
-    <canvas class="Q-canvas" id="myCanvas" width="600" height="100">
-    </canvas>
+    <canvas class="Q-canvas" id="myCanvas" width="600" height="100"></canvas>
     <div id="challengeDiv" class="Q-text">
+    This Challnege
     </div>
 </div>
 
@@ -25,31 +27,27 @@
    </div>
    <div class = "text-container">
     <form>
-    <textarea placeholder="Start Coding"></textarea>
-    <input onclick="duel()" value="Duel" class="submit">
+    <textarea placeholder="Start Coding" id="codeEditor"></textarea>
+    <input value="Duel" class="submit" id="submitBtn">
 </form></div>
 <div class="P1-container">
     <div class="P1"></div>
     <div class="user1">
-        <div id="player1Div"></div>
-        <div id="p1HealthDiv"></div>
+        <div id="p1UsernameDiv">Salem Alsairi</div>
+        
     </div>
-    
-    
-    
-    
+    <div id="p1HealthDiv">3</div>
 </div>
 </div>
 <div class="P2-container">
     <div class="P2"></div>
     <div class="user1">
-        <div id="player2Div"></div>
-        <div id="p2HealthDiv"></div>
+        <div id="p2UsernameDiv">Ali</div>
+        
     </div>
+    <div id="p2HealthDiv">3</div>
     
 </div>
-<script>
-    
-
-</script>
+<script src="/Script/GameLogic.js"></script>
+<script></script>
 </html>

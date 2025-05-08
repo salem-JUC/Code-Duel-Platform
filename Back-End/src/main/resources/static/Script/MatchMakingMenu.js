@@ -14,6 +14,7 @@ async function fetchCurrentUser() {
       
       const user = await response.json();
       document.getElementById("userNameSpan").innerText = user.username;
+      console.log(user)
     } catch (error) {
       console.error('Error fetching user:', error);
       return null;

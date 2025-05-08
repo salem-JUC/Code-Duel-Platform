@@ -8,9 +8,7 @@ public class WebSocketSecurityConfiguration extends AbstractSecurityWebSocketMes
     @Override
     protected void configureInbound(MessageSecurityMetadataSourceRegistry messages) {
         messages
-                .simpDestMatchers("/**").permitAll()
-                .simpSubscribeDestMatchers("/**").permitAll()
-                .anyMessage().permitAll();
+                .anyMessage().authenticated();
     }
     @Override
     protected boolean sameOriginDisabled() {
