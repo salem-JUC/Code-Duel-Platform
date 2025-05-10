@@ -6,34 +6,62 @@ VALUES
 
 INSERT INTO Challenge (ChallengeID, Title, Description, Difficulty, Sample)
 VALUES
-(1, 'Two Sum', 'Find two numbers that add up to a target.', 'Easy', 'Sample Input: [2, 7, 11, 15], 9'),
-(2, 'Palindrome Check', 'Check if a string is a palindrome.', 'Hard', 'Sample Input: "racecar"'),
-(3, 'Fibonacci Sequence', 'Generate the nth Fibonacci number.', 'Med', 'Sample Input: 5'),
-(4, 'Two Minus', 'Find two numbers that mins up to a target.', 'Easy', 'Sample Input: [2, 7, 11, 15], 9');
+(1, 'Sum of Two Numbers', 'Read two integers and print their sum.', 'Easy', 'Sample Input: 3 5'),
+(2, 'Even or Odd', 'Determine if an integer is even or odd.', 'Easy', 'Sample Input: 4'),
+(3, 'Maximum of Two Numbers', 'Print the larger of two numbers.', 'Easy', 'Sample Input: 7 9'),
+(4, 'Area of a Rectangle', 'Read the length and width of a rectangle and calculate its area.', 'Easy', 'Sample Input: 5 3')
+(5, 'Convert Minutes to Seconds', 'Convert a number of minutes to seconds.', 'Easy', 'Sample Input: 5'),
+(6, 'Fibonacci Sequence', 'Generate the nth Fibonacci number.', 'Normal', 'Sample Input: 5'),
+(7, 'Reverse a String', 'Read a string and print its reverse.', 'Normal', 'Sample Input: hello'),
+(8, 'Count Vowels in a Word', 'Count how many vowels are in a given lowercase word.', 'Normal', 'Sample Input: banana'),
+(9, 'Square a Number', 'Read a number and output its square.', 'Normal', 'Sample Input: 4'),
+(10, 'Find Smallest of Three Numbers', 'Given three integers, print the smallest.', 'Normal', 'Sample Input: 3 1 2'),
+(11, 'Sum of Digits', 'Read a number and print the sum of its digits.', 'Hard', 'Sample Input: 1234'),
+(12, 'Check for Palindrome Number', 'Check if a number reads the same backward.', 'Hard', 'Sample Input: 121'),
+(13, 'Print Multiples of 3 up to N', 'Print all numbers divisible by 3 up to a number n.', 'Hard', 'Sample Input: 10'),
+(14, 'Count Letters in a String', 'Count the number of letters in a string (excluding spaces).', 'Hard', 'Sample Input: hello world'),
+(15, 'Capitalize First Letter', 'Convert the first character of a word to uppercase.', 'Hard', 'Sample Input: hello');
 
 INSERT INTO "match" (matchID,current_challenge_id, difficulty , programmingLanguage, status)
 VALUES
-(1,2, 'Easy' , 'Java' ,'PENDING'),
+(1,1, 'Easy' , 'Java' ,'PENDING'),
 (2,1 , 'Easy' , 'Java','PENDING'),
 (3,1 , 'Easy' , 'Java' ,'PENDING'),
 (4,1 , 'Easy' , 'Java' ,'RUNNING');
 
 
-
 INSERT INTO TestCase (testCaseID, ChallengeID, "input", ExpectedOutput)
 VALUES
-(1, 1, '[2, 7, 11, 15], 9', '[0, 1]'),
-(2, 1, '[3, 2, 4], 6', '[1, 2]'),
-(3, 2, '"racecar"', 'true'),
-(4, 2, '"hello"', 'false'),
-(5, 2, '"12321"', 'true'),
-(6, 2, '"aabbaa"', 'true'),
-(7, 2 ,'"Racecar"' , 'false'),
-(8, 2, '"hi"' , 'false'),
-(9, 4, '10 5' , '5'),
-(10, 4, '3 2' , '1'),
-(11, 4, '9 4' , '5');
-
+(1, 1, '3 5', '8'),
+(2, 1, '3 5', '7'),
+(3, 2, '4', 'Even'),
+(4, 2, '4', 'Odd'),
+(5, 3, '7 9', '9'),
+(6, 3, '7 9', '7'),
+(7, 4, '5 3', '15'),
+(8, 4, '5 3', '8'),
+(9, 5, '5', '300'),
+(10, 5, '5', '60'),
+(11, 6, '5', '5'),
+(12, 6, '5', '8'),
+(13, 7, 'hello', 'olleh'),
+(14, 7, 'hello', 'hello'),
+(15, 8, 'banana', '3'),
+(16, 8, 'banana', '2'),
+(17, 9, '4', '16'),
+(18, 9, '4', '8'),
+(19, 10, '3 1 2', '1'),
+(20, 10, '3 1 2', '3'),
+(21, 11, '1234', '10'),
+(22, 11, '1234', '6'),
+(23, 12, '121', 'true'),
+(24, 12, '121', 'false'),
+(25, 13, '10', '3 6 9'),
+(26, 13, '10', '2 4 8'),
+(27, 14, 'hello world', '10'),
+(28, 14, 'hello world', '11'),
+(29, 15, 'hello', 'Hello'),
+(30, 15, 'hello', 'hello');
 
 INSERT INTO Submission (submissionID, ChallengeID, submitterID, Result, Code, ProgrammingLanguage)
 VALUES
