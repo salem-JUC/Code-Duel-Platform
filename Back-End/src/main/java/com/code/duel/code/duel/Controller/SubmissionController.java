@@ -1,7 +1,10 @@
 package com.code.duel.code.duel.Controller;
 
+import com.code.duel.code.duel.Mappers.ResponseMapper.SubmissionWithChallengeResponse;
+import com.code.duel.code.duel.Model.Challenge;
 import com.code.duel.code.duel.Model.Submission;
 import com.code.duel.code.duel.Model.User;
+import com.code.duel.code.duel.Service.ChallengeService;
 import com.code.duel.code.duel.Service.SubmissionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -19,10 +22,24 @@ import java.util.List;
 public class SubmissionController {
     @Autowired
     SubmissionService submissionService;
+    @Autowired
+    ChallengeService challengeService;
 
-    @GetMapping("/my-submissions")
+    @GetMapping("/submissions")
     public ResponseEntity<List<Submission>> getSubmissionsByUserId(@AuthenticationPrincipal User user) {
         List<Submission> submissions = submissionService.getAllSubmissionsOfSubmitter(user.getUserID());
         return ResponseEntity.ok(submissions);
+    }
+    @GetMapping("/submissions/{challengeId}")
+    public ResponseEntity<List<Submission>> getSubmissionsByChallengeId(@PathVariable Long challengeId) {
+        List<Submission> submissions = submissionService.getAllSubmissionsOfChallenge(challengeId);
+        return ResponseEntity.ok(submissions);
+    }
+    @GetMapping("submissions/{submissionId}")
+    public ResponseEntity<SubmissionWithChallengeResponse> getSubmissionById(@PathVariable Long submissionId) {
+        Submission submission = submissionService.getSubmissionById(submissionId);
+        Challenge challenge = challengeService.getChallengeById(submission.getChallengeID());
+        SubmissionWithChallengeResponse submissionWithChallengeResponse = new SubmissionWithChallengeResponse(submission , challenge);
+        return ResponseEntity.ok(submissionWithChallengeResponse);
     }
 }

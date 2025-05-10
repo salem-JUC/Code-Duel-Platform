@@ -14,7 +14,7 @@ public class EvaluationModule {
     @Autowired
     private Judge0Wrapper judge0Wrapper;
 
-    public Submission evaluate(Submission submission, List<TestCase> testCases) {
+    public String evaluate(Submission submission, List<TestCase> testCases) {
         System.out.println("Evaluating submission: " + submission.getSubmissionID());
         int languageId =0;
         if (submission.getProgrammingLanguage().equals("Java")) {
@@ -36,21 +36,19 @@ public class EvaluationModule {
                         testCase.getInput(),
                         testCase.getExpectedOutput()
                 );
-
-                if (!"Accepted".equalsIgnoreCase(status)) {
-                    submission.setResult(status);
-                    return submission;
+                System.out.println("Test case " + (i + 1) + " status: " + status);
+                if (!status.equals("Accepted")) {
+                    return status;
                 }
 
             } catch (IOException | InterruptedException e) {
                 e.printStackTrace();
-                submission.setResult("Error");
-                return submission;
+                return "Execuation Error";
             }
             System.out.println("Test case " + (i + 1) + " passed.");
         }
+        System.out.println("All test cases passed.");
 
-        submission.setResult("Accepted");
-        return submission;
+        return "Accepted";
     }
 }

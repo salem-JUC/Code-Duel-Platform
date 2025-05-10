@@ -50,4 +50,15 @@ public class MatchController {
         MatchStatusResponseMapper matchStatus = matchService.getMatchStatus(1000L , 1L);
         return ResponseEntity.ok(matchStatus);
     }
+
+    @GetMapping("/matchesByUser")
+    public ResponseEntity<List<Match>> getMatchesByUserId(@AuthenticationPrincipal User user) {
+        List<Match> matches;
+        try {
+            matches = matchService.getMatchesByUserId(user.getUserID());
+        }catch (MatchNotFoundException e){
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(matches);
+    }
 }

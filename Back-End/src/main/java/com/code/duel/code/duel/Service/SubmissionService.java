@@ -36,6 +36,10 @@ public class SubmissionService {
         return submissionRepo.findBysubmitterId(submitterId);
     }
 
+    public Submission getSubmissionById(Long submissionId) {
+        return submissionRepo.findById(submissionId);
+    }
+
     public Submission createSubmission(Long matchId ,  Long submitterId , String code) {
         Match match = matchRepo.findById(matchId);
         Submission submission = new Submission();
@@ -46,10 +50,11 @@ public class SubmissionService {
         submission.setProgrammingLanguage(match.getProgrammingLanguage());
         submission.setSubmitterID(submitterId);
         List<TestCase> testCases = testCaseRepo.findByChallengeId(match.getCurrentChallengeId());
-        submission = evaluationModule.evaluate(submission , testCases);
+        submission.setResult(evaluationModule.evaluate(submission , testCases));
+        System.out.println("Submission evaluated: assigned" + submission.getResult());
         submissionRepo.save(submission);
+        System.out.println("Submission created: " + submission.getSubmissionID());
         return submission;
-
     }
 
 

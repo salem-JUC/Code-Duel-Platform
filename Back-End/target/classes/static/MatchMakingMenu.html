@@ -35,8 +35,8 @@
     <div class="slider-label">Language</div>
     <div class="slider-options-group">
       <div class="slider-background"></div>
-      <button class="slider-option active" data-value="java">JAVA</button>
-      <button class="slider-option" data-value="python">Python</button>
+      <button class="slider-option active" data-value="Java">JAVA</button>
+      <button class="slider-option" data-value="Python">Python</button>
     </div>
   </div>
 </div>
@@ -47,27 +47,25 @@
     <div class="slider-label">Difficulty</div>
     <div class="slider-options-group">
       <div class="slider-background"></div>
-      <button class="slider-option active" data-value="easy">Easy</button>
+      <button class="slider-option active" data-value="Easy">Easy</button>
       <button class="slider-option" data-value="normal">Normal</button>
-      <button class="slider-option" data-value="hard">Hard</button>
+      <button class="slider-option" data-value="Hard">Hard</button>
     </div>
   </div>
 </div></header>
 
   <section class="section"></section>
   
-  <script src="/Script/MatchMakingMenu.js">
-    
-
-
+  <script src="/Script/MatchMakingMenu.js"></script>
+  <script>
     document.querySelectorAll('.slider-container').forEach(container => {
-      const options = container.querySelectorAll('.slider-option');
-      const background = container.querySelector('.slider-background');
-      const optionCount = options.length;
-      
-      container.style.setProperty('--options-count', optionCount);
-      
-      options.forEach((option, index) => {
+    const options = container.querySelectorAll('.slider-option');
+    const background = container.querySelector('.slider-background');
+    const optionCount = options.length;
+    
+    container.style.setProperty('--options-count', optionCount);
+    
+    options.forEach((option, index) => {
         option.addEventListener('click', function() {
             options.forEach(opt => opt.classList.remove('active'));
             this.classList.add('active');
@@ -75,9 +73,11 @@
             // Correct transform calculation
             background.style.transform = `translateX(${index * 100}%)`;
         });
-      });
     });
-   
+});
+
+console.log(getAllSliderValues())
+
   </script>
 </body>
 </html>

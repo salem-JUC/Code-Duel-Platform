@@ -7,21 +7,21 @@ public class Match {
     private String difficulty;
     private String programmingLanguage;
 
-
-
     private String status;
+    Long winnerId;
 
 
 
     // Constructors
     public Match() {}
 
-    public Match(Long matchID,  Long currentChallengeId, String difficulty ,String programmingLanguage,String status ) {
+    public Match(Long matchID,  Long currentChallengeId, String difficulty ,String programmingLanguage,String status  , Long winnerId) {
         this.matchID = matchID;
         this.currentChallengeId = currentChallengeId;
         this.difficulty = difficulty;
         this.programmingLanguage = programmingLanguage;
         this.status = status;
+        this.winnerId = winnerId;
     }
 
     @Override
@@ -31,7 +31,8 @@ public class Match {
                 ", currentChallengeId=" + currentChallengeId +
                 ", difficulty='" + difficulty + '\'' +
                 ", programmingLanguage='" + programmingLanguage + '\'' +
-                ", status='" + status + '\'' +
+                ", status='" + status +
+                ", winnerId= " + winnerId + '\'' +
                 '}';
     }
 
@@ -71,5 +72,11 @@ public class Match {
 
     public void setProgrammingLanguage(String programmingLanguage) {
         this.programmingLanguage = programmingLanguage;
+    }
+    public Long getWinnerId() {
+        return winnerId;
+    }
+    public void setWinnerId(Long winnerId) {
+        this.winnerId = winnerId;
     }
 }

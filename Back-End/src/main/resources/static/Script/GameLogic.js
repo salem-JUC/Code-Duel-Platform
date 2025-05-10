@@ -1,4 +1,6 @@
 // GameLogic.js - Real-time competitive coding duel
+
+
 class GameLogic {
     constructor() {
         this.stompClient = null;
@@ -116,6 +118,7 @@ class GameLogic {
 
     // Handle code submission
     handleSubmit() {
+        
         if (!this.isGameActive) return;
         
         const code = document.getElementById('codeEditor').value.trim();
@@ -135,6 +138,7 @@ class GameLogic {
 
     // Process hit event
     handleHitEvent(hit) {
+        console.log(hit)
         const isAttacker = hit.hittingPlayerId === this.playerId;
         
         // Update health values
@@ -240,6 +244,7 @@ window.onload = async () => {
     const user = await fetchCurrentUser()
     const game = new GameLogic();
     game.init(user);
+    
 };
 
 async function fetchCurrentUser() {

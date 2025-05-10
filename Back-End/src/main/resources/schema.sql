@@ -10,7 +10,7 @@ CREATE TABLE Challenge (
     ChallengeID BIGINT PRIMARY KEY,
     Title VARCHAR(255),
     Description VARCHAR(255),
-    Difficulty ENUM('Easy' , 'Med' , 'Hard') NOT NULL,
+    Difficulty ENUM('Easy' , 'Normal' , 'Hard') NOT NULL,
     Sample VARCHAR(255)
 );
 
@@ -21,11 +21,9 @@ CREATE TABLE "match" (
     difficulty VARCHAR(255),
     programmingLanguage VARCHAR(255),
     status ENUM('PENDING' , 'RUNNING' , 'FINISHED') NOT NULL,
+    winnerId BIGINT,
     FOREIGN KEY (current_challenge_id) REFERENCES Challenge(ChallengeID)
 );
-
--- Create Challenge table
-
 
 -- Create TestCase table
 CREATE TABLE TestCase (
@@ -53,7 +51,7 @@ CREATE TABLE Submission (
     submitterID BIGINT,
     Result VARCHAR(255),
     Code TEXT,
-    ProgrammingLanguage ENUM('E'),
+    ProgrammingLanguage VARCHAR(255),
     FOREIGN KEY (ChallengeID) REFERENCES Challenge(ChallengeID),
     FOREIGN KEY (submitterID) REFERENCES "user"(userID)
 );

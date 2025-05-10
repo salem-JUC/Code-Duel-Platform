@@ -13,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class MatchService {
 
@@ -32,6 +34,7 @@ public class MatchService {
         newMatch.setMatchID(idIncrement);
         newMatch.setDifficulty(difficulty);
         newMatch.setProgrammingLanguage(programmingLanguage);
+        newMatch.setWinnerId(0L);
         idIncrement++;
         matchRepo.save(newMatch);
 
@@ -73,6 +76,7 @@ public class MatchService {
     }
 
     public void handleCorrectSubmmission(Long matchId, Long playerId, Long challengeId){
+        System.out.println("match service Handling correct submission for match ID: " + matchId + ", player ID: " + playerId + ", challenge ID: " + challengeId);
         Match match = matchRepo.findById(matchId);
         if (match.getCurrentChallengeId() != challengeId)
             throw new MatchNotFoundException(matchId);
@@ -82,15 +86,16 @@ public class MatchService {
         opponent.setUserScore(opponent.getUserScore() - 1);
         userPlayMatchRepo.update(opponent);
         if (opponent.getUserScore() <= 0) {
-            endMatch(matchId);
+            endMatch(matchId , playerId);
         }else {
             assignChallenge(matchId);
         }
     }
 
-    private void endMatch(Long matchId) {
+    private void endMatch(Long winnerId,Long matchId) {
         Match match = matchRepo.findById(matchId);
         match.setStatus("FINISHED");
+        match.setWinnerId(winnerId);
         matchRepo.update(match);
     }
 
@@ -114,12 +119,49 @@ public class MatchService {
         return msrm;
     }
 
-    public void submitCode(Long matchId, Long playerId, Long cha){
 
-    }
 
     public boolean isMatchReady(Long matchId) {
         Match match = matchRepo.findById(matchId);
         return "RUNNING".equals(match.getStatus());
     }
+
+    public List<Match> getAllMatches() {
+        return matchRepo.findAll();
+    }
+    public List<Match> getMatchesByUserId(Long userId) {
+        List<Match> matches;
+        try {
+            matches = matchRepo.findAllMatchesByUserIdOrderByRecent(userId);
+        }catch (EmptyResultDataAccessException e){
+            throw new MatchNotFoundException(userId);
+        }
+        return matches;
+    }
+
+    public List<Match> getMatchesWinnerId(Long winnerId) {
+        List<Match> matches;
+        try {
+            matches = matchRepo.findAllMatchesWinnedByUserIdOrderByRecent(winnerId);
+        }catch (EmptyResultDataAccessException e){
+            throw new MatchNotFoundException(winnerId);
+        }
+        return matches;
+    }
+
+    public String getWinLoseRationByUserId(Long userId){
+        try {
+            int winnedMatches = getMatchesWinnerId(userId).size();
+            int allMatches = getMatchesByUserId(userId).size();
+            return "" + winnedMatches + "/" + (allMatches-winnedMatches) + "";
+        }catch (MatchNotFoundException e){
+            return "0/0";
+        }catch (Exception e){
+            return "0/0";
+        }
+
+    }
+
+
+
 }

@@ -9,45 +9,36 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js" integrity="sha512-iKDtgDyTHjAitUDdLljGhenhPwrbBfqTKWO1mkhSFH3A7blITC9MhYon6SjnMhp4o0rADGw9yAC6EW4t5a4K3g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 </head>
-<div class="Q-container">
-    <canvas class="Q-canvas" id="myCanvas" width="600" height="100"></canvas>
-    <div id="challengeDiv" class="Q-text">
-    This Challnege
+    <div class="Q-container">
+        <div id="challengeDiv" class="Q-text"></div>
     </div>
-</div>
 
+    <div id="p1UsernameDiv" class="player-label">BOB</div>
+    <div id="p1HealthDiv" class="health-bar player1"></div>
 
-
-<div class="game-container">
-    <canvas class="game-canvas" width="352" height="198">
-        <img src="./Asset/Haert.png" class="H1">
-        <img src="./Asset/Haert.png" class="H2">
-    </canvas>
-  
-   </div>
-   <div class = "text-container">
-    <form>
-    <textarea placeholder="Start Coding" id="codeEditor"></textarea>
-    <input value="Duel" class="submit" id="submitBtn">
-</form></div>
-<div class="P1-container">
-    <div class="P1"></div>
-    <div class="user1">
-        <div id="p1UsernameDiv">Salem Alsairi</div>
-        
-    </div>
-    <div id="p1HealthDiv">3</div>
-</div>
-</div>
-<div class="P2-container">
-    <div class="P2"></div>
-    <div class="user1">
-        <div id="p2UsernameDiv">Ali</div>
-        
-    </div>
-    <div id="p2HealthDiv">3</div>
+    <!-- شريط صحة الخصم -->
+    <div id="p2UsernameDiv" class="player-label-2">Ali</div>
+    <div id="p2HealthDiv" class="health-bar enemy"></div>
+        <!-- بقية العناصر -->
+        <div class="game-container">
+        <canvas class="game-canvas" width="352" height="198">
     
-</div>
-<script src="/Script/GameLogic.js"></script>
-<script></script>
+            
+        </canvas>
+        </div>
+    
+
+
+    <div class="text-container">
+        <form>
+            <textarea id="codeEditor" placeholder="Start Coding"></textarea>
+            <input type="button" id="submitBtn" value="Duel" class="submit">
+        </form>
+    </div>
+    <script src="./Script/Overworld.js"></script>
+    <script src="./Script/GameObject.js"></script>
+    <script src="./Script/Sprite.js"></script>
+    <script src="./Script/init.js"></script>
+    <script src="/Script/GameLogic.js"></script>
+    <script></script>
 </html>

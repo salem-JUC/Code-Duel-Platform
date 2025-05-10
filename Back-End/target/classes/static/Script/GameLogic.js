@@ -1,4 +1,6 @@
 // GameLogic.js - Real-time competitive coding duel
+import { Overworld } from "./Overworld.js";
+
 class GameLogic {
     constructor() {
         this.stompClient = null;
@@ -116,25 +118,27 @@ class GameLogic {
 
     // Handle code submission
     handleSubmit() {
-        if (!this.isGameActive) return;
+        Overworld.playerPerformAttack() 
+        // if (!this.isGameActive) return;
         
-        const code = document.getElementById('codeEditor').value.trim();
-        if (!code) {
-            this.showError("Please write some code first!");
-            return;
-        }
+        // const code = document.getElementById('codeEditor').value.trim();
+        // if (!code) {
+        //     this.showError("Please write some code first!");
+        //     return;
+        // }
 
-        this.stompClient.send(`/app/match/${this.matchId}/submit`, {}, JSON.stringify({
-            challengeId: this.currentChallenge.id,
-            code: code
-        }));
+        // this.stompClient.send(`/app/match/${this.matchId}/submit`, {}, JSON.stringify({
+        //     challengeId: this.currentChallenge.id,
+        //     code: code
+        // }));
         
-        // Clear editor but keep it enabled for next attempt
-        document.getElementById('codeEditor').value = '';
+        // // Clear editor but keep it enabled for next attempt
+        // document.getElementById('codeEditor').value = '';
     }
 
     // Process hit event
     handleHitEvent(hit) {
+        console.log(hit)
         const isAttacker = hit.hittingPlayerId === this.playerId;
         
         // Update health values
@@ -240,6 +244,7 @@ window.onload = async () => {
     const user = await fetchCurrentUser()
     const game = new GameLogic();
     game.init(user);
+    
 };
 
 async function fetchCurrentUser() {

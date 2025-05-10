@@ -19,12 +19,28 @@ async function fetchCurrentUser() {
       console.error('Error fetching user:', error);
       return null;
     }
+}
+
+  function getAllSliderValues() {
+    const values = {};
+    
+    document.querySelectorAll('.slider-container').forEach(container => {
+      const label = container.querySelector('.slider-label')?.innerText.toLowerCase();
+      const activeOption = container.querySelector('.slider-option.active');
+      if (label && activeOption) {
+        values[label] = activeOption.dataset.value;
+      }
+    });
+  
+    return values;
   }
 
   //Create match function
   async function createMatch() {
-    language = "Java"
-    difficulty = "Easy"
+    language = getAllSliderValues().language
+    difficulty = getAllSliderValues().difficulty
+    console.log("labuage " + language)
+    console.log("diffuty " + difficulty)
     try {
       const response = await fetch('/api/match/create', {
         method: 'POST',

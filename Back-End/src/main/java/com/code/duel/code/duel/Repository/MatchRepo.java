@@ -21,14 +21,15 @@ public class MatchRepo {
 
     // Save a new match
     public void save(Match match) {
-        String sql = "INSERT INTO \"match\" (matchID, current_challenge_id, difficulty, programmingLanguage,status ) VALUES (?,?,? ,?, ?)";
+        String sql = "INSERT INTO \"match\" (matchID, current_challenge_id, difficulty, programmingLanguage,status, winnerId) VALUES (?,?,? ,?, ? ,?)";
 
         jdbcTemplate.update(sql,
                 match.getMatchID(),
                 match.getCurrentChallengeId(),
                 match.getDifficulty(),
                 match.getProgrammingLanguage(),
-                match.getStatus());
+                match.getStatus(),
+                match.getWinnerId());
     }
 
     // Find a match by ID
@@ -41,7 +42,8 @@ public class MatchRepo {
                         rs.getLong("current_challenge_id"),
                         rs.getString("difficulty"),
                         rs.getString("programmingLanguage"),
-                        rs.getString("status")
+                        rs.getString("status"),
+                        rs.getLong("winnerId")
                 ));
 
     }
@@ -55,16 +57,18 @@ public class MatchRepo {
                         rs.getLong("current_challenge_id"),
                         rs.getString("difficulty"),
                         rs.getString("programmingLanguage"),
-                        rs.getString("status")
+                        rs.getString("status"),
+                        rs.getLong("matchID")
                 ));
     }
 
     // Update a match (including challenge ID)
     public void update(Match match) {
-        String sql = "UPDATE \"match\" SET status = ?, current_challenge_id = ? WHERE matchID = ?";
+        String sql = "UPDATE \"match\" SET status = ?, current_challenge_id = ?, winnerId = ? WHERE matchID = ?";
         jdbcTemplate.update(sql,
                 match.getStatus(),
                 match.getCurrentChallengeId(),
+                match.getWinnerId(),
                 match.getMatchID());
     }
 
@@ -90,7 +94,8 @@ public class MatchRepo {
                         rs.getLong("current_challenge_id"),
                         rs.getString("difficulty"),
                         rs.getString("programmingLanguage"),
-                        rs.getString("status")
+                        rs.getString("status"),
+                        rs.getLong("winnerId")
                 ));
     }
 
@@ -103,7 +108,51 @@ public class MatchRepo {
                         rs.getLong("current_challenge_id"),
                         rs.getString("difficulty"),
                         rs.getString("programmingLanguage"),
-                        rs.getString("status")
+                        rs.getString("status"),
+                        rs.getLong("winnerId")
                 )).stream().findFirst();
+    }
+
+    public List<Match> findAllMatchesByUserIdOrderByRecent(Long userId) {
+        String sql = """
+            SELECT m.matchID, m.current_challenge_id, m.difficulty, 
+                   m.programmingLanguage, m.status, m.winnerId
+            FROM "match" m
+            JOIN user_play_match upm ON m.matchID = upm.matchID
+            WHERE upm.userID = ?
+            ORDER BY m.matchID DESC
+            """;
+
+        return jdbcTemplate.query(sql, new Object[]{userId}, (rs, rowNum) -> {
+            Match match = new Match();
+            match.setMatchID(rs.getLong("matchID"));
+            match.setCurrentChallengeId(rs.getLong("current_challenge_id"));
+            match.setDifficulty(rs.getString("difficulty"));
+            match.setProgrammingLanguage(rs.getString("programmingLanguage"));
+            match.setStatus(rs.getString("status"));
+            match.setWinnerId(rs.getLong("winnerId"));
+            return match;
+        });
+    }
+
+    public List<Match> findAllMatchesWinnedByUserIdOrderByRecent(Long userId) {
+        String sql = """
+            SELECT m.matchID, m.current_challenge_id, m.difficulty, 
+                   m.programmingLanguage, m.status, m.winnerId
+            FROM "match" m
+            WHERE m.winnerId = ?
+            ORDER BY m.matchID DESC
+            """;
+
+        return jdbcTemplate.query(sql, new Object[]{userId}, (rs, rowNum) -> {
+            Match match = new Match();
+            match.setMatchID(rs.getLong("matchID"));
+            match.setCurrentChallengeId(rs.getLong("current_challenge_id"));
+            match.setDifficulty(rs.getString("difficulty"));
+            match.setProgrammingLanguage(rs.getString("programmingLanguage"));
+            match.setStatus(rs.getString("status"));
+            match.setWinnerId(rs.getLong("winnerId"));
+            return match;
+        });
     }
 }

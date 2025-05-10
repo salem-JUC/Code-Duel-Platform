@@ -1,0 +1,818 @@
+@import url('https://fonts.cdnfonts.com/css/pf-tempesta-five');
+@import url('https://fonts.cdnfonts.com/css/public-pixel');
+@import url('https://fonts.cdnfonts.com/css/maria-2');
+
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css');
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+   
+}
+/*----*/
+.navbar .btnlogin-popup,
+.navbar .btnregister-popup {
+    backdrop-filter: blur(6px);
+    border: none;
+    width: 425px;
+    height: 66px;
+    color: #fff;
+    z-index: 1;
+    display: flex;
+    background: transparent ;
+    position: relative;
+    cursor: pointer;
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: 5px;
+}
+.navbar .btnlogin-popup p,
+.navbar .btnregister-popup p {
+    font-family: 'PF Tempesta Five Compressed', sans-serif;
+    margin: 0 auto;
+    align-self: center;
+    font-size: 25px;
+    font-weight: bold;
+    text-align: center;
+  }
+
+.navbar .btnlogin-popup::after,
+.navbar .btnregister-popup::after {
+    position: absolute;
+    content: "";
+    width: 100%;
+    z-index: -1;
+    height: 10%;
+    bottom: 0;
+    clip-path: polygon(
+      0% 74%,
+      4% 75%,
+      8% 76%,
+      11% 77%,
+      15% 78%,
+      20% 78%,
+      25% 77%,
+      32% 77%,
+      37% 75%,
+      40% 74%,
+      43% 74%,
+      46% 73%,
+      52% 72%,
+      57% 72%,
+      65% 74%,
+      66% 75%,
+      71% 78%,
+      75% 82%,
+      81% 86%,
+      83% 88%,
+      88% 91%,
+      90% 94%,
+      94% 96%,
+      98% 98%,
+      100% 100%,
+      82% 100%,
+      0 100%
+    );
+    background: #110255;
+    transition: height 0.2s ease;
+}
+
+.navbar .btnlogin-popup::before,
+.navbar .btnregister-popup::before {
+    position: absolute;
+  content: "";
+  /*   bottom: 80%; */
+  transform: rotate(180deg);
+  width: 100%;
+  height: 10%;
+  transition: 0.2s ease;
+  /*   bottom:; */
+  z-index: -1;
+  clip-path: polygon(
+    0% 74%,
+    4% 75%,
+    8% 76%,
+    11% 77%,
+    15% 78%,
+    20% 78%,
+    25% 77%,
+    32% 77%,
+    37% 75%,
+    40% 74%,
+    43% 74%,
+    46% 73%,
+    52% 72%,
+    57% 72%,
+    65% 74%,
+    66% 75%,
+    71% 78%,
+    75% 82%,
+    81% 86%,
+    83% 88%,
+    88% 91%,
+    90% 94%,
+    94% 96%,
+    98% 98%,
+    100% 100%,
+    82% 100%,
+    0 100%
+    );
+    background: #110255 ;
+    transition: height 0.2s ease;
+}
+
+.navbar .btnlogin-popup:hover,
+.navbar .btnregister-popup:hover {
+    color: #ff1717;
+    transform: translateY(-3px);
+}
+
+
+.navbar .btnlogin-popup:hover::after,
+.navbar .btnregister-popup:hover::after {
+    clip-path: polygon(
+        0 30%,
+        9% 34%,
+        7% 39%,
+        11% 43%,
+        13% 33%,
+        17% 30%,
+        24% 34%,
+        25% 35%,
+        30% 31%,
+        30% 38%,
+        39% 33%,
+        35% 43%,
+        43% 45%,
+        55% 46%,
+        65% 74%,
+        67% 66%,
+        81% 57%,
+        75% 82%,
+        81% 86%,
+        83% 88%,
+        88% 91%,
+        90% 94%,
+        94% 96%,
+        98% 98%,
+        100% 100%,
+        82% 100%,
+        0 100%
+      );
+      height: 80%;
+}
+
+.navbar .btnlogin-popup:hover::before,
+.navbar .btnregister-popup:hover::before {
+    clip-path: polygon(
+        0 30%,
+        9% 34%,
+        7% 39%,
+        11% 43%,
+        13% 33%,
+        17% 30%,
+        24% 34%,
+        25% 35%,
+        30% 31%,
+        30% 38%,
+        39% 33%,
+        35% 43%,
+        43% 45%,
+        55% 46%,
+        65% 74%,
+        67% 66%,
+        81% 57%,
+        75% 82%,
+        81% 86%,
+        83% 88%,
+        88% 91%,
+        90% 94%,
+        94% 96%,
+        98% 98%,
+        100% 100%,
+        82% 100%,
+        0 100%
+      );
+      height: 80%;
+}
+
+
+
+/*----*/
+.section {
+    min-height: 100vh;
+    position: relative;
+    overflow: hidden;
+    image-rendering:auto;
+}
+
+.section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background: url('../Asset/BG.png') center/cover;
+    animation: zoomOut 2s ease-out forwards;
+    z-index: -1;
+}
+
+@keyframes zoomOut {
+    from { transform: scale(1.1); }
+    to { transform: scale(1); }
+}
+/*----*/
+.wrapper {
+    position: fixed; /* Fix to viewport */
+    top: 50%; /* Center vertically */
+    left: 49%; /* Center horizontally */
+    
+    width: 500px;
+    height: 65%;
+    background: transparent;
+    backdrop-filter: blur(15px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    z-index: 100;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding: 0 40px;
+    opacity: 0;
+    pointer-events: none;
+    visibility: hidden;
+    transition: all 0.3s ease, visibility 0.3s;
+    transform: translate(-50%, -50%); /* Precise centering */
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    z-index: 1000;
+}
+
+.wrapper:not(.active-popup),
+.wSetting:not(.active-popup) {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translate(-50%, -50%) scale(0.95);
+}
+.wrapper.active-popup,
+.wSetting.active-popup {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translate(-50%, -50%) scale(1);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.icon-close{
+   position: absolute;
+   top: 0;
+   right: 0;
+   width: 45px;
+   height: 45px;
+   background:transparent;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;border-bottom-left-radius: 10px;
+
+}
+.icon-close i {
+    font-size: 32px;
+    color: #ffffff;
+}
+.wrapper .logreg-box {
+    width: 100%;
+ 
+
+}
+.wrapper .form-box.login {
+    display: none;
+}
+
+.wrapper.active .form-box.login {
+    display: block;
+}
+
+.wrapper .form-box.register {
+    display: none;
+}
+
+.wrapper.activeR .form-box.register {
+    display: block;
+}
+
+
+/*----*/
+.logreg-box .logreg-title{
+    text-align: center;
+    margin-bottom: 40px;}
+    
+.logreg-title h2 {
+color: #ff1717;
+    font-family: 'PF Tempesta Five Compressed', sans-serif;
+    font-size: 32px;
+}
+.logreg-title p {
+    color: #ffffff;;
+    font-family: 'Maria', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+}
+.logreg-box .Input-box{
+    position: relative;
+    width: 100%;
+    height: 50px;
+    font-family: 'Maria', sans-serif;
+          
+    margin: 30px 0;
+    border-bottom: 2px solid #ffffff;
+}
+
+/*----*/
+.Input-box input{
+    font-family: 'Maria', sans-serif;
+    width:100% ;
+    height: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    font-weight: 500;
+    color: #fff;
+    padding-right: 25px;
+
+}
+.Input-box label {
+                                                
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    font-size: 16px;
+    color: #ffffff;
+    font-weight: 500;
+    pointer-events: none;
+    transition: .5s;
+}
+.Input-box input:focus~label,
+.Input-box input:valid~label {
+    top: -5px ;
+}
+
+.Input-box .icon {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    font-size: 20px;
+    color: #fff;
+}
+.logreg-box .remember-forgot{
+    font-family: 'Maria', sans-serif;
+                                                
+    font-size: 14.5px;
+    color:#ffffff ;
+    font-weight: 500;
+    margin: -14px 0 15px;
+    display: flex;
+    justify-content: space-between;
+}
+.remember-forgot label input {
+    accent-color: #fff;
+    margin-right: 3px;
+}
+.remember-forgot a {
+    color: #fff;
+    text-decoration:none ;
+}
+.remember-forgot a:hover {
+    text-decoration: underline;
+
+}
+.logreg-box .btn {
+    width: 100%;
+    height: 45px;
+    background: #ffffff;
+    border: none;
+    outline: none;
+    border-radius: 40px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, .2);
+    cursor: pointer;
+    font-size: 16px;
+    color: #222;
+    font-weight: 600;
+}
+.logreg-box .logreg-link {
+   
+    font-family: 'Maria', sans-serif;
+                                                                           
+    font-size: 11.5px;
+    color: #ffffff;
+    text-align: center;
+    font-weight: 500;
+   
+    margin: 25px 0 15px;
+}
+
+.logreg-link p a {
+    font-family: 'Maria', sans-serif;
+                                                
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 600;
+}
+.logreg-link p a:hover {
+    font-family: 'Maria', sans-serif;
+                                                
+    text-decoration: underline;
+
+}
+.media-options{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+/*----*/
+.media-options a{
+    font-family: 'Maria', sans-serif;
+                                                
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 50px;
+    background: transparent;
+    border: 2px solid #ffffff;
+    margin: 10px 0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, .2);
+    border-radius: 40px;
+    color: #fff;
+    text-decoration: none;
+    transition: .5s;
+}
+.media-options a:hover{
+    font-family: 'Maria', sans-serif;
+                                                
+    background: rgba(255, 255, 255, .1);
+}
+.media-options a i {
+    font-size: 22px;
+    margin: 0 8px 1.5px 0 ;
+}
+.media-options span {
+    font-size: 16px;
+    font-weight: 500;
+}
+.wrapper:not(.active-popup) .media-options {
+    display: flex;
+}
+/*----*/
+
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1; }
+  }
+
+/*----*/
+
+  .settings-container {
+    position: fixed;
+    bottom: 20px;  
+    right: 20px;
+    z-index: 1000;
+}
+.settings-btn-1 {
+    background: rgba(0, 0, 0, 0.7);;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 20%;
+    box-shadow: 0 2px 10px rgba(255, 255, 255, 0.1);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.settings-btn-1:hover {
+    transform: scale(1.1);
+    box-shadow: 0 2px 15px rgba(0,0,0,0.2);
+    background: rgba(0, 0, 0, 0.7);
+}
+
+.settings-btn-1i {
+    font-size: 20px;
+    color: #ffffff;
+}
+.settings-btn-1 i {
+    font-size: 20px;
+    color: #ffffff;
+}
+.settings-btn-1::after {
+    content: "Settings";
+    position: absolute;
+    right: 50px;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 12px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.settings-btn-1:hover::after {
+    opacity: 1;
+}
+.settings-btn-1:hover i {
+    animation: rotateCog 2s ;
+    color: #ff1717;
+ 
+}
+
+.settings-btn {
+    background: rgba(0, 0, 0, 0.7);;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 20%;
+    box-shadow: 0 2px 10px rgba(255, 255, 255, 0.1);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.settings-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 2px 15px rgba(0,0,0,0.2);
+    background: rgba(0, 0, 0, 0.7);
+}
+
+.settings-btn i {
+    font-size: 20px;
+    color: #ffffff;
+}
+.settings-btn i {
+    font-size: 20px;
+    color: #ffffff;
+}
+.settings-btn::after {
+   
+    position: absolute;
+    right: 50px;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 12px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.settings-btn:hover::after {
+    opacity: 1;
+}
+.settings-btn:hover i {
+    animation: rotateCog 2s ;
+    color: #ff1717;
+ 
+}
+
+@keyframes rotateCog {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(180deg); }
+}
+/* نافذة الإعدادات */
+/* تنسيق نافذة الإعدادات */
+.wSetting {
+    position: fixed;
+    top: 50%; /* تمركز عمودي */
+    left: 50%; /* تمركز أفقي */
+    transform: translate(-50%, -50%);
+    width: 500px;
+    height: 60%;
+    background: transparent;
+    backdrop-filter: blur(15px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding: 0 40px;
+    opacity: 0;
+    pointer-events: none;
+    visibility: hidden;
+    transition: all 0.3s ease, visibility 0.3s;
+    transform: translate(-50%, -50%);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+/* يظهر عند تفعيل نافذة الإعدادات */
+.wSetting.active-popup {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translate(-50%, -50%) scale(1);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* تصميم أيقونة الإغلاق */
+.icon-close-Settings {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 45px;
+    height: 45px;
+    background: transparent;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom-left-radius: 10px;
+}
+
+.icon-close-Settings i {
+    font-size: 32px;
+    color: #ffffff;
+}
+
+/* العنوان في نافذة الإعدادات */
+.Setting-title h2 {
+    color: #ff1717;
+    margin-top: 0;
+    font-family: 'PF Tempesta Five Compressed', sans-serif;
+    font-size: 32px;
+    text-align: center;
+}
+
+/* المحتوى داخل نافذة الإعدادات */
+/* تنسيقات عامة للتحكم */
+.audio-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 20px;
+}
+
+.control-item {
+    display: flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 10px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.control-item:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+/* تنسيقات الـ Checkbox المخصصة */
+.control-label {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+    font-family: 'Maria', sans-serif;
+    color: #fff;
+    font-size: 12px;
+}
+
+input[type="checkbox"] {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 22px;
+    height: 22px;
+    border: 2px solid #ff1717;
+    border-radius: 5px;
+    cursor: pointer;
+    position: relative;
+}
+input[type="checkbox"]:checked {
+    background-color: #ff1717;
+}
+input[type="checkbox"]:checked::before {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    color: #ff1717;
+    font-size: 16px;
+}
+
+/* تأثيرات تفاعلية */
+.control-label:hover input[type="checkbox"] {
+    border-color: #ff6b6b;
+  
+}
+/* تنسيق شريط الصوت */
+.volume-control {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+}
+
+input[type="range"].volume-slider {
+    width: 100%;
+    height: 3px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    accent-color: #ff1717; 
+}
+
+input[type="range"].volume-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 18px;
+    height: auto;
+    background: #ff1717;
+    border: 2px solid #fff;
+    border-radius: 50%;
+}
+.volume-value {
+    font-family: 'Maria', sans-serif;
+    color: #fff;
+    font-size: 5px;
+    margin-left: 10px;
+}
+/* تنسيقات إضافية */
+.settings-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-top: 30px;
+}
+
+.settings-btn {
+    content: "";
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    border: none;
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: all 0.3s ease;
+}
+
+.settings-btn i {
+
+    font-size: 20px;
+}
+
+.info-btn:hover {
+    
+    background: rgba(0, 123, 255, 0.2);
+}
+
+.report-btn:hover {
+    background: rgba(255, 0, 0, 0.2);
+}
+
+.volume-percent {
+    font-family: 'Maria', sans-serif;
+    color: #fff;
+    font-size: 14px;
+    margin-left: 10px;
+    min-width: 40px;
+    display: inline-block;
+    text-align: right;
+}
+.s {
+    min-height: 100vh;
+    position: relative;
+    overflow: hidden;
+    image-rendering:auto;
+}
+
+.s::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background: url("../Asset/PpBG.png") no-repeat center center;
+    background-size: cover;
+
+    /* Blur effect */
+    backdrop-filter: blur(1px); /* Adjust the blur intensity */
+    -webkit-backdrop-filter: blur(10px);
+    animation: zoomOut 2s ease-out forwards;
+    z-index: -1;
+}
+
+@keyframes zoomOut {
+    from { transform: scale(1.1); }
+    to { transform: scale(1); }
+}

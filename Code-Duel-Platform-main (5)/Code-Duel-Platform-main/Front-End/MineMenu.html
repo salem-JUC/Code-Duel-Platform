@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="./Style/styleMM.css" />
+  <link rel="stylesheet" href="./Style/styleSetting.css">
+ <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <title>Code Duel</title>
+</head>
+<body>
+  <header class="header">
+    <a href="#" class="Logo"> Code Duel </a>
+    <div class="welcome-container">
+      <i class='bx bxs-user'></i>
+      <p class="headerP"><span id="userNameSpan"></span></p>
+    </div>
+    
+  
+  
+    <!-- Navbar under the welcome message -->
+    <div class="navbar">
+      <button class="btnlogin-popup" onclick="playSFXByName('click'); setTimeout(() => { window.location.href='MatchMakingMenu.html' }, 100)">
+          <p>MatchMaking</p>
+      </button>
+      <button class="btnlogin-popup"  onclick="playSFXByName('click'); setTimeout(() => { window.location.href='ProfilePage.html' }, 100)">
+          <p>Edit Profile</p>
+      </button>
+  </div>
+  <!-- Add this button just before closing </body> tag -->
+   <div class="navbar">
+<button class="btnlogin-popup"   onclick="playSFXByName('click'); setTimeout(() => { window.location.href='HomePage.html' }, 100)">
+  
+  <p>Logout</p>
+</button>
+</div>
+  </header>
+
+  <section class="section">
+    <div class="settings-container">
+      <button class="settings-btn-1" id="settingsBtn">
+          <i class="fas fa-cog"></i>
+      </button>
+  </div>
+  
+  
+  <div class="wSetting" id="settingsPopup">
+      <span class="icon-close-Settings" id="closeSettings">
+          <i class='bx bx-x'></i>
+      </span>
+      
+          
+          <div class="Setting-box">
+              <div class="form-box settings">
+                  <div class="Setting-title">
+                      <h2 class="settings-heading" >Settings</h2>
+                  </div>
+                  
+                  <!-- في قسم الإعدادات -->
+<div class="settings-content">
+  <!-- Music Settings -->
+  <div class="Input-Setting">
+      <div class="audio-controls">
+          <!-- عناصر التحكم في الموسيقى -->
+          <div class="control-item">
+              <label class="control-label">
+                  <input type="checkbox" id="musicMute">
+                  <span class="checkmark"></span>
+                  Music Mute
+              </label>
+          </div>
+          
+          <div class="control-item volume-control">
+              <label class="control-label">
+                  Music Volume
+                  <input type="range" class="volume-slider" id="musicVolume" min="0" max="1" step="0.1" value="1">
+                  <span class="volume-percent" id="musicPercent">100%</span>
+              </label>
+              
+          </div>
+
+          <!-- SFX Controls -->
+          <div class="control-item">
+              <label class="control-label">
+                  <input type="checkbox" id="sfxMute">
+                  <span class="checkmark"></span>
+                  SFX Mute
+              </label>
+          </div>
+          
+          <div class="control-item volume-control">
+              <label class="control-label">
+                  SFX Volume
+                  <input type="range" class="volume-slider" id="sfxVolume" min="0" max="1" step="0.1" value="1">
+                  <span class="volume-percent" id="sfxPercent">100%</span>
+              </label>
+          </div>
+      </div>
+  </div>
+
+  <!-- أزرار إضافية -->
+  <div class="settings-buttons">
+      <button class="settings-btn info-btn">
+          <i class='bx bx-info-circle'></i>
+          About Us
+      </button>
+      <button class="settings-btn report-btn">
+          <i class='bx bx-bug'></i>
+          Report Bug
+      </button>
+  </div>
+</div></div></div></div>
+  </section>
+
+  <script>
+    // Original JavaScript remains the same
+    function getUser() {
+      const user = {
+        id: 101,
+        username: "KhalidX7x",
+        email: "khalidX7x@gmail.com",
+        score: 22
+      };
+      document.getElementById("userNameSpan").innerText = user.username;
+      return user;
+    }
+
+    const userDetails = getUser();
+
+   
+  </script>
+  <script>
+document.querySelector('your-element').addEventListener('click', () => {
+  playSFXByName('click');
+  setTimeout(() => {
+    window.location.href = 'MatchMakingMenu.html';
+  }, 100);
+});
+
+  </script>
+  <script src="./Script/LogReg.js"></script>
+  <script src="./Script/Sounds.js"></script>
+
+</body>
+</html>

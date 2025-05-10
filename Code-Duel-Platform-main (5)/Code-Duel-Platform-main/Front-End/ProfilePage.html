@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="./Style/stylepp.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Page</title>
+</head>
+<body>
+    <div class="profile-container">
+        <!-- قسم ملف اللاعب -->
+        <div class="player-profile">
+            <div class="profile-header">
+                <img src="./Asset/Pirate Ninja.jpg" alt="Profile" class="profile-pic">
+                <div>
+                    <h2 class="username" id="usernameP">KhalidX7x</h2>
+                    <p class="player-rank">Rank: #101</p>
+                </div>
+            </div>
+    
+            <div class="player-info-grid">
+                <div class="info-card">
+                    <div class="info-label">Level</div>
+                    <div class="info-value" id="userScoreSpan">22</div>
+                </div>
+                <div class="info-card">
+                    <div class="info-label">W/L Ratio</div>
+                    <div class="info-value">10/8</div>
+                </div>
+                <div class="info-card">
+                    <div class="info-label">Matches</div>
+                    <div class="info-value">18</div>
+                </div>
+                <div class="info-card">
+                    <div class="info-label">Status</div>
+                    <div class="info-value online">Online</div>
+                </div>
+            </div>
+        </div>
+    
+        <!-- قسم تاريخ المباريات -->
+        <div class="history-container">
+            <h2 class="history-header">Recent Games</h2>
+            <div class="games-list">
+                <div class="game-entry">
+                    <div class="game-mode">⚔️ Competitive Match</div>
+                    <div class="game-date">2023-10-05 20:45</div>
+                    <div class="game-result">🏆 Victory vs. PlayerX</div>
+                </div>
+                <div class="game-entry">
+                    <div class="game-mode">🎯 Quick Play</div>
+                    <div class="game-date">2023-10-04 18:30</div>
+                    <div class="game-result">💔 Defeat vs. ProPlayer</div>
+                </div>
+                <div class="game-entry">
+                    <div class="game-mode">🛡️ Tournament</div>
+                    <div class="game-date">2023-10-03 15:00</div>
+                    <div class="game-result">🏅 3rd Place</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+<script>
+  const user = getUser()
+  const usernameP = document.getElementById("usernameP")
+  const userScoreSpan = document.getElementById("userScoreSpan")
+
+  usernameP.innerHTML = user.username
+  userScoreSpan.innerHTML = user.score
+
+  function getUser() {
+    return {
+        id : 101,
+        username : "KhalidX7x",
+        email : "khalidX7x@gmail.com",
+        score : 22
+    }
+  }
+</script>
