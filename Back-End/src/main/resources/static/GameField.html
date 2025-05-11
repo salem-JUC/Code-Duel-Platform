@@ -19,6 +19,23 @@
     <!-- شريط صحة الخصم -->
     <div id="p2UsernameDiv" class="player-label-2">Ali</div>
     <div id="p2HealthDiv" class="health-bar enemy"></div>
+
+    <div class="left-box">
+        <div>
+            <p onclick="clickPhoto()">Language: </p>
+            <p><span id="language"></span></p>
+        </div>
+        <br>
+        <div>
+            <p>Difficulty: </p>
+            <p><span id="difficulty"></span></p>
+        </div>
+    </div>
+    
+          <div class="right-box">
+              <p>Start Fighting<span id="note"></span></p>
+          </div>
+      </div>
         <!-- بقية العناصر -->
         <div class="game-container">
         <canvas class="game-canvas" width="352" height="198">
@@ -32,7 +49,7 @@
     <div class="text-container">
         <form>
             <textarea id="codeEditor" placeholder="Start Coding"></textarea>
-            <input type="button" id="submitBtn" value="Duel" class="submit">
+            <input type="button" id="submitBtn" onclick="click()" value="Duel" class="submit">
         </form>
     </div>
     

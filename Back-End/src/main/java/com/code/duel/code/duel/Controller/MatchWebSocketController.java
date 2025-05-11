@@ -1,5 +1,6 @@
 package com.code.duel.code.duel.Controller;
 
+import com.code.duel.code.duel.Judge.Judge0Wrapper;
 import com.code.duel.code.duel.Mappers.RequestMapper.SubmissionRequestMapper;
 import com.code.duel.code.duel.Mappers.ResponseMapper.HitNotifcation;
 import com.code.duel.code.duel.Mappers.ResponseMapper.MatchResult;
@@ -9,6 +10,8 @@ import com.code.duel.code.duel.Model.Submission;
 import com.code.duel.code.duel.Model.User;
 import com.code.duel.code.duel.Service.MatchService;
 import com.code.duel.code.duel.Service.SubmissionService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
@@ -32,6 +35,9 @@ public class MatchWebSocketController {
     private final MatchService matchService;
     private final SubmissionService submissionService;
     private final Map<Long, Set<Long>> activeMatchSubscriptions = new ConcurrentHashMap<>();
+
+    private static final Logger logger = LoggerFactory.getLogger(MatchWebSocketController.class);
+
 
     @Autowired
     public MatchWebSocketController(SimpMessagingTemplate messagingTemplate,
@@ -63,26 +69,25 @@ public class MatchWebSocketController {
     }
 
     private void processSuccessfulHit(Long matchId, Long playerId, Long challengeId) {
-        System.out.println("Processing successful hit for match ID: " + matchId + ", player ID: " + playerId + ", challenge ID: " + challengeId);
-        // 1. Process the hit in service layer
+
         matchService.handleCorrectSubmmission(matchId, playerId, challengeId);
 
-        // 2. Get updated match status
+
         MatchStatusResponseMapper status = matchService.getMatchStatus(matchId, playerId);
 
-        // 3. Notify both players of the hit
+
         broadcastHit(matchId, playerId, status);
 
-        // 4. Check if match ended
+
         if (status.getUserPlayMatch2().getUserScore() <= 0) {
             broadcastMatchEnd(matchId, playerId, status.getUserPlayMatch1().getUsername());
         } else {
-            // 5. Assign and broadcast new challenge
             assignNewChallenge(matchId);
         }
     }
 
     private void assignNewChallenge(Long matchId) {
+        logger.info("Assigning new challenge for match ID: {}", matchId);
         matchService.assignChallenge(matchId);
         MatchStatusResponseMapper status = matchService.getMatchStatus(matchId, null);
 

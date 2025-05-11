@@ -13,6 +13,8 @@ class GameLogic {
         this.playerHealth = 3;
         this.opponentHealth = 3;
         this.isGameActive = false;
+        this.diffculty = null;
+        this.language = null;
     }
 
     // Initialize game
@@ -99,6 +101,8 @@ class GameLogic {
     // Handle initial game state
     handleGameStart(status) {
         this.currentChallenge = status.currentChallenge;
+        this.language = status.match.programmingLanguage;
+        this.diffculty = status.match.difficulty;
         this.isGameActive = true;
         console.log(status)
         // Identify opponent
@@ -120,7 +124,8 @@ class GameLogic {
     handleSubmit() {
         
         if (!this.isGameActive) return;
-        
+        document.getElementById("submitBtn").disabled = true;
+        document.getElementById("note").textContent = "⌛ Your submission is being evaluated"
         const code = document.getElementById('codeEditor').value.trim();
         if (!code) {
             this.showError("Please write some code first!");
@@ -134,6 +139,7 @@ class GameLogic {
         
         // Clear editor but keep it enabled for next attempt
         document.getElementById('codeEditor').value = '';
+
     }
 
     // Process hit event
@@ -142,16 +148,19 @@ class GameLogic {
         const isAttacker = hit.hittingPlayerId === this.playerId;
         
         // Update health values
-        this.playerHealth = hit.player1Health;
-        this.opponentHealth = hit.player2Health;
+        
         
         // Play animations
         if (isAttacker) {
-            this.playAttackAnimation();
-            this.showMessage("You hit your opponent!");
+            this.showMessage("👊 You attacked " + this.opponentUsername)
+            overworld.Player.performAttackP(overworld.Oponent);
+            this.playerHealth = hit.player1Health;
+            this.opponentHealth = hit.player2Health;
         } else {
-            this.playHitAnimation();
-            this.showMessage(`${this.opponentUsername} hit you!`);
+            this.showMessage("⚠️ "+this.opponentUsername + " attacked you")
+            overworld.Player.performAttackO(overworld.Oponent);
+            this.playerHealth = hit.player2Health;
+            this.opponentHealth = hit.player1Health;
         }
         
         this.updateUI();
@@ -164,25 +173,39 @@ class GameLogic {
 
     // Handle submission response
     handleSubmissionResponse(response) {
+        document.getElementById("submitBtn").disabled = false;
         if (response.accepted) {
-            this.showMessage("Correct solution!");
+            console.log("submission correct")
+            this.showMessage("✅️ Correct solution");
         } else {
-            this.showError(response.message);
+            this.showMessage( "❌ Wrong solution" + response.message);
         }
     }
 
+    attack(){
+        console.log("attack animation function")
+        
+    }
+
+
     // Handle match end
     handleMatchEnd(result) {
-        const message = result.winnerId === this.playerId ?
-            "You won the match!" : 
-            `${result.winnerName} won the match!`;
+        let message;
+
+        if (result.winnerId === this.playerId) {
+            overworld.Player.WinnerP(overworld.Oponent);
+            message = "You won the match!";
+        } else if (result.winnerName) {
+            overworld.Player.winnerO(overworld.Oponent);
+            message = `${result.winnerName} won the match!`;
+        }
         
         this.showMessage(message);
         this.isGameActive = false;
         
         setTimeout(() => {
             window.location.href = '/MatchMakingMenu.html';
-        }, 3000);
+        }, 6000);
     }
 
     // UI Updates
@@ -192,6 +215,8 @@ class GameLogic {
         document.getElementById('p2UsernameDiv').textContent = this.opponentUsername || "Opponent";
         document.getElementById('p1HealthDiv').textContent = healthLevels[this.playerHealth];
         document.getElementById('p2HealthDiv').textContent =healthLevels[this.opponentHealth];
+        document.getElementById("language").textContent = this.language;
+        document.getElementById("difficulty").textContent = this.diffculty;
     }
 
     updateChallengeDisplay() {
@@ -206,20 +231,11 @@ class GameLogic {
     }
 
     // Animation Methods
-    playAttackAnimation() {
-        // Implement your attack animation
-        const attacker = this.playerId === this.playerId ? 'P1' : 'P2';
-        console.log(`${attacker} attack animation`);
-    }
-
-    playHitAnimation() {
-        // Implement your hit animation
-        console.log("Hit animation");
-    }
+  
 
     // Notification Methods
     showMessage(message) {
-        alert(message)
+        document.getElementById("note").textContent = message
     }
 
     showError(message) {
@@ -239,13 +255,21 @@ class GameLogic {
     }
 }
 
+const game = new GameLogic();
 // Initialize game when page loads
 window.onload = async () => {
     const user = await fetchCurrentUser()
-    const game = new GameLogic();
+    
     game.init(user);
+
     
 };
+
+function outAttack() {
+    console.log("outAttack called")
+    game.attack()
+}
+
 
 async function fetchCurrentUser() {
     console.log("fetching user")
@@ -269,3 +293,4 @@ async function fetchCurrentUser() {
       return null;
     }
 }
+

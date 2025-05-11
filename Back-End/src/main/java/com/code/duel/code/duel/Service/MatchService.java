@@ -1,6 +1,7 @@
 package com.code.duel.code.duel.Service;
 
 import com.code.duel.code.duel.Exception.MatchNotFoundException;
+import com.code.duel.code.duel.Judge.Judge0Wrapper;
 import com.code.duel.code.duel.Mappers.ResponseMapper.MatchStatusResponseMapper;
 import com.code.duel.code.duel.Model.Challenge;
 import com.code.duel.code.duel.Model.Match;
@@ -9,6 +10,8 @@ import com.code.duel.code.duel.Repository.ChallengeRepo;
 import com.code.duel.code.duel.Repository.MatchRepo;
 import com.code.duel.code.duel.Repository.UserPlayMatchRepo;
 import com.code.duel.code.duel.Repository.UserRepo;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
@@ -27,8 +30,11 @@ public class MatchService {
     @Autowired
     ChallengeRepo challengeRepo;
 
+    private static final Logger logger = LoggerFactory.getLogger(MatchService.class);
+
     long idIncrement = 1000;
     public Match createMatch(Long playerId , String difficulty , String programmingLanguage){
+        logger.info("Creating match with player ID: {}, difficulty: {}, programming language: {}", playerId, difficulty, programmingLanguage);
         Match newMatch = new Match();
         newMatch.setStatus("PENDING");
         newMatch.setMatchID(idIncrement);
@@ -50,6 +56,7 @@ public class MatchService {
     }
 
     public Match joinMatch(Long matchId , Long playerId){
+        logger.info("Joining match with ID: {}, player ID: {}", matchId, playerId);
         Match wantedMatch;
         try {
             wantedMatch = matchRepo.findById(matchId);
@@ -68,15 +75,17 @@ public class MatchService {
     }
 
     public void assignChallenge(Long matchId){
+
         Match match = matchRepo.findById(matchId);
         String difficulty = match.getDifficulty();
         Challenge randomChallenge = challengeRepo.findRandomWithDifficulty(difficulty);
         match.setCurrentChallengeId(randomChallenge.getChallengeID());
+        logger.info("Assigning challenge with ID: {} to match with ID: {} diffculty: {}", randomChallenge.getChallengeID(), matchId, difficulty);
         matchRepo.update(match);
     }
 
     public void handleCorrectSubmmission(Long matchId, Long playerId, Long challengeId){
-        System.out.println("match service Handling correct submission for match ID: " + matchId + ", player ID: " + playerId + ", challenge ID: " + challengeId);
+        logger.info("Handling correct submission for match ID: {}, player ID: {}, challenge ID: {}", matchId, playerId, challengeId);
         Match match = matchRepo.findById(matchId);
         if (match.getCurrentChallengeId() != challengeId)
             throw new MatchNotFoundException(matchId);

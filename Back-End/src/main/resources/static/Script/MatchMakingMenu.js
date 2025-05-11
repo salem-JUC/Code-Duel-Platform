@@ -31,10 +31,10 @@ async function fetchCurrentUser() {
         values[label] = activeOption.dataset.value;
       }
     });
-  
+    console.log(values)
     return values;
   }
-
+  
   //Create match function
   async function createMatch() {
     language = getAllSliderValues().language
@@ -48,8 +48,8 @@ async function fetchCurrentUser() {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          difficulty: "Easy",
-          programmingLanguage: "Java"
+          difficulty: difficulty,
+          programmingLanguage: language
         }),
         credentials: 'include'
       });

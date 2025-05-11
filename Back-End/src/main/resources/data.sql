@@ -61,7 +61,7 @@ VALUES
 (25, 13, '10', '3 6 9'),
 (26, 13, '15', '3 6 9 12 15'),
 (27, 14, 'hello world', '10'),
-(28, 14, 'code duel platform' '16'),
+(28, 14, 'code duel platform', '16'),
 (29, 15, 'hello', 'Hello'),
 (30, 15, 'code', 'Code');
 

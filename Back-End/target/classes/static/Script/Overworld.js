@@ -1,4 +1,4 @@
-export class Overworld {
+class Overworld {
   constructor(config) {
     this.element = config.element;
     this.canvas = this.element.querySelector(".game-canvas");
@@ -50,13 +50,13 @@ export class Overworld {
 
     gameLoop();
 
-    function playerPerformAttack() {
-      
-      overworld.Player.performAttackP(overworld.Oponent);
-      
-    }
+    // 👇 مستمع الضغط على زر A
+    window.addEventListener("keydown", (e) => {
+      if (e.key === "a" || e.key === "A") {
+        overworld.Player.performAttackP(overworld.Oponent);
 
-
+      }
+    });
 
     window.addEventListener("keydown", (e) => {
       if (e.key === "s" || e.key === "S") {
