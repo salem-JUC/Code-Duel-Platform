@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <link rel="stylesheet" href="./Style/styleMMK.css" />
+  <link rel="stylesheet" href="./Style/styleSetting.css">
   <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
   <title>Code Duel</title>
 </head>
@@ -29,10 +30,85 @@
   </div>
   </header>
 
-  <section class="section"></section>
+  <section class="section">
+    <section class="section">
+      <div class="settings-container">
+        <button class="settings-btn-1" id="settingsBtn">
+            <i class="fas fa-cog"></i>
+        </button>
+    </div>
+    
+    
+    <div class="wSetting" id="settingsPopup">
+        <span class="icon-close-Settings" id="closeSettings">
+            <i class='bx bx-x'></i>
+        </span>
+        
+            
+            <div class="Setting-box">
+                <div class="form-box settings">
+                    <div class="Setting-title">
+                        <h2 class="settings-heading" >Settings</h2>
+                    </div>
+                    
+                    <!-- في قسم الإعدادات -->
+  <div class="settings-content">
+    <!-- Music Settings -->
+    <div class="Input-Setting">
+        <div class="audio-controls">
+            <!-- عناصر التحكم في الموسيقى -->
+            <div class="control-item">
+                <label class="control-label">
+                    <input type="checkbox" id="musicMute">
+                    <span class="checkmark"></span>
+                    Music Mute
+                </label>
+            </div>
+            
+            <div class="control-item volume-control">
+                <label class="control-label">
+                    Music Volume
+                    <input type="range" class="volume-slider" id="musicVolume" min="0" max="1" step="0.1" value="1">
+                    <span class="volume-percent" id="musicPercent">100%</span>
+                </label>
+                
+            </div>
+  
+            <!-- SFX Controls -->
+            <div class="control-item">
+                <label class="control-label">
+                    <input type="checkbox" id="sfxMute">
+                    <span class="checkmark"></span>
+                    SFX Mute
+                </label>
+            </div>
+            
+            <div class="control-item volume-control">
+                <label class="control-label">
+                    SFX Volume
+                    <input type="range" class="volume-slider" id="sfxVolume" min="0" max="1" step="0.1" value="1">
+                    <span class="volume-percent" id="sfxPercent">100%</span>
+                </label>
+            </div>
+        </div>
+    </div>
+  
+    <!-- أزرار إضافية -->
+    <div class="settings-buttons">
+        <button class="settings-btn info-btn">
+            <i class='bx bx-info-circle'></i>
+            About Us
+        </button>
+        <button class="settings-btn report-btn">
+            <i class='bx bx-bug'></i>
+            Report Bug
+        </button>
+    </div>
+  </div></div></div></div>
+  </section>
 
   <script>
-    // Original JavaScript remains the same
+  
     async function getUser() {
       try {
         const response = await fetch('/api/auth/me', {
@@ -54,8 +130,10 @@
       }
     }
     getUser()
-
    
   </script>
 </body>
+<script src="./Script/LogReg.js"></script>
+<script src="./Script/Sounds.js"></script>
+<audio id="backgroundMusic" loop></audio>
 </html>

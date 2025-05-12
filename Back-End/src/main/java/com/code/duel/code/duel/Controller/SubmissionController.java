@@ -25,17 +25,17 @@ public class SubmissionController {
     @Autowired
     ChallengeService challengeService;
 
-    @GetMapping("/submissions")
+    @GetMapping
     public ResponseEntity<List<Submission>> getSubmissionsByUserId(@AuthenticationPrincipal User user) {
         List<Submission> submissions = submissionService.getAllSubmissionsOfSubmitter(user.getUserID());
         return ResponseEntity.ok(submissions);
     }
-    @GetMapping("/submissions/{challengeId}")
+    @GetMapping("/challenge/{challengeId}")
     public ResponseEntity<List<Submission>> getSubmissionsByChallengeId(@PathVariable Long challengeId) {
         List<Submission> submissions = submissionService.getAllSubmissionsOfChallenge(challengeId);
         return ResponseEntity.ok(submissions);
     }
-    @GetMapping("submissions/{submissionId}")
+    @GetMapping("/{submissionId}")
     public ResponseEntity<SubmissionWithChallengeResponse> getSubmissionById(@PathVariable Long submissionId) {
         Submission submission = submissionService.getSubmissionById(submissionId);
         Challenge challenge = challengeService.getChallengeById(submission.getChallengeID());

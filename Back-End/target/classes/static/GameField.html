@@ -4,59 +4,69 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="./Style/styleGF.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Game Field</title>
     <script src="https://cdn.jsdelivr.net/npm/sockjs-client/dist/sockjs.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js" integrity="sha512-iKDtgDyTHjAitUDdLljGhenhPwrbBfqTKWO1mkhSFH3A7blITC9MhYon6SjnMhp4o0rADGw9yAC6EW4t5a4K3g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
+    <title>CodeDuel</title>
 </head>
-    <div class="Q-container">
-        <div id="challengeDiv" class="Q-text"></div>
-    </div>
+<body>
 
+    <div class="Q-container">
+        <div id="challengeDiv" class="Q-text">
+        </div>
+    </div>
+    <!--Player 1-->
     <div id="p1UsernameDiv" class="player-label">BOB</div>
     <div id="p1HealthDiv" class="health-bar player1"></div>
+    
+    <!-- Player 2 or oppopsit-->
+    <div id="p2UsernameDiv" class="player-label-2">M7</div>
+    <div id="p2HealthDiv" class="health-bar enemy">
+    </div>
 
-    <!-- شريط صحة الخصم -->
-    <div id="p2UsernameDiv" class="player-label-2">Ali</div>
-    <div id="p2HealthDiv" class="health-bar enemy"></div>
+    <!-- إضافة المربعات الجانبية -->
 
     <div class="left-box">
-        <div>
-            <p>Language: </p>
-            <p><span id="language"></span></p>
-        </div>
-        <br>
-        <div>
-            <p>Difficulty: </p>
-            <p><span id="difficulty"></span></p>
+      <div>
+          <p>Language: </p>
+          <p><span id="language"></span></p>
+      </div>
+      <br>
+      <div>
+          <p>Difficulty: </p>
+          <p><span id="difficulty"></span></p>
+      </div>
+  </div>
+  
+        <div class="right-box">
+            <p>Fight<span id="message"></span></p>
         </div>
     </div>
-    
-          <div class="right-box">
-              <p>Start Fighting<span id="note"></span></p>
-          </div>
-      </div>
-        <!-- بقية العناصر -->
-        <div class="game-container">
-        <canvas class="game-canvas" width="352" height="198">
-    
-            
-        </canvas>
-        </div>
-    
 
+    <!-- الكانفا -->
+    <div class="game-container">
+        <canvas class="game-canvas" width="352" height="198"></canvas>
+    </div>
 
     <div class="text-container">
         <form>
             <textarea id="codeEditor" placeholder="Start Coding"></textarea>
-            <input type="button" id="submitBtn"  value="Duel" class="submit">
+            <input type="button" id="submitBtn" value="Duel" class="submit">
         </form>
     </div>
-    
-    <script src="./Script/GameObject.js"></script>
+
+    <div class="game-over-modal" id="gameOverModal">
+        <div class="game-over-content">
+            <h2 id="resultMessage"></h2>
+            <button class="return-btn" onclick="window.location.href = 'index.html'">Return to Main Page</button>
+        </div>
+    </div>
+
+    <script src="./Script/GF.js"></script>
     <script src="./Script/Overworld.js"></script>
+    <script src="./Script/GameObject.js"></script>
     <script src="./Script/Sprite.js"></script>
     <script src="./Script/init.js"></script>
     <script src="/Script/GameLogic.js"></script>
-    <script></script>
+</body>
 </html>

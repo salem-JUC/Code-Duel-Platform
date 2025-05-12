@@ -4,10 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./Style/styleHP.css">
+    
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <title>Code Duel</title>
 </head>
 <body>
+
     <header class = "header">
        
         <a href="#" class="Logo"> Code Duel </a>
@@ -17,14 +19,91 @@
     <br><br><br><br>
     <br><br><br><br><br>
         <nav class="navbar">
-            <button class="btnlogin-popup"> <p>Log in</p></button> 
+            <button class="btnlogin-popup" onclick="playSFXByName('click')"> <p>Log in</p></button> 
             <br><br>
             <br><br><br><br>
-            <button class="btnregister-popup"> <p>Register</p> </button> 
+            <button class="btnregister-popup" onclick="playSFXByName('click')"> <p>Register</p> </button> 
          
    </nav>
 </header>
 <section class="section">
+
+    <div class="settings-container">
+        <button class="settings-btn-1" id="settingsBtn" onclick="playSFXByName('click')">
+            <i class="fas fa-cog"></i>
+        </button>
+    </div>
+    
+    
+    <div class="wSetting" id="settingsPopup">
+        <span class="icon-close-Settings" id="closeSettings">
+            <i class='bx bx-x'></i>
+        </span>
+        
+            
+            <div class="Setting-box">
+                <div class="form-box settings">
+                    <div class="Setting-title">
+                        <h2 class="settings-heading" >Settings</h2>
+                    </div>
+                    
+                    <!-- في قسم الإعدادات -->
+<div class="settings-content">
+    <!-- Music Settings -->
+    <div class="Input-Setting">
+        <div class="audio-controls">
+            <!-- عناصر التحكم في الموسيقى -->
+            <div class="control-item">
+                <label class="control-label">
+                    <input type="checkbox" id="musicMute">
+                    <span class="checkmark"></span>
+                    Music Mute
+                </label>
+            </div>
+            
+            <div class="control-item volume-control">
+                <label class="control-label">
+                    Music Volume
+                    <input type="range" class="volume-slider" id="musicVolume" min="0" max="1" step="0.1" value="1">
+                    
+                </label>
+                
+            </div>
+
+            <!-- SFX Controls -->
+            <div class="control-item">
+                <label class="control-label">
+                    <input type="checkbox" id="sfxMute">
+                    <span class="checkmark"></span>
+                    SFX Mute
+                </label>
+            </div>
+            
+            <div class="control-item volume-control">
+                <label class="control-label">
+                    SFX Volume
+                    <input type="range" class="volume-slider" id="sfxVolume" min="0" max="1" step="0.1" value="1">
+                   
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <!-- أزرار إضافية -->
+    <div class="settings-buttons">
+        <button class="settings-btn info-btn" onclick="window.location.href='AboutUs.html'">
+            <i class='bx bx-info-circle'></i>
+            About Us
+        </button>
+        
+        </button>
+        <button class="settings-btn report-btn" onclick="window.location.href='ReportBugs.html'">
+            <i class='bx bx-bug'></i>
+            Report Bug
+        </button>
+    </div>
+</div></div></div></div>
+
     <div class="wrapper">
         <span class="icon-close"><i class='bx bx-x'></i>
 
@@ -55,7 +134,7 @@
                             </label>
                             <a href="#">Forgot password ? </a>
                         </div>
-                            <button onclick="login()" class="btn">Login</button>
+                            <button onclick="login()"  class="btn">Login</button>
                             <div class="logreg-link">
                                 <p>Don't have an account ? <a href="/"class = "register-link">register</a></p>
                             </div>
@@ -66,34 +145,36 @@
             <div class="form-box register">
                 <div class="logreg-title">
                     <h2>Register</h2>
-                    <p>Please Login to use the platform</p>
+                    <p>Please Register to use the platform</p>
                     </div>
                     <form action="./MineMenu.html">
                         <div class="Input-box">
                             <span class="icon"><i class='bx bx-user'></i>
                             </span>
-                            <input type="text" required>
+                            <input id="usernameRegister" type="text" required>
                             <label >Username</label>
                             </div>
                         <div class="Input-box">
                             <span class="icon"><i class='bx bxs-envelope'></i>
                             </span>
-                            <input type="email" required>
+                            <input id="emailRegister" type="email" required>
                             <label >Email</label>
                             </div>
                             <div class="Input-box">
                                 <span class="icon"><i class='bx bxs-lock-alt'></i></span>
-                                <input type="password" required>
-                                <label >Password</label>
-                        </div>
+                                <input id="passwordRegister" type="password" class="password" required>
+                                <label>Password</label>
+                                <small id="passwordHelp" class="help-text"></small>
+                            </div>
+                            
                         <div class="remember-forgot">
                             <label >
-                                <input type="checkbox" >
-                                terms and conditions
+                                <input type="checkbox"  class="T">
+                                <a href="terms and conditions.html">terms and conditions</a>
                             </label>
                             
                         </div>
-                            <button type="submit" class="btn">Login</button>
+                            <button type="submit" class="btn">Register</button>
                             <div class="logreg-link">
                                 <p>Do you have account <a href="#"class = "login-link">Log in</a></p>
                             </div>
@@ -101,188 +182,68 @@
                 
             </div>
         </div>
-        <div class="media-options">
-            <a href="#">
-                <i class='bx bxl-google'></i>
-                <span>Login with Google</span>
-            </a>
-         
-        </div>
+    
     </div>
 </section>
-<script>
+    <script>
+        async function checkAuthStatus() {
+            try {
+                const response = await fetch('/api/auth/me', {
+                    credentials: 'include'
+                });
 
-    async function login() {
-        const username = document.getElementById("usernameLogin").value
-        const password = document.getElementById("passwordLogin").value;
+                if (response.ok) {;
+                    // Redirect to main menu if already logged in
+                    window.location.href = '/MineMenu.html';
+                }
+                
+            } catch (error) {
+                console.log('Not logged in');
+            }
+        }
 
-        const formData = new FormData();
-        formData.append('username', username);
-        formData.append('password', password);
-            
+        async function login() {
+            const username = document.getElementById("usernameLogin").value
+            const password = document.getElementById("passwordLogin").value;
+
+            const formData = new FormData();
+            formData.append('username', username);
+            formData.append('password', password);
+
             try {
                 const response = await fetch('/api/auth/login', {
                     method: 'POST',
                     body: formData
                 });
-                
+
                 if (response.ok) {
                     window.location.href = '/MineMenu.html';
                 } else {
-                    showError('Login failed');
+                    alert("Bad Credntials")
                 }
             } catch (error) {
                 showError('Error: ' + error.message);
             }
-    }
-    // LogReg.js
-    document.addEventListener('DOMContentLoaded', function() {
-    // DOM elements
-    const wrapper = document.querySelector('.wrapper');
-    const loginPopup = document.querySelector('.btnlogin-popup');
-    const registerPopup = document.querySelector('.btnregister-popup');
-    const iconClose = document.querySelector('.icon-close');
-    const loginLink = document.querySelector('.login-link');
-    const registerLink = document.querySelector('.register-link');
-    const loginForm = document.querySelector('.form-box.login form');
-    const registerForm = document.querySelector('.form-box.register form');
-    const googleLoginBtn = document.querySelector('.media-options a');
-
-    // Show login popup
-    loginPopup.addEventListener('click', () => {
-    wrapper.classList.add('active-popup');
-    wrapper.classList.remove('active'); // Ensure register form is hidden
-});
-
-registerPopup.addEventListener('click', () => {
-    wrapper.classList.add('active-popup');
-    wrapper.classList.add('active'); // Show register form
-});
-
-// Switch between forms
-registerLink.addEventListener('click', (e) => {
-    e.preventDefault();
-    wrapper.classList.add('active');
-});
-
-loginLink.addEventListener('click', (e) => {
-    e.preventDefault();
-    wrapper.classList.remove('active');
-});
-
-
-
-    // Handle register form submission
-    registerForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-
-        const username = registerForm.querySelector('input[type="text"]').value;
-        const email = registerForm.querySelector('input[type="email"]').value;
-        const password = registerForm.querySelector('input[type="password"]').value;
-
-        try {
-            const response = await fetch('/api/auth/register', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-XSRF-TOKEN': getCookie('XSRF-TOKEN')
-                },
-                credentials: 'include',
-                body: JSON.stringify({ username, email, password })
-            });
-
-            if (response.ok) {
-                // Registration successful, switch to login form
-                wrapper.classList.remove('active');
-                showSuccess('Registration successful! Please login.');
-            } else {
-                const errorData = await response.json();
-                showError(errorData.message || 'Registration failed');
-            }
-        } catch (error) {
-            showError('Network error: ' + error.message);
         }
-    });
+        async function register() {
+            const username = document.getElementById("usernameRegister").value;
+            const email = document.getElementById("emailRegister").value;
+            const password = document.getElementById("passwordRegister").value;
 
-    // Handle Google login
-    googleLoginBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        window.location.href = '/oauth2/authorization/google';
-    });
+            const fromData = new FormData();
+            formData.append('username', username);
+            formData.append('email', email);
+            formData.append('password', password);
+            //TO-DO
 
-    // Helper function to get CSRF token from cookies
-    function getCookie(name) {
-        const value = `; ${document.cookie}`;
-        const parts = value.split(`; ${name}=`);
-        if (parts.length === 2) return parts.pop().split(';').shift();
-    }
-
-    // Helper function to show error messages
-    function showError(message) {
-        const errorElement = document.createElement('div');
-        errorElement.className = 'error-message';
-        errorElement.textContent = message;
-
-        // Remove any existing error messages
-        const existingErrors = document.querySelectorAll('.error-message');
-        existingErrors.forEach(err => err.remove());
-
-        // Add new error message
-        const activeForm = wrapper.classList.contains('active') ?
-            document.querySelector('.form-box.register') :
-            document.querySelector('.form-box.login');
-
-        activeForm.appendChild(errorElement);
-
-        // Auto-remove after 5 seconds
-        setTimeout(() => {
-            errorElement.remove();
-        }, 5000);
-    }
-
-    // Helper function to show success messages
-    function showSuccess(message) {
-        const successElement = document.createElement('div');
-        successElement.className = 'success-message';
-        successElement.textContent = message;
-
-        // Remove any existing success messages
-        const existingSuccess = document.querySelectorAll('.success-message');
-        existingSuccess.forEach(succ => succ.remove());
-
-        // Add new success message
-        const activeForm = wrapper.classList.contains('active') ?
-            document.querySelector('.form-box.register') :
-            document.querySelector('.form-box.login');
-
-        activeForm.appendChild(successElement);
-
-        // Auto-remove after 5 seconds
-        setTimeout(() => {
-            successElement.remove();
-        }, 5000);
-    }
-
-    // Check if user is already logged in
-    async function checkAuthStatus() {
-        try {
-            const response = await fetch('/api/auth/me', {
-                credentials: 'include'
-            });
-
-            if (response.ok) {
-                const user = await response.json();
-                // Redirect to main menu if already logged in
-                window.location.href = '/MineMenu.html';
-            }
-        } catch (error) {
-            console.log('Not logged in');
         }
-    }
+        checkAuthStatus()
+    </script>
+<script src="./Script/PasswordLogic.js"></script>
+<script src="./Script/LogReg.js"></script>
+<script src="./Script/Sounds.js"></script>
 
-    // Check auth status on page load
-    checkAuthStatus();
-});
-</script>
+
+
 </body>
 </html>

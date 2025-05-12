@@ -29,6 +29,7 @@
 	<properties>
 		<java.version>23</java.version>
 	</properties>
+	<packaging>jar</packaging>
 	<dependencies>
 
 		<dependency>

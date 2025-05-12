@@ -54,7 +54,6 @@ class Overworld {
     window.addEventListener("keydown", (e) => {
       if (e.key === "a" || e.key === "A") {
         overworld.Player.performAttackP(overworld.Oponent);
-
       }
     });
 

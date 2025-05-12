@@ -7,17 +7,19 @@
     <title>Document</title>
 </head>
 <body>
-  <div class="loader">
-  </div>
-    
-    
-    
+  <div class="loader1"></div>
+  <div class="loaderr"></div>
 
-    
+  <!-- أضف هذا العنصر الجديد -->
+  <div class="waiting-timer">
+    WAITING TIME:<span id="timer">00:00</span>
+  </div>
 </body>
 <script>
     const matchIdSpan = document.getElementById("matchIdSpan");
     // call api and get match id
     matchIdSpan.innerHTML = "54321"
 </script>
+<script src="./Script/Sounds.js"></script>
+<script src="./Script/wTimer.js"></script>
 </html>

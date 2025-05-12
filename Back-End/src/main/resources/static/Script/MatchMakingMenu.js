@@ -63,4 +63,4 @@ async function fetchCurrentUser() {
     }
   }
   
-  fetchCurrentUser()
+fetchCurrentUser()

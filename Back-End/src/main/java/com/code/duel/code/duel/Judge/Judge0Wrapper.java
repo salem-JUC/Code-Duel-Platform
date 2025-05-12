@@ -41,7 +41,7 @@ public class Judge0Wrapper {
                 .build();
 
 
-
+        logger.info("Sending request to Judge0 API: {}", jsonPayload);
         HttpResponse<String> response = HttpClient.newHttpClient()
                 .send(request, HttpResponse.BodyHandlers.ofString());
 
@@ -49,6 +49,7 @@ public class Judge0Wrapper {
         ObjectMapper objectMapper = new ObjectMapper();
         JsonNode rootNode = objectMapper.readTree(response.body());
         String statusDescription = rootNode.path("status").path("description").asText();
+        logger.info("Received response from Judge0 API: {}", statusDescription);
         return statusDescription;
     }
 

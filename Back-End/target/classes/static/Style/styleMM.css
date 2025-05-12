@@ -74,7 +74,21 @@
     white-space: nowrap; /* Prevent line breaks */
     overflow: hidden; /* Hide overflow if it extends beyond container */
     text-overflow: ellipsis; /* Add "..." if text overflows */
+    animation: reverseHover 0.8s ease;
 }
+@keyframes reverseHover {
+    0% {
+        transform: translateX(-50%) scale(1.1); 
+        color: #ff1717; 
+        text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5); 
+    }
+    100% {
+        transform: translateX(-50%) scale(1); 
+        color: transparent; 
+        text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); 
+    }
+}
+
 
 /* Hover effect */
 .Logo:hover {
@@ -111,9 +125,10 @@
   
     position: relative;
     cursor: pointer;
- 
-    
+    animation: redPulse 3s infinite;
 }
+    
+
 .navbar .btnlogin-popup p,
 .navbar .btnregister-popup p {
     font-family: 'PF Tempesta Five Compressed', sans-serif;
@@ -302,3 +317,7 @@
     50% { opacity: 0.5; transform: scale(1.1); }
     100% { opacity: 1; transform: scale(1); }
   }
+  @keyframes redPulse {
+    0%, 100% { border-color: #110255; box-shadow: 0 0 10px #0f024b; }
+    50% { border-color: #110255; box-shadow: 0 0 20px #110255; }
+}

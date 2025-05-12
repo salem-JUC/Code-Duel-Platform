@@ -124,11 +124,11 @@ class GameLogic {
     handleSubmit() {
         
         if (!this.isGameActive) return;
-        document.getElementById("submitBtn").disabled = true;
-        document.getElementById("note").textContent = "⌛ Your submission is being evaluated"
+        this.showMessage("⌛ Your submission is being evaluated");
         const code = document.getElementById('codeEditor').value.trim();
         if (!code) {
             this.showError("Please write some code first!");
+            document.getElementById("submitBtn").disabled = false;
             return;
         }
 
@@ -173,7 +173,6 @@ class GameLogic {
 
     // Handle submission response
     handleSubmissionResponse(response) {
-        document.getElementById("submitBtn").disabled = false;
         if (response.accepted) {
             console.log("submission correct")
             this.showMessage("✅️ Correct solution");
@@ -195,6 +194,8 @@ class GameLogic {
         if (result.winnerId === this.playerId) {
             overworld.Player.WinnerP(overworld.Oponent);
             message = "You won the match!";
+            let mySound = new Audio('./Asset/victory.mp3')
+            mySound.play()
         } else if (result.winnerName) {
             overworld.Player.winnerO(overworld.Oponent);
             message = `${result.winnerName} won the match!`;
@@ -235,7 +236,7 @@ class GameLogic {
 
     // Notification Methods
     showMessage(message) {
-        document.getElementById("note").textContent = message
+        document.getElementById("message").textContent = message
     }
 
     showError(message) {
@@ -265,10 +266,7 @@ window.onload = async () => {
     
 };
 
-function outAttack() {
-    console.log("outAttack called")
-    game.attack()
-}
+
 
 
 async function fetchCurrentUser() {
@@ -293,3 +291,4 @@ async function fetchCurrentUser() {
       return null;
     }
 }
+

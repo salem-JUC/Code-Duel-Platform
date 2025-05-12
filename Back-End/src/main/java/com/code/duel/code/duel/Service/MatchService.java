@@ -80,7 +80,7 @@ public class MatchService {
         String difficulty = match.getDifficulty();
         Challenge randomChallenge = challengeRepo.findRandomWithDifficulty(difficulty);
         match.setCurrentChallengeId(randomChallenge.getChallengeID());
-        logger.info("Assigning challenge with ID: {} to match with ID: {} diffculty: {}", randomChallenge.getChallengeID(), matchId, difficulty);
+        logger.info("Assigning challenge with ID: {}, title : {} to match with ID: {} diffculty: {}", randomChallenge.getChallengeID(),randomChallenge.getTitle(), matchId, randomChallenge.getDifficulty());
         matchRepo.update(match);
     }
 
@@ -101,7 +101,8 @@ public class MatchService {
         }
     }
 
-    private void endMatch(Long winnerId,Long matchId) {
+    private void endMatch(Long matchId , Long winnerId) {
+        logger.info("Ending match with ID: {}, winner ID: {}", matchId, winnerId);
         Match match = matchRepo.findById(matchId);
         match.setStatus("FINISHED");
         match.setWinnerId(winnerId);

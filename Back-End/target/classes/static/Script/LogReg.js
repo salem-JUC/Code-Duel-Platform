@@ -1,43 +1,119 @@
-const wrapper = document.querySelector('.wrapper');
-const registerLink = document.querySelector('.register-link');
-const loginLink = document.querySelector('.login-link');
-const btPopupL = document.querySelector('.btnlogin-popup');
-const btPopupR = document.querySelector('.btnregister-popup');
-const iconClose = document.querySelector('.icon-close');
+document.addEventListener('DOMContentLoaded', () => {
+    // العناصر الرئيسية
+    const wrapper = document.querySelector('.wrapper');
+    const wSetting = document.querySelector('.wSetting');
+    const registerLink = document.querySelector('.register-link');
+    const loginLink = document.querySelector('.login-link');
+    const btnLogin = document.querySelector('.btnlogin-popup');
+    const btnRegister = document.querySelector('.btnregister-popup');
+    const btnSettings = document.getElementById('settingsBtn');
+    const iconClose = document.querySelectorAll('[class*="icon-close"]');
 
-registerLink.onclick = () => {
-    wrapper.classList.add('activeR'); // Switch to Register form
-    wrapper.classList.remove('active');
-};
+    // إدارة حالة النوافذ
+    const popupManager = {
+        activePopup: null,
 
-loginLink.onclick = () => {
-    wrapper.classList.remove('activeR');
-    wrapper.classList.add('active'); // Switch to Login form
-};
+        open: (popup) => {
+            // لا تعيد فتح نفس النافذة لو هي مفتوحة أصلاً
+            if (popupManager.activePopup === popup) return;
+            popupManager.closeAll();
+            popup.classList.add('active-popup');
+            popupManager.activePopup = popup;
+        },
 
-btPopupL.onclick = () => {
-    wrapper.classList.add('active-popup'); // Show popup
-    wrapper.classList.add('active'); // Default to Login form
-};
+        closeAll: () => {
+            document.querySelectorAll('.active-popup').forEach(popup => {
+                popup.classList.remove('active-popup');
+            });
+            popupManager.activePopup = null;
+        },
 
-btPopupR.onclick = () => {
-    wrapper.classList.add('active-popup'); // Show popup
-    wrapper.classList.add('activeR'); // Switch to Register form
-};
+        close: (popup) => {
+            popup.classList.remove('active-popup');
+            if (popupManager.activePopup === popup) {
+                popupManager.activePopup = null;
+            }
+        }
+    };
 
-iconClose.onclick = () => {
-    wrapper.classList.remove('active-popup');
-    wrapper.classList.remove('active');
-    wrapper.classList.remove('activeR');
-};
-iconClose.onclick = () => {
-    wrapper.style.transition = 'none'; // Disable transition immediately
-    wrapper.classList.remove('active-popup');
-    wrapper.classList.remove('active');
-    wrapper.classList.remove('activeR');
-
-    // Re-enable transition after a short delay
-    setTimeout(() => {
-        wrapper.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+    // أحداث فتح النوافذ
+    btnLogin?.addEventListener('click', (e) => {
+        e.stopPropagation();
+        popupManager.closeAll();
+        wrapper.classList.add('active');
+        wrapper.classList.remove('activeR');
+        popupManager.open(wrapper);
     });
-};
+    
+    btnRegister?.addEventListener('click', (e) => {
+        e.stopPropagation();
+        popupManager.closeAll();
+        wrapper.classList.add('activeR');
+        wrapper.classList.remove('active');
+        popupManager.open(wrapper);
+    });
+    
+
+    btnSettings?.addEventListener('click', (e) => {
+        e.stopPropagation();
+        popupManager.open(wSetting);
+    });
+
+    // أحداث الإغلاق (×)
+    iconClose?.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const parentPopup = btn.closest('.active-popup');
+            if (parentPopup) {
+                popupManager.close(parentPopup);
+            }
+        });
+    });
+
+    // إغلاق عند النقر خارج النافذة
+    document.addEventListener('click', (e) => {
+        const isClickInsidePopup = e.target.closest('.active-popup');
+        const isClickOnTrigger = e.target.closest('.btnlogin-popup') ||
+                                 e.target.closest('.btnregister-popup') ||
+                                 e.target.closest('#settingsBtn');
+        if (!isClickInsidePopup && !isClickOnTrigger) {
+            popupManager.closeAll();
+        }
+    });
+
+    // تبديل بين النماذج (داخل الـ wrapper فقط)
+    registerLink?.addEventListener('click', (e) => {
+        e.preventDefault();
+        // إغلاق النموذج الحالي أولاً
+        wrapper.classList.remove('active');
+        wrapper.classList.add('activeR');
+    });
+
+    loginLink?.addEventListener('click', (e) => {
+        e.preventDefault();
+        // إغلاق النموذج الحالي أولاً
+        wrapper.classList.remove('activeR');
+        wrapper.classList.add('active');
+    });
+});
+
+document.querySelectorAll('.settings-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+        const heading = document.querySelector('.settings-heading');
+        if (heading) {
+            heading.style.opacity = '0';
+            setTimeout(() => heading.style.display = 'none', 300); // إخفاء بعد الانتقال
+        }
+    });
+});
+
+// إعادة العرض عند فتح النافذة
+document.getElementById('settingsBtn').addEventListener('click', () => {
+    const heading = document.querySelector('.settings-heading');
+    if (heading) {
+        heading.style.display = 'block';
+        heading.style.opacity = '1';
+    }
+});
+
+

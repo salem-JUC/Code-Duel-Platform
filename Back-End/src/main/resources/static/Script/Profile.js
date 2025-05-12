@@ -125,6 +125,7 @@ async function displayDetails() {
     document.getElementById("winLoseRatio").innerHTML = statics.winLoseRatio
     document.getElementById("totalMatches").innerHTML = statics.totalMatches
     document.getElementById("usernameP").innerHTML = user.username
+    document.getElementById("userId").innerHTML = "Id #"+user.userID
     document.getElementById("userScoreSpan").innerHTML = user.score
     displayRecentMatches()
     
