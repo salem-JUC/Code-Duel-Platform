@@ -50,31 +50,7 @@ class Overworld {
 
     gameLoop();
 
-    // 👇 مستمع الضغط على زر A
-    window.addEventListener("keydown", (e) => {
-      if (e.key === "a" || e.key === "A") {
-        overworld.Player.performAttackP(overworld.Oponent);
-      }
-    });
-
-    window.addEventListener("keydown", (e) => {
-      if (e.key === "s" || e.key === "S") {
-        overworld.Player.performAttackO(overworld.Oponent);
-      }
-    });
-
-    window.addEventListener("keydown", (e) => {
-      if (e.key === "d" || e.key === "D") {
-        overworld.Player.WinnerP(overworld.Oponent);
-      }
-    });
-
-
-    window.addEventListener("keydown", (e) => {
-      if (e.key === "f" || e.key === "F") {
-        overworld.Player.winnerO(overworld.Oponent);
-      }
-    });
+   
 
 
 
