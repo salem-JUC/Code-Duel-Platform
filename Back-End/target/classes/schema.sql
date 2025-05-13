@@ -1,9 +1,9 @@
 CREATE TABLE "user" (
     userID BIGINT PRIMARY KEY,
-    Username VARCHAR(255),
-    Email VARCHAR(255),
+    Username VARCHAR(255) UNIQUE,
+    Email VARCHAR(255) UNIQUE,
     Password VARCHAR(255),
-    Role ENUM('E') NOT NULL,
+    Role ENUM('PLAYER' , 'ADMIN') NOT NULL,
     Score INT
 );
 CREATE TABLE Challenge (

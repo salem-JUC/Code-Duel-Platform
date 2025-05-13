@@ -175,7 +175,7 @@
                             </label>
                             
                         </div>
-                            <button type="submit" class="btn">Register</button>
+                            <button class="btn" onclick="register()">Register</button>
                             <div class="logreg-link">
                                 <p>Do you have account <a href="#"class = "login-link">Log in</a></p>
                             </div>
@@ -231,11 +231,28 @@
             const email = document.getElementById("emailRegister").value;
             const password = document.getElementById("passwordRegister").value;
 
-            const fromData = new FormData();
-            formData.append('username', username);
-            formData.append('email', email);
-            formData.append('password', password);
-            //TO-DO
+
+            try {
+                const response = await fetch('/api/auth/register', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        username: username,
+                        email: email,
+                        password: password
+                    }),
+                });
+
+                if (response.ok || response.status === 201) {
+                    window.location.href = '/MineMenu.html';
+                } else {
+                    alert(response.statusText);
+                }
+            } catch (error) {
+                showError('Error: ' + error.message);
+            }
 
         }
         checkAuthStatus()

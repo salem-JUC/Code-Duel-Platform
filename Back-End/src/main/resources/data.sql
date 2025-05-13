@@ -1,8 +1,8 @@
 INSERT INTO "user" (userID, Username, Email, Password, Role, Score)
 VALUES
-(1, 'Alice', 'alice@example.com', '{noop}123456', 'E', 100),
-(2, 'Bob', 'bob@example.com', '{noop}654321', 'E', 85),
-(3, 'Charlie', 'charlie@example.com', '{noop}987654', 'E', 120);
+(1, 'Alice', 'alice@example.com', '{noop}123456', 'PLAYER', 0),
+(2, 'Bob', 'bob@example.com', '{noop}654321', 'PLAYER', 0),
+(3, 'Charlie', 'charlie@example.com', '{noop}987654', 'PLAYER', 0);
 
 INSERT INTO Challenge (ChallengeID, Title, Description, Difficulty, Sample)
 VALUES
@@ -23,12 +23,7 @@ VALUES
 (15, 'Capitalize First Letter', 'Convert the first character of a word to uppercase.', 'Hard', 'Input: hello\nOutput: Hello');
 
 
-INSERT INTO "match" (matchID,current_challenge_id, difficulty , programmingLanguage, status, winnerId)
-VALUES
-(1,4, 'Easy' , 'Java' ,'FINISHED' , 1),
-(2,1 , 'Easy' , 'Java','FINISHED' , 1),
-(3,1 , 'Easy' , 'Java' ,'FINISHED' , NULL),
-(4,1 , 'Easy' , 'Java' ,'FINISHED' , NULL);
+
 
 
 
@@ -65,10 +60,5 @@ VALUES
 (29, 15, 'hello', 'Hello'),
 (30, 15, 'code', 'Code');
 
-INSERT INTO Submission (submissionID, ChallengeID, submitterID, Result, Code, ProgrammingLanguage)
-VALUES
-(1, 1, 1, 'Success', 'public class Solution {...}', 'E'),
-(2, 1, 2, 'Failure', 'public class Solution {...}', 'E'),
-(3, 2, 3, 'Success', 'public class Solution {...}', 'E'),
-(4, 3, 1, 'Success', 'public class Solution {...}', 'E');
+
 

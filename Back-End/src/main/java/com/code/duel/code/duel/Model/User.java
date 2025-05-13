@@ -12,6 +12,7 @@ public class User implements UserDetails {
     private String email;
     private String password;
     private String role;
+    private Integer score;
 
     @Override
     public String toString() {
@@ -25,7 +26,7 @@ public class User implements UserDetails {
                 '}';
     }
 
-    private Integer score;
+
 
     // Constructors
     public User() {}
