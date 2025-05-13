@@ -232,6 +232,9 @@ class GameLogic {
             <div class="sample">${this.currentChallenge.sample}</div>
         `;
     }
+    quit(){
+        this.stompClient.send(`/app/match/${this.matchId}/quit`);
+    }
 
     // Animation Methods
   
@@ -248,7 +251,7 @@ class GameLogic {
     // Event Listeners
     setupUIEvents() {
         document.getElementById('submitBtn').addEventListener('click', () => this.handleSubmit());
-        
+        document.getElementById('quitBtn').addEventListener('click', () => this.quit());
         // Allow Ctrl+Enter to submit
         document.getElementById('codeEditor').addEventListener('keydown', (e) => {
             if (e.ctrlKey && e.key === 'Enter') {

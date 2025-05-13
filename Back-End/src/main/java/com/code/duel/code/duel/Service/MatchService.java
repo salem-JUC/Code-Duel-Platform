@@ -101,7 +101,7 @@ public class MatchService {
         }
     }
 
-    private void endMatch(Long matchId , Long winnerId) {
+    public void endMatch(Long matchId, Long winnerId) {
         logger.info("Ending match with ID: {}, winner ID: {}", matchId, winnerId);
         Match match = matchRepo.findById(matchId);
         match.setStatus("FINISHED");

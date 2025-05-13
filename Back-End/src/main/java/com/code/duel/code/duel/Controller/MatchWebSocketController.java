@@ -8,6 +8,7 @@ import com.code.duel.code.duel.Mappers.ResponseMapper.MatchStatusResponseMapper;
 import com.code.duel.code.duel.Mappers.ResponseMapper.SubmissionResponse;
 import com.code.duel.code.duel.Model.Submission;
 import com.code.duel.code.duel.Model.User;
+import com.code.duel.code.duel.Model.UserPlayMatch;
 import com.code.duel.code.duel.Service.MatchService;
 import com.code.duel.code.duel.Service.SubmissionService;
 import org.slf4j.Logger;
@@ -66,6 +67,15 @@ public class MatchWebSocketController {
         } catch (Exception e) {
             sendError(principal.getName(), "Submission error: " + e.getMessage());
         }
+    }
+
+    @MessageMapping("/match/{matchId}/quit")
+    public void handlePlayerQuit(@DestinationVariable Long matchId, Principal principal) {
+        User user = (User) ((Authentication) principal).getPrincipal();
+        logger.info("Player {} is quitting match {}", user.getUsername(), matchId);
+        UserPlayMatch winner = matchService.getMatchStatus(matchId, user.getUserID()).getUserPlayMatch2();
+        matchService.endMatch(matchId, winner.getUserID());
+        broadcastMatchEnd(matchId, winner.getUserID(), winner.getUsername());
     }
 
     private void processSuccessfulHit(Long matchId, Long playerId, Long challengeId) {
