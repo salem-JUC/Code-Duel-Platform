@@ -154,11 +154,13 @@ class GameLogic {
         if (isAttacker) {
             this.showMessage("👊 You attacked " + this.opponentUsername)
             overworld.Player.performAttackP(overworld.Oponent);
+            gameSounds.playSFX('hit');
             this.playerHealth = hit.player1Health;
             this.opponentHealth = hit.player2Health;
         } else {
             this.showMessage("⚠️ "+this.opponentUsername + " attacked you")
             overworld.Player.performAttackO(overworld.Oponent);
+            gameSounds.playSFX('hit');
             this.playerHealth = hit.player2Health;
             this.opponentHealth = hit.player1Health;
         }
@@ -194,10 +196,10 @@ class GameLogic {
         if (result.winnerId === this.playerId) {
             overworld.Player.WinnerP(overworld.Oponent);
             message = "You won the match!";
-            let mySound = new Audio('./Asset/victory.mp3')
-            mySound.play()
+            gameSounds.playSFX('win');
+
         } else if (result.winnerName) {
-            overworld.Player.winnerO(overworld.Oponent);
+            overworld.Player.opponentWin(overworld.Oponent);
             message = `${result.winnerName} won the match!`;
         }
         

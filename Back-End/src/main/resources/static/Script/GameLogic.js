@@ -196,10 +196,10 @@ class GameLogic {
         if (result.winnerId === this.playerId) {
             overworld.Player.WinnerP(overworld.Oponent);
             message = "You won the match!";
-           gameSounds.playSFX('win');
-            mySound.play()
+            gameSounds.playSFX('win');
+
         } else if (result.winnerName) {
-            overworld.Player.winnerO(overworld.Oponent);
+            overworld.Player.opponentWin(overworld.Oponent);
             message = `${result.winnerName} won the match!`;
         }
         

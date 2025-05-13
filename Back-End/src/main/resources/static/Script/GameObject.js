@@ -28,7 +28,7 @@ takeHitO() {
   setTimeout(() => {
     this.x = originalX;
     this.sprite.setAnimation("idle");
-  }, 3000); // نص ثانية ويرجع
+  }, 2800); // نص ثانية ويرجع
 }
 performAttackP(target) { // نمرر الهدف
   const originalX = this.x;
@@ -43,7 +43,7 @@ performAttackP(target) { // نمرر الهدف
   setTimeout(() => {
     this.x = originalX;
     this.sprite.setAnimation("idle");
-  }, 3000);
+  }, 2800);
 }
 
 
@@ -58,7 +58,7 @@ takeHitP() {
   setTimeout(() => {
     this.x = originalX;
     this.sprite.setAnimation("idle");
-  }, 3000); // نص ثانية ويرجع
+  }, 2800); // نص ثانية ويرجع
 }
 
 performAttackO(target) { // نمرر الهدف
@@ -74,7 +74,7 @@ performAttackO(target) { // نمرر الهدف
   setTimeout(() => {
     this.x = originalX;
     this.sprite.setAnimation("idle");
-  }, 3000);
+  }, 2800);
 }
 
 
@@ -85,6 +85,7 @@ WinnerP(target) { // نمرر الهدف
 
   this.sprite.setAnimation("win");
   this.x = targetX;
+  target.OppositDisappear();
 
   // 👇 يهجم والخصم يتراجع بنفس الوقت
  
@@ -92,7 +93,7 @@ WinnerP(target) { // نمرر الهدف
   setTimeout(() => {
     this.x = originalX;
     this.sprite.setAnimation("idle");
-  }, 5000);
+  }, 6000);
 }
 winO() {
   const originalX = this.x;
@@ -104,7 +105,7 @@ winO() {
   setTimeout(() => {
     this.x = originalX;
     this.sprite.setAnimation("idle");
-  }, 5000); // نص ثانية ويرجع
+  }, 6000); // نص ثانية ويرجع
 }
 winnerO(target) { // نمرر الهدف
   const originalX = this.x;
@@ -119,8 +120,52 @@ winnerO(target) { // نمرر الهدف
   setTimeout(() => {
     this.x = originalX;
     this.sprite.setAnimation("idle");
-  }, 3000);
+  }, 6000);
 }
+
+OppositDisappear() {
+  const originalX = this.x;
+  const knockbackX = this.x +300; // يرجع خطوة (تقدر تزيد القيمة)
+
+  this.sprite.setAnimation("Damege");
+  this.x = knockbackX;
+
+  setTimeout(() => {
+    this.x = originalX;
+    this.sprite.setAnimation("idle");
+  }, 6000); // نص ثانية ويرجع
+}
+
+playerDisappear() {
+  const originalX = this.x;
+  const knockbackX = this.x -4; // يرجع خطوة (تقدر تزيد القيمة)
+
+  this.sprite.setAnimation("win");
+  this.x = knockbackX;
+
+  setTimeout(() => {
+    this.x = originalX;
+    this.sprite.setAnimation("idle");
+  }, 6000); // نص ثانية ويرجع
+}
+
+opponentWin(target) { // نمرر الهدف
+  const originalX = this.x;
+  const targetX = this.x - 300; // تقدم الهجوم
+
+  this.sprite.setAnimation("Damege");
+  this.x = targetX;
+
+  // 👇 يهجم والخصم يتراجع بنفس الوقت
+  target.playerDisappear();
+
+  setTimeout(() => {
+    this.x = originalX;
+    this.sprite.setAnimation("idle");
+  }, 6000);
+}
+
+
 
 
 }

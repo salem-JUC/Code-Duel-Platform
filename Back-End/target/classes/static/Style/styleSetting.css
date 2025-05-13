@@ -9,6 +9,8 @@
     box-sizing: border-box;
    
 }
+
+
 /*----*/
 .navbar .btnlogin-popup,
 .navbar .btnregister-popup {
@@ -24,7 +26,9 @@
     cursor: pointer;
     background: rgba(0, 0, 0, 0.7);
     border-radius: 5px;
+    animation: redPulse 3s infinite;
 }
+
 .navbar .btnlogin-popup p,
 .navbar .btnregister-popup p {
     font-family: 'PF Tempesta Five Compressed', sans-serif;
@@ -274,6 +278,7 @@
     display: flex;
     justify-content: center;
     align-items: center;border-bottom-left-radius: 10px;
+    color: #ffffff;
 
 }
 .icon-close i {
@@ -463,6 +468,10 @@ color: #ff1717;
 .media-options span {
     font-size: 16px;
     font-weight: 500;
+
+}
+span{
+    color: #ffffff;
 }
 .wrapper:not(.active-popup) .media-options {
     display: flex;
@@ -495,7 +504,9 @@ color: #ff1717;
     display: flex;
     align-items: center;
     justify-content: center;
+    animation: redPulse 3s infinite;
 }
+
 
 .settings-btn-1:hover {
     transform: scale(1.1);
@@ -635,11 +646,14 @@ color: #ff1717;
     justify-content: center;
     align-items: center;
     border-bottom-left-radius: 10px;
+   color: #ffffff;
 }
-
+bx bx-x
 .icon-close-Settings i {
-    font-size: 32px;
-    color: #ffffff;
+    color: #ffffff !important;
+}
+.icon-close-Settings:hover i {
+    color: #ffffff !important;
 }
 
 /* العنوان في نافذة الإعدادات */
@@ -793,4 +807,25 @@ input[type="range"].volume-slider::-webkit-slider-thumb {
 @keyframes redPulse {
     0%, 100% { border-color: #110255; box-shadow: 0 0 10px #0f024b; }
     50% { border-color: #110255; box-shadow: 0 0 20px #110255; }
+}
+.help-text {
+    display: block;
+    margin-top: 5px;
+    font-size: 12px;
+    margin-bottom: 20px;
+    gap: 20px;
+
+    
+}
+
+.help-text.valid {
+    color: #00ff7f;
+}
+
+.help-text.invalid {
+    color: #ffffff; 
+
+}
+.T{
+margin-top: 20px;
 }
