@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="./Style/stylepp.css">
+    <link rel="stylesheet" href="./Style/styleSetting.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Page</title>
+</head>
+<body>
+    <div class="profile-container">
+        <!-- قسم ملف اللاعب -->
+        <div class="player-profile">
+           
+                <div>
+                    <h2 class="username" id="usernameP"></h2>
+                    <p id="userId" class="player-rank"></p>
+                </div>
+
+    
+            <div class="player-info-grid">
+                <div class="info-card">
+                    <div class="info-label">Level</div>
+                    <div class="info-value" id="userScoreSpan">22</div>
+                </div>
+                <div class="info-card">
+                    <div class="info-label">W/L Ratio</div>
+                    <div id="winLoseRatio" class="info-value"></div>
+                </div>
+                <div class="info-card">
+                    <div class="info-label">Matches</div>
+                    <div id="totalMatches" class="info-value"></div>
+                </div>
+                <div class="info-card">
+                    <div class="info-label">Status</div>
+                    <div class="info-value online">Online</div>
+                </div>
+            </div>
+        </div>
+    
+        <!-- قسم تاريخ المباريات -->
+        <div class="history-container">
+            <h2 class="history-header">Recent Games</h2>
+            <div class="games-list">
+                <!--Heres game-entry -->
+            </div>
+            <button class="submissions-toggle-btn"  onclick="window.location.href='SubmationsPage.html'">View Submissions 🗃️</button>
+            <button class="submissions-toggle-btn"  onclick="window.location.href='MineMenu.html'">Back</button>
+        </div> 
+    </div>
+    >
+</body>
+</html>
+
+<script src="./Script/Profile.js"></script>

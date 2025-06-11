@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="./Style/styleGF.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodeDuel</title>
+</head>
+<body>
+    <div class="countdown-overlay" id="countdown"></div>
+    <div class="Q-container">
+        <div id="challengeDiv" class="Q-text" align="center"><h2>CODE DUOL</h2></div>
+    </div>
+
+      
+      <div class="health-fill"></div>
+      
+    </div>
+    
+    <!-- شريط صحة الخصم -->
+
+      <div class="health-fill"></div>
+      
+    </div>
+        <!-- بقية العناصر -->
+        <div class="game-container">
+          <canvas class="game-canvas" width="352" height="198">
+     
+              
+          </canvas>
+        </div>
+      
+  
+
+    <div class="text-container">
+        <form onsubmit="event.preventDefault(); duel();">
+            <textarea id="codeEditor" placeholder="Start Coding"></textarea>
+            <input type="button" onclick="this.disabled=false; duel();" value="Duel" class="submit">
+        </form>
+
+    </div>
+    <div class="game-over-modal" id="gameOverModal">
+      <div class="game-over-content">
+          <h2 id="resultMessage"></h2>
+          <button class="return-btn" onclick="window.location.href = 'index.html'">Return to Main Page</button>
+      </div>
+  </div>
+  
+  
+
+<script src="./Script/CountDown.js"></script>
+<script src="./Script/GF.js"></script>
+<script src="./Script/Overworld.js"></script>
+<script src="./Script/GameObject.js"></script>
+<script src="./Script/init.js"></script>
+
+</body>
+</html>

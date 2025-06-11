@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="./Style/styleL.css">
+    <link rel="stylesheet" href="./Style/styleSetting.css">
+    <script src="https://cdn.jsdelivr.net/npm/sockjs-client/dist/sockjs.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js" integrity="sha512-iKDtgDyTHjAitUDdLljGhenhPwrbBfqTKWO1mkhSFH3A7blITC9MhYon6SjnMhp4o0rADGw9yAC6EW4t5a4K3g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+  
+  <div class="loader">
+    
+    <div class="match-id-text">Match ID: <span id="matchIdSpan">123ABC</span></div></div>
+    <p>Share The Match ID with other player to start the match</p>
+    
+     
+    
+</body>
+<script>
+    //get the match id from URL parameter
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const matchIdSpan = document.getElementById("matchIdSpan");
+    matchId = urlParams.get('matchId');
+    matchIdSpan.innerHTML = matchId;
+
+    // In waiting-room.js
+    const socket = new SockJS('/ws');
+    const stompClient = Stomp.over(socket);
+
+    stompClient.connect({}, () => {
+
+        // Subscribe to ready notifications
+            stompClient.subscribe(`/topic/match/${matchId}/ready`, () => {
+                window.location.href = `/CountBeforeGameFaild.html?matchId=${matchId}`;
+            });
+    
+        // Tell server we're waiting
+        stompClient.send(`/app/match/${matchId}/wait`);
+    });
+</script>
+
+<script src="./Script/LogReg.js"></script>
+</html>
