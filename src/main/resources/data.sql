@@ -8,8 +8,8 @@ VALUES
 INSERT INTO Challenge (ChallengeID, Title, Description, Difficulty, Sample)
 VALUES
 (1, 'Sum of Two Numbers', 'Read two integers and print their sum.', 'Easy', 'Input: 3 5 Output: 8'),
-(2, 'Even or Odd', 'Determine if an integer is even or odd.', 'Easy', 'Input: 4 Output: Even'),
-(3, 'Maximum of Two Numbers', 'Print the larger of two numbers.', 'Easy', 'Input: 7 9 Output: 9'),
+(2, 'Even or Odd', 'Reada number then print if an integer is even or odd.', 'Easy', 'Input: 4 Output: Even'),
+(3, 'Maximum of Two Numbers', 'Read two numbers then Print the larger of two numbers.', 'Easy', 'Input: 7 9 Output: 9'),
 (4, 'Area of a Rectangle', 'Read the length and width of a rectangle and calculate its area.', 'Easy', 'Input: 5 3 Output: 15'),
 (5, 'Convert Minutes to Seconds', 'Convert a number of minutes to seconds.', 'Easy', 'Input: 5 Output: 300'),
 (6, 'Fibonacci Sequence', 'Generate the nth Fibonacci number.', 'Normal', 'Input: 5 Output: 5'),
