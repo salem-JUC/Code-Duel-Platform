@@ -228,7 +228,9 @@ class GameLogic {
         const challengeDiv = document.getElementById('challengeDiv');
         challengeDiv.innerHTML = `
             <h3>${this.currentChallenge.title}</h3>
+            <br>
             <p>${this.currentChallenge.description}</p>
+            <br>
             <div class="sample">${this.currentChallenge.sample}</div>
         `;
     }

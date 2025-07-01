@@ -3,7 +3,8 @@ VALUES
 (1, 'Alice', 'alice@example.com', '{noop}123456', 'PLAYER', 0),
 (2, 'Bob', 'bob@example.com', '{noop}654321', 'PLAYER', 0),
 (3, 'SalemX', 'salem@example.com', '{noop}123456', 'PLAYER', 0),
-(4, 'MohX', 'moh@example.com', '{noop}123456', 'PLAYER', 0);
+(4, 'MohX', 'moh@example.com', '{noop}123456', 'PLAYER', 0),
+(5, 'rxvii', 'rxvii@example.com', '{noop}123456', 'PLAYER', 0);
 
 INSERT INTO Challenge (ChallengeID, Title, Description, Difficulty, Sample)
 VALUES

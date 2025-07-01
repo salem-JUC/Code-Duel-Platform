@@ -33,8 +33,8 @@ public class Judge0Wrapper {
 
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create("https://judge0-extra-ce.p.rapidapi.com/submissions?base64_encoded=true&wait=true&fields=*"))
-                .header("x-rapidapi-key", "e3f6fcba8emsh427fb13a3e71224p128063jsn30301f1d3849")
-                .header("x-rapidapi-host", "judge0-extra-ce.p.rapidapi.com")
+                .header("x-rapidapi-key", "64431d57cbmsh5e695d9da960983p1ca418jsn067194f9b2fa")
+                .header("x-rapidapi-host", "judge0-ce.p.rapidapi.com")
                 .header("Content-Type", "application/json")
                 .method("POST", HttpRequest.BodyPublishers.ofString(jsonPayload)
                 )
@@ -54,13 +54,15 @@ public class Judge0Wrapper {
     }
 
     public String getLanguages() throws IOException, InterruptedException {
+
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create("https://judge0-extra-ce.p.rapidapi.com/languages"))
-                .header("x-rapidapi-key", "e3f6fcba8emsh427fb13a3e71224p128063jsn30301f1d3849")
-                .header("x-rapidapi-host", "judge0-extra-ce.p.rapidapi.com")
+                .uri(URI.create("https://judge0-ce.p.rapidapi.com/languages"))
+                .header("x-rapidapi-key", "64431d57cbmsh5e695d9da960983p1ca418jsn067194f9b2fa")
+                .header("x-rapidapi-host", "judge0-ce.p.rapidapi.com")
                 .method("GET", HttpRequest.BodyPublishers.noBody())
                 .build();
         HttpResponse<String> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
+
         return response.body();
     }
 
