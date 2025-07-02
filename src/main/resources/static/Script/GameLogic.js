@@ -22,7 +22,7 @@ class GameLogic {
         document.getElementById('codeEditor').value = `
 import java.util.Scanner;
 
-public class RectangleArea {
+public class Main{
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
@@ -152,7 +152,7 @@ public class RectangleArea {
         document.getElementById('codeEditor').value = `
 import java.util.Scanner;
 
-public class RectangleArea {
+public class Main{
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 

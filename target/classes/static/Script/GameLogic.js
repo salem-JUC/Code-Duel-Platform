@@ -19,6 +19,17 @@ class GameLogic {
 
     // Initialize game
     init(user) {
+        document.getElementById('codeEditor').value = `
+import java.util.Scanner;
+
+public class Main{
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Start Coding
+    }
+}
+`;
         this.getMatchInfo(user);
         this.setupWebSocket();
         this.setupUIEvents();
@@ -138,7 +149,17 @@ class GameLogic {
         }));
         
         // Clear editor but keep it enabled for next attempt
-        document.getElementById('codeEditor').value = '';
+        document.getElementById('codeEditor').value = `
+import java.util.Scanner;
+
+public class Main{
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Start Coding
+    }
+}
+`;
 
     }
 
