@@ -168,9 +168,6 @@ public class Main{
         console.log(hit)
         const isAttacker = hit.hittingPlayerId === this.playerId;
         
-        // Update health values
-        
-        
         // Play animations
         if (isAttacker) {
             this.showMessage("👊 You attacked " + this.opponentUsername)
@@ -185,6 +182,17 @@ public class Main{
             this.playerHealth = hit.player2Health;
             this.opponentHealth = hit.player1Health;
         }
+        document.getElementById('codeEditor').value = `
+import java.util.Scanner;
+
+public class Main{
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Start Coding
+    }
+}
+`;
         
         this.updateUI();
         

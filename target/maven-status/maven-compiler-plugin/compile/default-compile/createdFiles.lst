@@ -15,6 +15,7 @@ com\code\duel\code\duel\Model\Challenge.class
 com\code\duel\code\duel\Mappers\RequestMapper\SubmissionRequestMapper.class
 com\code\duel\code\duel\Controller\SubmissionController.class
 com\code\duel\code\duel\Model\User.class
+com\code\duel\code\duel\Mappers\RequestMapper\UserRegisterRequest.class
 com\code\duel\code\duel\Service\SubmissionService.class
 com\code\duel\code\duel\SecurityConfiguration.class
 com\code\duel\code\duel\Repository\UserRepo.class

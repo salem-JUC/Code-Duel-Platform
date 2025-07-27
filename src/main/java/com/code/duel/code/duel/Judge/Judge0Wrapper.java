@@ -5,6 +5,8 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.env.ConfigTreePropertySource;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
@@ -18,6 +20,12 @@ import java.util.Base64;
 public class Judge0Wrapper {
 
     private static final Logger logger = LoggerFactory.getLogger(Judge0Wrapper.class);
+    @Value("${JUDGE0API_KEY}")
+    private String JUDGE0API_KEY;
+
+    public String getJUDGE0API_KEY() {
+        return JUDGE0API_KEY;
+    }
 
     public String submit(String sourceCode, int languageId, String input, String expected_output) throws IOException, InterruptedException {
         String sourceCodeEncoded = Base64.getEncoder().encodeToString(sourceCode.getBytes());
@@ -33,7 +41,7 @@ public class Judge0Wrapper {
 
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create("https://judge0-extra-ce.p.rapidapi.com/submissions?base64_encoded=true&wait=true&fields=*"))
-                .header("x-rapidapi-key", "64431d57cbmsh5e695d9da960983p1ca418jsn067194f9b2fa")
+                .header("x-rapidapi-key", JUDGE0API_KEY)
                 .header("x-rapidapi-host", "judge0-ce.p.rapidapi.com")
                 .header("Content-Type", "application/json")
                 .method("POST", HttpRequest.BodyPublishers.ofString(jsonPayload)
@@ -57,7 +65,7 @@ public class Judge0Wrapper {
 
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create("https://judge0-ce.p.rapidapi.com/languages"))
-                .header("x-rapidapi-key", "64431d57cbmsh5e695d9da960983p1ca418jsn067194f9b2fa")
+                .header("x-rapidapi-key", JUDGE0API_KEY)
                 .header("x-rapidapi-host", "judge0-ce.p.rapidapi.com")
                 .method("GET", HttpRequest.BodyPublishers.noBody())
                 .build();
