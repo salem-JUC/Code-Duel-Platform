@@ -35,7 +35,7 @@ public class MatchWebSocketController {
     private final SimpMessagingTemplate messagingTemplate;
     private final MatchService matchService;
     private final SubmissionService submissionService;
-    private final Map<Long, Set<Long>> activeMatchSubscriptions = new ConcurrentHashMap<>();
+
 
     private static final Logger logger = LoggerFactory.getLogger(MatchWebSocketController.class);
 
@@ -111,7 +111,6 @@ public class MatchWebSocketController {
 
     private void broadcastHit(Long matchId, Long hittingPlayerId,
                               MatchStatusResponseMapper status) {
-        System.out.println("Broadcasting hit for match ID: " + matchId + ", hitting player ID: " + hittingPlayerId);
         messagingTemplate.convertAndSend(
                 "/topic/match/" + matchId + "/hit",
                 new HitNotifcation(
@@ -127,7 +126,6 @@ public class MatchWebSocketController {
                 "/topic/match/" + matchId + "/ended",
                 new MatchResult(winnerId, winnerName)
         );
-
     }
 
     private void sendSubmissionResponse(String principalName, boolean accepted, String message) {

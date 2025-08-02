@@ -19,17 +19,6 @@ class GameLogic {
 
     // Initialize game
     init(user) {
-        document.getElementById('codeEditor').value = `
-import java.util.Scanner;
-
-public class Main{
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-
-        // Start Coding
-    }
-}
-`;
         this.getMatchInfo(user);
         this.setupWebSocket();
         this.setupUIEvents();
@@ -54,7 +43,10 @@ public class Main{
         const socket = new SockJS('/ws');
         this.stompClient = Stomp.over(socket);
         
-        this.stompClient.connect({}, (frame) => {
+        this.stompClient.connect({
+        type : "MATCH"
+        ,userId:this.playerId
+        ,matchId : this.matchId}, (frame) => {
             console.log('Connected to WebSocket');
             this.subscribeToChannels();
             this.sendReadyNotification();
@@ -149,17 +141,7 @@ public class Main{
         }));
         
         // Clear editor but keep it enabled for next attempt
-        document.getElementById('codeEditor').value = `
-import java.util.Scanner;
-
-public class Main{
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-
-        // Start Coding
-    }
-}
-`;
+        document.getElementById('codeEditor').value = ""
 
     }
 
@@ -182,17 +164,7 @@ public class Main{
             this.playerHealth = hit.player2Health;
             this.opponentHealth = hit.player1Health;
         }
-        document.getElementById('codeEditor').value = `
-import java.util.Scanner;
-
-public class Main{
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-
-        // Start Coding
-    }
-}
-`;
+        document.getElementById('codeEditor').value = ""
         
         this.updateUI();
         
@@ -229,7 +201,7 @@ public class Main{
 
         } else if (result.winnerName) {
             overworld.Player.opponentWin(overworld.Oponent);
-            message = `${result.winnerName} won the match!`;
+            message = "You have Lost !! ";
         }
         
         this.showMessage(message);

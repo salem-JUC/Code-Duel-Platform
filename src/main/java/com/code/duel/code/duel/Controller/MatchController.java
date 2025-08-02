@@ -9,6 +9,8 @@ import com.code.duel.code.duel.Model.User;
 import com.code.duel.code.duel.Service.MatchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.messaging.simp.user.SimpUser;
+import org.springframework.messaging.simp.user.SimpUserRegistry;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,8 +20,12 @@ import java.util.List;
 @RequestMapping("/api/match")
 public class MatchController {
 
+
+
     @Autowired
     MatchService matchService;
+    @Autowired
+    private SimpUserRegistry simpUserRegistry;
 
     @PostMapping("/create")
     public ResponseEntity<Long> createMatch(
@@ -60,5 +66,20 @@ public class MatchController {
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok(matches);
+    }
+
+    @GetMapping("/ws/sessionDetails")
+    public String sessionDetails() {
+        StringBuilder sb = new StringBuilder();
+        for (SimpUser user : simpUserRegistry.getUsers()) {
+            sb.append("User: ").append(user.getName()).append("\n");
+            user.getSessions().forEach(session -> {
+                sb.append("  Session ID: ").append(session.getId()).append("\n");
+                session.getSubscriptions().forEach(sub -> {
+                    sb.append("    Subscribed to: ").append(sub.getDestination()).append("\n");
+                });
+            });
+        }
+        return sb.toString();
     }
 }

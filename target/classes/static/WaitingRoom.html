@@ -32,7 +32,7 @@
     const socket = new SockJS('/ws');
     const stompClient = Stomp.over(socket);
 
-    stompClient.connect({}, () => {
+    stompClient.connect({type : "WAITING"}, () => {
 
         // Subscribe to ready notifications
             stompClient.subscribe(`/topic/match/${matchId}/ready`, () => {
