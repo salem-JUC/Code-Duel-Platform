@@ -201,7 +201,7 @@ class GameLogic {
 
         } else if (result.winnerName) {
             overworld.Player.opponentWin(overworld.Oponent);
-            message = `${result.winnerName} won the match!`;
+            message = "You have Lost !! ";
         }
         
         this.showMessage(message);

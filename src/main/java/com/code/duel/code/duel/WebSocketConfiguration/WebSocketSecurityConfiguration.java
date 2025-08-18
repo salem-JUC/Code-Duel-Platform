@@ -1,4 +1,4 @@
-package com.code.duel.code.duel;
+package com.code.duel.code.duel.WebSocketConfiguration;
 
 import org.springframework.security.config.annotation.web.messaging.MessageSecurityMetadataSourceRegistry;
 import org.springframework.security.config.annotation.web.socket.AbstractSecurityWebSocketMessageBrokerConfigurer;

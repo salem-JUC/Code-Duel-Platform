@@ -1,4 +1,4 @@
-package com.code.duel.code.duel;
+package com.code.duel.code.duel.WebSocketConfiguration;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;
