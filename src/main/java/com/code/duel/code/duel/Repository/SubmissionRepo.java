@@ -1,10 +1,13 @@
 package com.code.duel.code.duel.Repository;
 
+import com.code.duel.code.duel.DTO.SubmissionDTO.SubmissionDTO;
 import com.code.duel.code.duel.Model.Submission;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -58,6 +61,26 @@ public class SubmissionRepo {
                         rs.getString("Code"),
                         rs.getString("ProgrammingLanguage")
                 ));
+    }
+
+    public List<SubmissionDTO> getSubmissionsOfUser(Long userId){
+        String sql = "select s.SUBMISSIONID , c.TITLE  , c.DIFFICULTY , s.PROGRAMMINGLANGUAGE , s.RESULT \n" +
+                "from SUBMISSION  s\n" +
+                "inner join CHALLENGE c on s.CHALLENGEID = c.CHALLENGEID\n" +
+                "where s.SUBMITTERID = ? ;";
+        SqlRowSet rowSet = jdbcTemplate.queryForRowSet(sql , userId);
+        List<SubmissionDTO> submissions = new ArrayList<>();
+        while (rowSet.next()){
+            SubmissionDTO submission = new SubmissionDTO(
+                    rowSet.getLong("SUBMISSIONID"),
+                    rowSet.getString("TITLE"),
+                    rowSet.getString("DIFFICULTY"),
+                    rowSet.getString("PROGRAMMINGLANGUAGE"),
+                    rowSet.getString("RESULT")
+            );
+            submissions.add(submission);
+        }
+        return submissions;
     }
 
     // Update a submission

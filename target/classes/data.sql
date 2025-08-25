@@ -24,6 +24,18 @@ VALUES
 (14, 'Count Letters in a String', 'Count the number of letters in a string (excluding spaces).', 'Hard', 'Input: hello world Output: 10'),
 (15, 'Capitalize First Letter', 'Convert the first character of a word to uppercase.', 'Hard', 'Input: hello Output: Hello');
 
+INSERT INTO SUBMISSION
+(SUBMISSIONID, CHALLENGEID, SUBMITTERID, RESULT, CODE, PROGRAMMINGLANGUAGE)
+VALUES
+(1, 1, 1, 'SUCCESS', 'public class Hello { public static void main(String[] args){ System.out.println("Hello World"); } }', 'Java'),
+
+(2, 2, 2, 'FAILURE', 'print("Hello World")', 'Python'),
+
+(3, 2, 4, 'SUCCESS', '#include <iostream>\nusing namespace std;\nint main(){ cout << "Hello C++"; return 0; }', 'C++'),
+
+(4, 3, 5, 'SUCCESS', 'console.log("Hello JavaScript");', 'JavaScript'),
+
+(5, 4, 4, 'FAILURE', 'SELECT * FROM users;', 'SQL');
 
 
 

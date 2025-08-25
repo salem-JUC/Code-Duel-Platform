@@ -1,5 +1,6 @@
 package com.code.duel.code.duel.Controller;
 
+import com.code.duel.code.duel.DTO.SubmissionDTO.SubmissionDTO;
 import com.code.duel.code.duel.Mappers.ResponseMapper.SubmissionWithChallengeResponse;
 import com.code.duel.code.duel.Model.Challenge;
 import com.code.duel.code.duel.Model.Submission;
@@ -26,8 +27,8 @@ public class SubmissionController {
     ChallengeService challengeService;
 
     @GetMapping
-    public ResponseEntity<List<Submission>> getSubmissionsByUserId(@AuthenticationPrincipal User user) {
-        List<Submission> submissions = submissionService.getAllSubmissionsOfSubmitter(user.getUserID());
+    public ResponseEntity<List<SubmissionDTO>> getSubmissionsByUserId(@AuthenticationPrincipal User user) {
+        List<SubmissionDTO> submissions = submissionService.getAllSubmissionsOfSubmitter(user.getUserID());
         return ResponseEntity.ok(submissions);
     }
     @GetMapping("/challenge/{challengeId}")
@@ -37,9 +38,7 @@ public class SubmissionController {
     }
     @GetMapping("/{submissionId}")
     public ResponseEntity<SubmissionWithChallengeResponse> getSubmissionById(@PathVariable Long submissionId) {
-        Submission submission = submissionService.getSubmissionById(submissionId);
-        Challenge challenge = challengeService.getChallengeById(submission.getChallengeID());
-        SubmissionWithChallengeResponse submissionWithChallengeResponse = new SubmissionWithChallengeResponse(submission , challenge);
+
         return ResponseEntity.ok(submissionWithChallengeResponse);
     }
 }

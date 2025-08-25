@@ -15,9 +15,11 @@
     <thead>
         <tr>
             <th>Submission ID</th>
-            <th>Challenge ID</th>
-            <th>Result</th>
+            <th>Challenge Title</th>
+            <th>Difficulty</th>
             <th>Programming Language</th>
+            <th>Result</th>
+
         </tr>
     </thead>
     <tbody id="table-body">
@@ -76,13 +78,12 @@
             const row = document.createElement('tr');
             row.innerHTML = `
                 <td data-label="Submission ID">
-                <a href="submissionDetails.html?id=${submission.submissionID}">${submission.submissionID}</a>
+                    <a href="submissionDetails.html?id=${submission.submissionID}">${submission.submissionID}</a>
                 </td>
-                <td data-label="Challenge ID">${submission.challengeID}</td>
-                <td data-label="Result">
-                ${submission.result}
-                </td>
+                <td data-label="Challenge Title">${submission.challengeTitle}</td>
+                <td data-label="Difficulty">${submission.difficulty}</td>
                 <td data-label="Programming Language">${submission.programmingLanguage}</td>
+                <td data-label="Result">${submission.result}</td>
             `;
             tbody.appendChild(row);
         }
