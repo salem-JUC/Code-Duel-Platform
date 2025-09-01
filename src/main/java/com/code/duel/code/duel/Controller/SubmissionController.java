@@ -1,8 +1,7 @@
 package com.code.duel.code.duel.Controller;
 
 import com.code.duel.code.duel.DTO.SubmissionDTO.SubmissionDTO;
-import com.code.duel.code.duel.Mappers.ResponseMapper.SubmissionWithChallengeResponse;
-import com.code.duel.code.duel.Model.Challenge;
+import com.code.duel.code.duel.DTO.SubmissionDTO.SubmissionDetailsDTO;
 import com.code.duel.code.duel.Model.Submission;
 import com.code.duel.code.duel.Model.User;
 import com.code.duel.code.duel.Service.ChallengeService;
@@ -10,7 +9,6 @@ import com.code.duel.code.duel.Service.SubmissionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,8 +35,8 @@ public class SubmissionController {
         return ResponseEntity.ok(submissions);
     }
     @GetMapping("/{submissionId}")
-    public ResponseEntity<SubmissionWithChallengeResponse> getSubmissionById(@PathVariable Long submissionId) {
-
-        return ResponseEntity.ok(submissionWithChallengeResponse);
+    public ResponseEntity<SubmissionDetailsDTO> getSubmissionById(@PathVariable Long submissionId) {
+        SubmissionDetailsDTO submissionDetailsDTO = submissionService.getSubmissionDetailsDTO(submissionId);
+        return ResponseEntity.ok(submissionDetailsDTO);
     }
 }

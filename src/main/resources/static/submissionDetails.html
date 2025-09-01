@@ -9,7 +9,7 @@
 </head>
 <body>
     <div class="PP">
-        <h2 align="center" id="submissionId"></h2>
+        <h2 align="center" id="username"></h2>
         </div>
        
     <div class="profile-container">
@@ -25,7 +25,7 @@
             <div class="player-info-grid">
                 <div class="info-card">
                     <div class="info-label">Challenge</div>
-                    <div class="info-value" id="challengeTitle">Division of Two Numbers</div>
+                    <div class="info-value" style="color: blueviolet;" id="challengeTitle">Division of Two Numbers</div>
                     <div class="info-value" id="challengeTxt">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum eligendi vero mollitia amet, ducimus rerum veniam sint, unde error eos doloremque officia harum! Saepe, aut autem iste nobis deserunt optio.</div>
                     <div class="info-value" id="challengeSample">Sample</div>
                 </div>
@@ -34,9 +34,10 @@
                     <div class="info-value" id="language"></div>
                 </div>
                 <div class="info-card">
-                    <div class="info-label">Result</div>
-                    <div class="info-value" id="result"></div>
+                    <div class="info-label">Difficulty</div>
+                    <div class="info-value" id="difficulty"></div>
                 </div>
+                
             </div>
         </div>
     
@@ -56,10 +57,14 @@
                             System.out.println("Product: " + product);
                         }
                     }
-                      </p></div>
-                 
-                
+                      </p>
+                    </div>
+                    
             </div>
+            <div class="info-card">
+                    <div class="info-label">Result</div>
+                    <div class="info-value" id="result"></div>
+                </div>
             <button class="submissions-toggle-btn"  id="globalBtn">GLOBAL SUBMSSIONS</button>
             <button class="submissions-toggle-btn"  onclick="window.location.href='SubmationsPage.html'">BACK</button>
         </div> 
@@ -89,13 +94,13 @@
     async function displayFunction() {
         const response = await fetchDetails();
         console.log(response)
-        document.getElementById("submissionId").innerHTML = "#" + response.submission.submissionID;
-        document.getElementById("challengeTitle").innerHTML = response.challenge.title;
-        document.getElementById("challengeTxt").innerHTML = response.challenge.description;
-        document.getElementById("challengeSample").innerHTML = response.challenge.sample;
-        document.getElementById("language").innerHTML = response.submission.programmingLanguage;
-        document.getElementById("result").innerHTML = response.submission.result;
-        document.getElementById("code").innerHTML = response.submission.code;
+        document.getElementById("username").innerHTML = response.username;
+        document.getElementById("challengeTitle").innerHTML = response.title;
+        document.getElementById("challengeTxt").innerHTML = response.description;
+        document.getElementById("language").innerHTML = response.programmingLanguage;
+        document.getElementById("result").innerHTML = response.result;
+        document.getElementById("code").innerHTML = response.code;
+        document.getElementById("difficulty").innerHTML = response.difficulty;
         document.getElementById("globalBtn").addEventListener("click", function() {
             window.location.href=`AllSubmissions.html?challengeId=${response.submission.challengeID}`
         });

@@ -1,6 +1,7 @@
 package com.code.duel.code.duel.Service;
 
 import com.code.duel.code.duel.DTO.SubmissionDTO.SubmissionDTO;
+import com.code.duel.code.duel.DTO.SubmissionDTO.SubmissionDetailsDTO;
 import com.code.duel.code.duel.Judge.EvaluationModule;
 import com.code.duel.code.duel.Model.Match;
 import com.code.duel.code.duel.Model.Submission;
@@ -56,6 +57,10 @@ public class SubmissionService {
         submissionRepo.save(submission);
         System.out.println("Submission created: " + submission.getSubmissionID());
         return submission;
+    }
+
+    public SubmissionDetailsDTO getSubmissionDetailsDTO(Long submissionId) {
+        return submissionRepo.getSubmissionDetails(submissionId);
     }
 
 

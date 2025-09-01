@@ -16,7 +16,7 @@ public class runner implements CommandLineRunner {
     @Autowired
     SubmissionRepo submissionRepo;
     public void run(String... args) throws Exception {
-        List<SubmissionDTO> submissionDTOS = submissionRepo.getSubmissionsOfUser(4L);
-        System.out.println(submissionDTOS.toString());
+        System.out.println(submissionRepo.getSubmissionDetails(1L).toString());
+
     }
 }

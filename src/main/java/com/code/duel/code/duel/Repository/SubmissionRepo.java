@@ -1,6 +1,7 @@
 package com.code.duel.code.duel.Repository;
 
 import com.code.duel.code.duel.DTO.SubmissionDTO.SubmissionDTO;
+import com.code.duel.code.duel.DTO.SubmissionDTO.SubmissionDetailsDTO;
 import com.code.duel.code.duel.Model.Submission;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -93,5 +94,31 @@ public class SubmissionRepo {
     public void deleteById(Long submissionID) {
         String sql = "DELETE FROM Submission WHERE submissionID = ?";
         jdbcTemplate.update(sql, submissionID);
+    }
+
+    public SubmissionDetailsDTO getSubmissionDetails(Long submissionId) {
+        String sql = """
+                select u.USERNAME , s.CODE , s.RESULT , s.PROGRAMMINGLANGUAGE , c.TITLE , c.DESCRIPTION , c.DIFFICULTY
+                from SUBMISSION s
+                inner join "user" u on s.SUBMITTERID = u.USERID
+                inner join CHALLENGE c on s.CHALLENGEID = c.CHALLENGEID
+                where s.SUBMISSIONID = ? ;
+                """;
+
+        SqlRowSet rowSet = jdbcTemplate.queryForRowSet(sql , submissionId);
+        SubmissionDetailsDTO submissionDetailsDTO = null;
+        if (rowSet.next()){
+            submissionDetailsDTO =
+                    new SubmissionDetailsDTO(
+                            rowSet.getString("USERNAME"),
+                            rowSet.getString("CODE"),
+                            rowSet.getString("RESULT"),
+                            rowSet.getString("PROGRAMMINGLANGUAGE"),
+                            rowSet.getString("TITLE"),
+                            rowSet.getString("DESCRIPTION"),
+                            rowSet.getString("DIFFICULTY")
+                    );
+        }
+        return submissionDetailsDTO;
     }
 }
