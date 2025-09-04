@@ -32,7 +32,6 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/", "/Login.html", "/Style/**", "/Script/**","/Asset/**").permitAll()
                         .requestMatchers("/api/auth/**").permitAll()
-                        .requestMatchers("/h2-console/**" , "/h2-console").permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form
