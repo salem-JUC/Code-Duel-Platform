@@ -264,9 +264,10 @@ class GameLogic {
     }
 }
 
-const game = new GameLogic();
+const game = null;
 // Initialize game when page loads
 window.onload = async () => {
+    game = new GameLogic();
     const user = await fetchCurrentUser()
     game.init(user);
     
@@ -287,6 +288,8 @@ async function fetchCurrentUser() {
           window.location.href = '/login'; // Redirect if unauthorized
           return;
         }
+        window.location.href = '/login'; // Redirect if unauthorized
+        return;
         throw new Error('Failed to fetch user data');
       }
       const user = await response.json();
