@@ -6,9 +6,9 @@ com\code\duel\code\duel\Model\TestCase.class
 com\code\duel\code\duel\Repository\ChallengeRepo.class
 com\code\duel\code\duel\Repository\TestCaseRepo.class
 com\code\duel\code\duel\Repository\MatchRepo.class
-com\code\duel\code\duel\WebSocketConfiguration.class
 com\code\duel\code\duel\Mappers\RequestMapper\CreateMatchRequestMapper.class
 com\code\duel\code\duel\Repository\UserPlayMatchRepo.class
+com\code\duel\code\duel\WebSocketConfiguration\WebSocketEventListener.class
 com\code\duel\code\duel\Controller\MatchController.class
 com\code\duel\code\duel\Mappers\ResponseMapper\UserStatics.class
 com\code\duel\code\duel\Model\Challenge.class
@@ -25,6 +25,7 @@ com\code\duel\code\duel\Mappers\ResponseMapper\HitNotifcation.class
 com\code\duel\code\duel\Model\Role.class
 com\code\duel\code\duel\Model\MatchStatus.class
 com\code\duel\code\duel\Repository\SubmissionRepo.class
+com\code\duel\code\duel\WebSocketConfiguration\WebSocketSecurityConfiguration.class
 com\code\duel\code\duel\runner.class
 com\code\duel\code\duel\Mappers\RequestMapper\LoginRequest.class
 com\code\duel\code\duel\Judge\EvaluationModule.class
@@ -33,8 +34,8 @@ com\code\duel\code\duel\Model\Difficulty.class
 com\code\duel\code\duel\Service\MatchService.class
 com\code\duel\code\duel\Controller\AuthController.class
 com\code\duel\code\duel\Mappers\ResponseMapper\SubmissionWithChallengeResponse.class
+com\code\duel\code\duel\WebSocketConfiguration\WebSocketConfiguration.class
 com\code\duel\code\duel\Model\Match.class
-com\code\duel\code\duel\WebSocketSecurityConfiguration.class
 com\code\duel\code\duel\Controller\MatchWebSocketController.class
 com\code\duel\code\duel\Judge\Judge0Wrapper.class
 com\code\duel\code\duel\Model\UserPlayMatch.class

@@ -136,6 +136,11 @@ public class MatchService {
         return "RUNNING".equals(match.getStatus());
     }
 
+    public boolean isMatchFinished(Long matchId) {
+        Match match = matchRepo.findById(matchId);
+        return "FINISHED".equals(match.getStatus());
+    }
+
     public List<Match> getAllMatches() {
         return matchRepo.findAll();
     }

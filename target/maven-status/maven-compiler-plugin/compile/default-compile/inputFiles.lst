@@ -39,5 +39,6 @@ C:\Users\salem\OneDrive\سطح المكتب\Code-Duel-Platform\src\main\java\com
 C:\Users\salem\OneDrive\سطح المكتب\Code-Duel-Platform\src\main\java\com\code\duel\code\duel\Service\MatchService.java
 C:\Users\salem\OneDrive\سطح المكتب\Code-Duel-Platform\src\main\java\com\code\duel\code\duel\Service\PlayerService.java
 C:\Users\salem\OneDrive\سطح المكتب\Code-Duel-Platform\src\main\java\com\code\duel\code\duel\Service\SubmissionService.java
-C:\Users\salem\OneDrive\سطح المكتب\Code-Duel-Platform\src\main\java\com\code\duel\code\duel\WebSocketConfiguration.java
-C:\Users\salem\OneDrive\سطح المكتب\Code-Duel-Platform\src\main\java\com\code\duel\code\duel\WebSocketSecurityConfiguration.java
+C:\Users\salem\OneDrive\سطح المكتب\Code-Duel-Platform\src\main\java\com\code\duel\code\duel\WebSocketConfiguration\WebSocketConfiguration.java
+C:\Users\salem\OneDrive\سطح المكتب\Code-Duel-Platform\src\main\java\com\code\duel\code\duel\WebSocketConfiguration\WebSocketEventListener.java
+C:\Users\salem\OneDrive\سطح المكتب\Code-Duel-Platform\src\main\java\com\code\duel\code\duel\WebSocketConfiguration\WebSocketSecurityConfiguration.java

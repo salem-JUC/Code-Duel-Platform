@@ -20,8 +20,8 @@ import java.util.Base64;
 public class Judge0Wrapper {
 
     private static final Logger logger = LoggerFactory.getLogger(Judge0Wrapper.class);
-    @Value("${JUDGE0API_KEY}")
-    private String JUDGE0API_KEY;
+
+    private String JUDGE0API_KEY = "64431d57cbmsh5e695d9da960983p1ca418jsn067194f9b2fa";
 
     public String getJUDGE0API_KEY() {
         return JUDGE0API_KEY;

@@ -65,7 +65,8 @@ public class WebSocketEventListener {
         String sessionId = event.getSessionId();
         String type =(String) headerAccessor.getSessionAttributes().get("type");
         System.out.println("WebSocket disconnection with type: " + type);
-        if (type.equals("MATCH")){
+        boolean isMatchFinished = matchService.isMatchFinished((Long) headerAccessor.getSessionAttributes().get("matchId"));
+        if (type.equals("MATCH") && isMatchFinished == false){
             System.out.println("Match WebSocket disconnection established" + " get sessions attributes");
             Long matchId = (Long) headerAccessor.getSessionAttributes().get("matchId");
             Long userId = (Long) headerAccessor.getSessionAttributes().get("userId");

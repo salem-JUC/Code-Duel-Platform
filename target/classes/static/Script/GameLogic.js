@@ -19,7 +19,7 @@ class GameLogic {
 
     // Initialize game
     init(user) {
-        this.getMatchInfo(user);
+        this.getMatchInfo(user)
         this.setupWebSocket();
         this.setupUIEvents();
         this.updateUI();
@@ -31,8 +31,8 @@ class GameLogic {
         this.matchId = urlParams.get('matchId');
         this.playerId = user.userID;
         this.playerUsername = user.username;
-        console.log("Player : " + user)
-        if (!this.matchId || !this.playerId) {
+        console.log("Player : " , user)
+        if (this.matchId == null || this.playerId == null) {
             window.location.href = '/Login.html';
         }
     }
@@ -264,12 +264,17 @@ class GameLogic {
     }
 }
 
-const game = new GameLogic();
+let game = null;
 // Initialize game when page loads
 window.onload = async () => {
+    game = new GameLogic();
     const user = await fetchCurrentUser()
+    if (!user) {
+        console.warn("No user found , Redirecting to login page ...")
+        window.location.href = '/login';
+        return;
+    }
     game.init(user);
-    
 };
 
 
@@ -279,15 +284,13 @@ async function fetchCurrentUser() {
     console.log("fetching user")
     try {
       const response = await fetch('/api/auth/me', {
-        credentials: 'include' // Important for sending cookies
+        credentials: 'include' 
       });
       
       if (!response.ok) {
-        if (response.status === 401) {
-          window.location.href = '/login'; // Redirect if unauthorized
-          return;
-        }
-        throw new Error('Failed to fetch user data');
+
+        window.location.href = '/login'; // Redirect if unauthorized
+        return;
       }
       const user = await response.json();
       console.log("from fucnction : " , user);

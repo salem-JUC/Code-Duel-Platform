@@ -187,21 +187,7 @@
     </div>
 </section>
     <script>
-        async function checkAuthStatus() {
-            try {
-                const response = await fetch('/api/auth/me', {
-                    credentials: 'include'
-                });
 
-                if (response.ok) {;
-                    // Redirect to main menu if already logged in
-                    window.location.href = '/MineMenu.html';
-                }
-                
-            } catch (error) {
-                console.log('Not logged in');
-            }
-        }
 
         async function login() {
             const username = document.getElementById("usernameLogin").value
@@ -255,7 +241,7 @@
             }
 
         }
-        checkAuthStatus()
+        
     </script>
 <script src="./Script/PasswordLogic.js"></script>
 <script src="./Script/LogReg.js"></script>
