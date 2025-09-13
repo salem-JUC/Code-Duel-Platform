@@ -34,7 +34,7 @@
                     <div class="info-value" id="language"></div>
                 </div>
                 <div class="info-card">
-                    <div class="info-label">Hardy Hard</div>
+                    <div class="info-label">Difficulty</div>
                     <div class="info-value" id="difficulty"></div>
                 </div>
                 
@@ -65,7 +65,7 @@
                     <div class="info-label">Result</div>
                     <div class="info-value" id="result"></div>
                 </div>
-            <button class="submissions-toggle-btn"  id="globalBtn">GLOBAL SUBMSSIONS</button>
+            <button class="submissions-toggle-btn" onclick="window.location.href='AllSubmissions.html'"  id="globalBtn">GLOBAL SUBMSSIONS</button>
             <button class="submissions-toggle-btn"  onclick="window.location.href='SubmationsPage.html'">BACK</button>
         </div> 
     </div>
@@ -94,7 +94,7 @@
     async function displayFunction() {
         const response = await fetchDetails();
         console.log(response)
-        document.getElementById("username").innerHTML = "#" + response.username;
+        document.getElementById("username").innerHTML = response.username;
         document.getElementById("challengeTitle").innerHTML = response.title;
         document.getElementById("challengeTxt").innerHTML = response.description;
         document.getElementById("language").innerHTML = response.programmingLanguage;
@@ -102,7 +102,7 @@
         document.getElementById("code").innerHTML = response.code;
         document.getElementById("difficulty").innerHTML = response.difficulty;
         document.getElementById("globalBtn").addEventListener("click", function() {
-            window.location.href=`AllSubmissions.html?challengeId=${response.submission.challengeID}`
+            window.location.href=`AllSubmissions.html?challengeId=${response.challengeId}`
         });
     }
     displayFunction();

@@ -16,7 +16,10 @@ public class runner implements CommandLineRunner {
     @Autowired
     SubmissionRepo submissionRepo;
     public void run(String... args) throws Exception {
-        System.out.println(submissionRepo.getSubmissionDetails(1L).toString());
+        System.out.println(submissionRepo.getAllSubmissionsWithUsernames(2L).toString());
+
+
+
 
     }
 }

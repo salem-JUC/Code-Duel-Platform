@@ -2,6 +2,7 @@ package com.code.duel.code.duel.Controller;
 
 import com.code.duel.code.duel.DTO.SubmissionDTO.SubmissionDTO;
 import com.code.duel.code.duel.DTO.SubmissionDTO.SubmissionDetailsDTO;
+import com.code.duel.code.duel.DTO.SubmissionDTO.SubmissionWithUserDTO;
 import com.code.duel.code.duel.Model.Submission;
 import com.code.duel.code.duel.Model.User;
 import com.code.duel.code.duel.Service.ChallengeService;
@@ -30,13 +31,14 @@ public class SubmissionController {
         return ResponseEntity.ok(submissions);
     }
     @GetMapping("/challenge/{challengeId}")
-    public ResponseEntity<List<Submission>> getSubmissionsByChallengeId(@PathVariable Long challengeId) {
-        List<Submission> submissions = submissionService.getAllSubmissionsOfChallenge(challengeId);
-        return ResponseEntity.ok(submissions);
+    public ResponseEntity<List<SubmissionWithUserDTO>> getSubmissionsByChallengeId(@PathVariable Long challengeId) {
+        List<SubmissionWithUserDTO> submissionWithUserDTO = submissionService.getAllSubmissionsWithUsernames(challengeId);
+        return ResponseEntity.ok(submissionWithUserDTO);
     }
     @GetMapping("/{submissionId}")
     public ResponseEntity<SubmissionDetailsDTO> getSubmissionById(@PathVariable Long submissionId) {
         SubmissionDetailsDTO submissionDetailsDTO = submissionService.getSubmissionDetailsDTO(submissionId);
         return ResponseEntity.ok(submissionDetailsDTO);
     }
+
 }

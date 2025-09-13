@@ -2,6 +2,7 @@ package com.code.duel.code.duel.Repository;
 
 import com.code.duel.code.duel.DTO.SubmissionDTO.SubmissionDTO;
 import com.code.duel.code.duel.DTO.SubmissionDTO.SubmissionDetailsDTO;
+import com.code.duel.code.duel.DTO.SubmissionDTO.SubmissionWithUserDTO;
 import com.code.duel.code.duel.Model.Submission;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -98,7 +99,7 @@ public class SubmissionRepo {
 
     public SubmissionDetailsDTO getSubmissionDetails(Long submissionId) {
         String sql = """
-                select u.USERNAME , s.CODE , s.RESULT , s.PROGRAMMINGLANGUAGE , c.TITLE , c.DESCRIPTION , c.DIFFICULTY
+                select u.USERNAME , s.CODE , s.RESULT , s.PROGRAMMINGLANGUAGE , c.TITLE , c.DESCRIPTION , c.DIFFICULTY , c.ChallengeID
                 from SUBMISSION s
                 inner join "user" u on s.SUBMITTERID = u.USERID
                 inner join CHALLENGE c on s.CHALLENGEID = c.CHALLENGEID
@@ -116,9 +117,36 @@ public class SubmissionRepo {
                             rowSet.getString("PROGRAMMINGLANGUAGE"),
                             rowSet.getString("TITLE"),
                             rowSet.getString("DESCRIPTION"),
-                            rowSet.getString("DIFFICULTY")
+                            rowSet.getString("DIFFICULTY"),
+                            rowSet.getLong("CHALLENGEID")
                     );
         }
         return submissionDetailsDTO;
+    }
+
+    public List<SubmissionWithUserDTO> getAllSubmissionsWithUsernames(Long challengeId) {
+        String sql = """
+                select u.USERNAME , s.SUBMISSIONID , c.TITLE , c.DIFFICULTY , s.PROGRAMMINGLANGUAGE , s.RESULT\s
+                from SUBMISSION s
+                join "user" u on u.USERID = s.SUBMITTERID\s
+                join CHALLENGE c on c.CHALLENGEID = s.CHALLENGEID\s
+                where c.CHALLENGEID = ? ;
+                """;
+
+        SqlRowSet rowSet = jdbcTemplate.queryForRowSet(sql, challengeId);
+        List<SubmissionWithUserDTO> submissions = new ArrayList<>();
+        while (rowSet.next()){
+            SubmissionWithUserDTO submission =
+                    new SubmissionWithUserDTO(
+                            rowSet.getString("USERNAME"),
+                            rowSet.getLong("SUBMISSIONID"),
+                            rowSet.getString("TITLE"),
+                            rowSet.getString("DIFFICULTY"),
+                            rowSet.getString("PROGRAMMINGLANGUAGE"),
+                            rowSet.getString("RESULT")
+                    );
+            submissions.add(submission);
+        }
+        return submissions;
     }
 }
