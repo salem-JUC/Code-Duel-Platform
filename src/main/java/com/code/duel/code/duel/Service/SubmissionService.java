@@ -1,5 +1,8 @@
 package com.code.duel.code.duel.Service;
 
+import com.code.duel.code.duel.DTO.SubmissionDTO.SubmissionDTO;
+import com.code.duel.code.duel.DTO.SubmissionDTO.SubmissionDetailsDTO;
+import com.code.duel.code.duel.DTO.SubmissionDTO.SubmissionWithUserDTO;
 import com.code.duel.code.duel.Judge.EvaluationModule;
 import com.code.duel.code.duel.Model.Match;
 import com.code.duel.code.duel.Model.Submission;
@@ -32,8 +35,8 @@ public class SubmissionService {
         return submissionRepo.findByChallengeId(challengeId);
     }
 
-    public List<Submission> getAllSubmissionsOfSubmitter(Long submitterId) {
-        return submissionRepo.findBysubmitterId(submitterId);
+    public List<SubmissionDTO> getAllSubmissionsOfSubmitter(Long submitterId) {
+        return submissionRepo.getSubmissionsOfUser(submitterId);
     }
 
     public Submission getSubmissionById(Long submissionId) {
@@ -55,6 +58,14 @@ public class SubmissionService {
         submissionRepo.save(submission);
         System.out.println("Submission created: " + submission.getSubmissionID());
         return submission;
+    }
+
+    public SubmissionDetailsDTO getSubmissionDetailsDTO(Long submissionId) {
+        return submissionRepo.getSubmissionDetails(submissionId);
+    }
+
+    public List<SubmissionWithUserDTO> getAllSubmissionsWithUsernames(Long challengeId) {
+        return submissionRepo.getAllSubmissionsWithUsernames(challengeId);
     }
 
 
