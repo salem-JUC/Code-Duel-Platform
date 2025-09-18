@@ -14,29 +14,18 @@
 <table>
     <thead>
         <tr>
-            <th>Player ID</th>
+            <th>Username</th>
             <th>Submission ID</th>
-            <th>Challenge ID</th>
-            <th>Result</th>
+            <th>Challenge Title</th>
+            <th>Difficulty</th>
             <th>Programming Language</th>
+            <th>Result</th>
         </tr>
     </thead>
     <tbody id="table-body">
         
-        <tr>
-            <td data-label="Challenge ID">#121515</td>
-            <td data-label="Submission ID"><a href="GlobalsubmissionDetails.html?id=002">002</a></td>
-            <td data-label="Challenge ID">C102</td>
-            <td data-label="Result" class="result-fail">FALSE</td>
-            <td data-label="Programming Language">Python</td>
-        </tr>
-        <tr>
-            <td data-label="Challenge ID">#121515</td>
-            <td data-label="Submission ID"><a href="GlobalsubmissionDetails.html.html?id=003">003</a></td>
-            <td data-label="Challenge ID">C103</td>
-            <td data-label="Result" class="result-pass">FALSE</td>
-            <td data-label="Programming Language">Python</td>
-        </tr>
+        <!-- Rows will be populated here by JavaScript -->
+
     </tbody>
 </table>
 <button class="submissions-toggle-btn"  onclick="window.location.href='submissionDetails.html'">BACK</button>
@@ -65,17 +54,18 @@
 
     async function displaySubmissions(){
         const submissions = await fetchDetails();
+        console.log(submissions)
         tbody = document.getElementById("table-body")
         for await (const submission of submissions) {
-            console.log(submission)
             const row = document.createElement('tr');
             row.innerHTML = `
                 <tr>
-                <td data-label="Challenge ID">${submission.submitterID}</td>
-                <td data-label="Submission ID"><a href="GlobalsubmissionDetails.html?submissionId=${submission.submissionID}">${submission.submissionID}</a></td>
-                <td data-label="Challenge ID">${submission.challengeID}</td>
-                <td data-label="Result" class="result-pass">${submission.result}</td>
-                <td data-label="Programming Language">${submission.programmingLanguage}</td>
+                    <td data-label="Username">${submission.username}</td>
+                    <td data-label="Submission ID"><a href="submissionDetails.html?id=${submission.submissionId}">${submission.submissionId}</a></td>
+                    <td data-label="Challenge Title">${submission.challengeTitle}</td>
+                    <td data-label="Difficulty">${submission.difficulty}</td>
+                    <td data-label="Programming Language">${submission.programmingLanguage}</td>
+                    <td data-label="Result" class="result-pass">${submission.result}</td>
                 </tr>
             `
                 
