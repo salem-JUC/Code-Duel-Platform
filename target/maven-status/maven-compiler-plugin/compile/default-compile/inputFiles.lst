@@ -4,6 +4,9 @@ C:\Users\salem\OneDrive\سطح المكتب\Code-Duel-Platform\src\main\java\com
 C:\Users\salem\OneDrive\سطح المكتب\Code-Duel-Platform\src\main\java\com\code\duel\code\duel\Controller\MatchWebSocketController.java
 C:\Users\salem\OneDrive\سطح المكتب\Code-Duel-Platform\src\main\java\com\code\duel\code\duel\Controller\SubmissionController.java
 C:\Users\salem\OneDrive\سطح المكتب\Code-Duel-Platform\src\main\java\com\code\duel\code\duel\Controller\UserController.java
+C:\Users\salem\OneDrive\سطح المكتب\Code-Duel-Platform\src\main\java\com\code\duel\code\duel\DTO\SubmissionDTO\SubmissionDetailsDTO.java
+C:\Users\salem\OneDrive\سطح المكتب\Code-Duel-Platform\src\main\java\com\code\duel\code\duel\DTO\SubmissionDTO\SubmissionDTO.java
+C:\Users\salem\OneDrive\سطح المكتب\Code-Duel-Platform\src\main\java\com\code\duel\code\duel\DTO\SubmissionDTO\SubmissionWithUserDTO.java
 C:\Users\salem\OneDrive\سطح المكتب\Code-Duel-Platform\src\main\java\com\code\duel\code\duel\Exception\MatchNotFoundException.java
 C:\Users\salem\OneDrive\سطح المكتب\Code-Duel-Platform\src\main\java\com\code\duel\code\duel\Judge\EvaluationModule.java
 C:\Users\salem\OneDrive\سطح المكتب\Code-Duel-Platform\src\main\java\com\code\duel\code\duel\Judge\Judge0Wrapper.java
@@ -16,7 +19,6 @@ C:\Users\salem\OneDrive\سطح المكتب\Code-Duel-Platform\src\main\java\com
 C:\Users\salem\OneDrive\سطح المكتب\Code-Duel-Platform\src\main\java\com\code\duel\code\duel\Mappers\ResponseMapper\MatchResult.java
 C:\Users\salem\OneDrive\سطح المكتب\Code-Duel-Platform\src\main\java\com\code\duel\code\duel\Mappers\ResponseMapper\MatchStatusResponseMapper.java
 C:\Users\salem\OneDrive\سطح المكتب\Code-Duel-Platform\src\main\java\com\code\duel\code\duel\Mappers\ResponseMapper\SubmissionResponse.java
-C:\Users\salem\OneDrive\سطح المكتب\Code-Duel-Platform\src\main\java\com\code\duel\code\duel\Mappers\ResponseMapper\SubmissionWithChallengeResponse.java
 C:\Users\salem\OneDrive\سطح المكتب\Code-Duel-Platform\src\main\java\com\code\duel\code\duel\Mappers\ResponseMapper\UserStatics.java
 C:\Users\salem\OneDrive\سطح المكتب\Code-Duel-Platform\src\main\java\com\code\duel\code\duel\Model\Challenge.java
 C:\Users\salem\OneDrive\سطح المكتب\Code-Duel-Platform\src\main\java\com\code\duel\code\duel\Model\Difficulty.java

@@ -3,10 +3,12 @@ com\code\duel\code\duel\Mappers\ResponseMapper\MatchStatusResponseMapper.class
 com\code\duel\code\duel\Model\Submission.class
 com\code\duel\code\duel\Service\PlayerService.class
 com\code\duel\code\duel\Model\TestCase.class
+com\code\duel\code\duel\DTO\SubmissionDTO\SubmissionDTO.class
 com\code\duel\code\duel\Repository\ChallengeRepo.class
 com\code\duel\code\duel\Repository\TestCaseRepo.class
 com\code\duel\code\duel\Repository\MatchRepo.class
 com\code\duel\code\duel\Mappers\RequestMapper\CreateMatchRequestMapper.class
+com\code\duel\code\duel\DTO\SubmissionDTO\SubmissionDetailsDTO.class
 com\code\duel\code\duel\Repository\UserPlayMatchRepo.class
 com\code\duel\code\duel\WebSocketConfiguration\WebSocketEventListener.class
 com\code\duel\code\duel\Controller\MatchController.class
@@ -33,9 +35,9 @@ com\code\duel\code\duel\Service\ChallengeService.class
 com\code\duel\code\duel\Model\Difficulty.class
 com\code\duel\code\duel\Service\MatchService.class
 com\code\duel\code\duel\Controller\AuthController.class
-com\code\duel\code\duel\Mappers\ResponseMapper\SubmissionWithChallengeResponse.class
 com\code\duel\code\duel\WebSocketConfiguration\WebSocketConfiguration.class
 com\code\duel\code\duel\Model\Match.class
+com\code\duel\code\duel\DTO\SubmissionDTO\SubmissionWithUserDTO.class
 com\code\duel\code\duel\Controller\MatchWebSocketController.class
 com\code\duel\code\duel\Judge\Judge0Wrapper.class
 com\code\duel\code\duel\Model\UserPlayMatch.class
