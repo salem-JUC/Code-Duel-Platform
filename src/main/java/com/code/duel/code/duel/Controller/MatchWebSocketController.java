@@ -149,7 +149,7 @@ public class MatchWebSocketController {
     public void handlePlayerReady(@DestinationVariable Long matchId, Principal principal) {
         User user = (User) ((Authentication) principal).getPrincipal();
         MatchStatusResponseMapper status = matchService.getMatchStatus(matchId, user.getUserID());
-
+        logger.info(principal.getName() + " player is ready - send to start with status " + status.toString());
         messagingTemplate.convertAndSendToUser(
                 principal.getName(),
                 "/queue/match/start",
