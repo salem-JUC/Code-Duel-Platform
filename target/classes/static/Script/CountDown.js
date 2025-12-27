@@ -34,10 +34,9 @@ function startCountdown() {
     updateCountdown();
 }
 
-// إضافة تفاعل مع الصفحة لتجاوز قيود الصوت التلقائي
-window.addEventListener('click', function() {
-    // إضافة الحدث لضمان تشغيل الصوت أولًا
+
+window.onload = async () => {
     startCountdown();
-}, { once: true });
+};
 
 // نبدأ العد التنازلي بعد تحميل الصفحة مع أول تفاعل
