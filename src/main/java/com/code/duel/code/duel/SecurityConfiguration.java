@@ -9,6 +9,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.config.annotation.web.configurers.HeadersConfigurer;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -37,7 +38,7 @@ public class SecurityConfiguration {
                     });
                 })
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/", "/Login.html", "/Style/**", "/Script/**","/Asset/**").permitAll()
+                        .requestMatchers("/", "/Login.html").permitAll()
                         .requestMatchers("/api/auth/**").permitAll()
                         .anyRequest().authenticated()
                 )
@@ -83,5 +84,11 @@ public class SecurityConfiguration {
         authenticationManagerBuilder
                 .userDetailsService(userDetailsService());
         return authenticationManagerBuilder.build();
+    }
+
+    @Bean
+    public WebSecurityCustomizer webSecurityCustomizer() {
+        return (web) -> web.ignoring()
+                .requestMatchers("/Style/**", "/Script/**", "/Asset/**", "/favicon.ico" , "/error/**");
     }
 }

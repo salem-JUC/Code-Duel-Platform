@@ -190,6 +190,9 @@
 
 
         async function login() {
+        
+            event.preventDefault();
+
             const username = document.getElementById("usernameLogin").value
             const password = document.getElementById("passwordLogin").value;
 
@@ -204,7 +207,9 @@
                 });
 
                 if (response.ok) {
-                    window.location.href = '/MineMenu.html';
+                    setTimeout(() => {
+                        window.location.href = '/MineMenu.html';
+                    }, 50);
                 } else {
                     alert("Bad Credntials")
                 }
@@ -232,6 +237,7 @@
                 });
 
                 if (response.ok || response.status === 201) {
+                    alert("User Registered Successfully !!")
                     window.location.href = '/MineMenu.html';
                 } else {
                     alert(response.statusText);
