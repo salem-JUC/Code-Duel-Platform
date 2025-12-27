@@ -51,9 +51,12 @@ public class MatchController {
 
         return ResponseEntity.ok(joinedMatch.getMatchID());
     }
-    @GetMapping("/status")
-    public ResponseEntity<MatchStatusResponseMapper> getMatchStatus(){
-        MatchStatusResponseMapper matchStatus = matchService.getMatchStatus(1000L , 1L);
+    @GetMapping("/status/{matchId}/{userId}")
+    public ResponseEntity<MatchStatusResponseMapper> getMatchStatus(@PathVariable Long matchId , @PathVariable Long userId){
+        MatchStatusResponseMapper matchStatus = matchService.getMatchStatus(matchId , userId);
+        if (matchStatus == null){
+            return ResponseEntity.notFound().build();
+        }
         return ResponseEntity.ok(matchStatus);
     }
 
@@ -68,18 +71,5 @@ public class MatchController {
         return ResponseEntity.ok(matches);
     }
 
-    @GetMapping("/ws/sessionDetails")
-    public String sessionDetails() {
-        StringBuilder sb = new StringBuilder();
-        for (SimpUser user : simpUserRegistry.getUsers()) {
-            sb.append("User: ").append(user.getName()).append("\n");
-            user.getSessions().forEach(session -> {
-                sb.append("  Session ID: ").append(session.getId()).append("\n");
-                session.getSubscriptions().forEach(sub -> {
-                    sb.append("    Subscribed to: ").append(sub.getDestination()).append("\n");
-                });
-            });
-        }
-        return sb.toString();
-    }
+
 }

@@ -9,7 +9,11 @@ class GameLogic {
         this.playerUsername = null;
         this.opponentId = null;
         this.opponentUsername = null;
-        this.currentChallenge = null;
+        this.currentChallenge = {
+            title : null,
+            description : null,
+            sample : null
+        };
         this.playerHealth = 3;
         this.opponentHealth = 3;
         this.isGameActive = false;
@@ -29,6 +33,7 @@ class GameLogic {
     getMatchInfo(user) {
         const urlParams = new URLSearchParams(window.location.search);
         this.matchId = urlParams.get('matchId');
+        console.log("Match Id is : ", this.matchId)
         this.playerId = user.userID;
         this.playerUsername = user.username;
         console.log("Player : " , user)
@@ -103,22 +108,27 @@ class GameLogic {
 
     // Handle initial game state
     handleGameStart(status) {
-        this.currentChallenge = status.currentChallenge;
-        this.language = status.match.programmingLanguage;
-        this.diffculty = status.match.difficulty;
+        // "difficulty": "Easy",
+        // "programmingLanguage": "Java",
+        // "title": "Even or Odd",
+        // "description": "Reada number then print if an integer is even or odd.",
+        // "sample": "Input: 4 Output: Even",
+        // "playerName": "SalemX",
+        // "playerScore": 3,
+        // "secondName": "MohX",
+        // "secondScore": 3
+        console.log("Starting Status" , status)
+        this.currentChallenge.title = status.title;
+        this.currentChallenge.description = status.description;
+        this.currentChallenge.sample = status.sample;
+        this.diffculty = status.difficulty;
+        this.language = status.programmingLanguage;
+        this.playerUsername = status.playerName;
+        this.opponentId = status.secondId;
+        this.opponentUsername = status.secondName;
+        this.playerHealth = status.playerScore;
+        this.opponentHealth = status.secondScore;
         this.isGameActive = true;
-        console.log(status)
-        // Identify opponent
-        status.userPlayMatch1.userID === this.playerId ?
-            (this.opponentId = status.userPlayMatch2.userID,
-             this.opponentUsername = status.userPlayMatch2.username,
-             this.playerHealth = status.userPlayMatch1.userScore,
-             this.opponentHealth = status.userPlayMatch2.userScore) :
-            (this.opponentId = status.userPlayMatch1.userID,
-             this.opponentUsername = status.userPlayMatch1.username,
-             this.playerHealth = status.userPlayMatch2.userScore,
-             this.opponentHealth = status.userPlayMatch1.userScore);
-        
         this.updateUI();
         this.updateChallengeDisplay();
     }
@@ -265,16 +275,18 @@ class GameLogic {
 }
 
 let game = null;
-// Initialize game when page loads
+//Initialize game when page loads
 window.onload = async () => {
     game = new GameLogic();
+    
     const user = await fetchCurrentUser()
+    game.init(user);
     if (!user) {
         console.warn("No user found , Redirecting to login page ...")
         window.location.href = '/login';
         return;
     }
-    game.init(user);
+    
 };
 
 

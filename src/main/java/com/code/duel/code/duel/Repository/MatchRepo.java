@@ -1,6 +1,7 @@
 package com.code.duel.code.duel.Repository;
 
 
+import com.code.duel.code.duel.Mappers.ResponseMapper.MatchStatusResponseMapper;
 import com.code.duel.code.duel.Model.Difficulty;
 import com.code.duel.code.duel.Model.Match;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
+import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -155,4 +157,48 @@ public class MatchRepo {
             return match;
         });
     }
+
+    public MatchStatusResponseMapper queryMatchStatus(Long matchId , Long playerId){
+        String sql = """
+                select m.DIFFICULTY ,
+                m.PROGRAMMINGLANGUAGE ,
+                c.TITLE ,
+                c.DESCRIPTION ,
+                c.DIFFICULTY ,
+                c.SAMPLE ,
+                fupm.USERNAME as PlayerName ,
+                fupm.USERSCORE as PlayerScore ,
+                fupm.USERID as PlayerId ,
+                supm.USERNAME as SecondName ,
+                supm.USERSCORE  as SecondScore ,
+                supm.USERID as SecondId
+                from "match" as m
+                join CHALLENGE as c ON c.CHALLENGEID = m.CURRENT_CHALLENGE_ID
+                join USER_PLAY_MATCH  as fupm ON fupm.MATCHID = m.MATCHID AND fupm.USERID = ?
+                join USER_PLAY_MATCH  as supm ON supm.MATCHID = m.MATCHID AND supm.USERID != ?
+                where m.MATCHID = ?;
+                """;
+
+        return jdbcTemplate.query(sql, rs -> {
+            // .next() moves the cursor to the first row and returns false if empty
+            if (rs.next()) {
+                return new MatchStatusResponseMapper(
+                        rs.getString("DIFFICULTY"),
+                        rs.getString("PROGRAMMINGLANGUAGE"),
+                        rs.getString("TITLE"),
+                        rs.getString("DESCRIPTION"),
+                        rs.getString("SAMPLE"),
+                        rs.getString("PlayerName"),
+                        rs.getInt("PlayerScore"),
+                        rs.getLong("PlayerId"),
+                        rs.getString("SecondName"),
+                        rs.getInt("SecondScore"),
+                        rs.getLong("SecondId")
+                );
+            }
+            else
+                return null; // Return null if match not found
+        }, playerId, playerId, matchId);
+    }
+
 }

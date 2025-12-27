@@ -6,6 +6,7 @@ import com.code.duel.code.duel.Mappers.ResponseMapper.HitNotifcation;
 import com.code.duel.code.duel.Mappers.ResponseMapper.MatchResult;
 import com.code.duel.code.duel.Mappers.ResponseMapper.MatchStatusResponseMapper;
 import com.code.duel.code.duel.Mappers.ResponseMapper.SubmissionResponse;
+import com.code.duel.code.duel.Model.Challenge;
 import com.code.duel.code.duel.Model.Submission;
 import com.code.duel.code.duel.Model.User;
 import com.code.duel.code.duel.Model.UserPlayMatch;
@@ -73,7 +74,7 @@ public class MatchWebSocketController {
     public void handlePlayerQuit(@DestinationVariable Long matchId, Principal principal) {
         User user = (User) ((Authentication) principal).getPrincipal();
         logger.info("Player {} is quitting match {}", user.getUsername(), matchId);
-        UserPlayMatch winner = matchService.getMatchStatus(matchId, user.getUserID()).getUserPlayMatch2();
+        UserPlayMatch winner = matchService.getTheOpponent(matchId ,user.getUserID() );
         matchService.endMatch(matchId, winner.getUserID());
         broadcastMatchEnd(matchId, winner.getUserID(), winner.getUsername());
     }
@@ -89,8 +90,8 @@ public class MatchWebSocketController {
         broadcastHit(matchId, playerId, status);
 
 
-        if (status.getUserPlayMatch2().getUserScore() <= 0) {
-            broadcastMatchEnd(matchId, playerId, status.getUserPlayMatch1().getUsername());
+        if (status.getSecondScore() <= 0) {
+            broadcastMatchEnd(matchId, playerId, status.getPlayerName());
         } else {
             assignNewChallenge(matchId);
         }
@@ -98,14 +99,13 @@ public class MatchWebSocketController {
 
     private void assignNewChallenge(Long matchId) {
         logger.info("Assigning new challenge for match ID: {}", matchId);
-        matchService.assignChallenge(matchId);
-        MatchStatusResponseMapper status = matchService.getMatchStatus(matchId, null);
+        Challenge assignedChallenge = matchService.assignChallenge(matchId);
 
         System.out.println("Assigning new challenge for match ID: " + matchId);
         // Broadcast new challenge to both players
         messagingTemplate.convertAndSend(
                 "/topic/match/" + matchId + "/challenge",
-                status.getCurrentChallenge()
+                assignedChallenge
         );
     }
 
@@ -115,8 +115,8 @@ public class MatchWebSocketController {
                 "/topic/match/" + matchId + "/hit",
                 new HitNotifcation(
                         hittingPlayerId,
-                        status.getUserPlayMatch1().getUserScore(),
-                        status.getUserPlayMatch2().getUserScore()
+                        status.getPlayerScore(),
+                        status.getSecondScore()
                 )
         );
     }

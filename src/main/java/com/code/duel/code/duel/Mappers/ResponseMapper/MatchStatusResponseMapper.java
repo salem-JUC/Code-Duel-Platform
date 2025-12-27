@@ -8,60 +8,143 @@ public class MatchStatusResponseMapper {
     // this class is data structe for the match status , should contain userplayematch
     // for each user in match and the match status
 
-    private Match match;
-    private Challenge currentChallenge;
-    private UserPlayMatch userPlayMatch1;
-    private UserPlayMatch userPlayMatch2;
+//    select m.DIFFICULTY , m.PROGRAMMINGLANGUAGE , c.TITLE , c.DESCRIPTION , c.DIFFICULTY , c.SAMPLE , fupm.USERNAME as PlayerName , fupm.USERSCORE as PlayerScore , supm.USERNAME as SecondName , supm.USERSCORE  as SecondScore from "match" as m
+//    join CHALLENGE as c ON c.CHALLENGEID = m.CURRENT_CHALLENGE_ID
+//    join USER_PLAY_MATCH  as fupm ON fupm.MATCHID = m.MATCHID AND fupm.USERID = 3
+//    join USER_PLAY_MATCH  as supm ON supm.MATCHID = m.MATCHID AND supm.USERID != 3
+//    where m.MATCHID = 1000;
 
-    public MatchStatusResponseMapper(Match match, Challenge currentChallenge, UserPlayMatch userPlayMatch1, UserPlayMatch userPlayMatch2) {
-        this.match = match;
-        this.currentChallenge = currentChallenge;
-        this.userPlayMatch1 = userPlayMatch1;
-        this.userPlayMatch2 = userPlayMatch2;
+    private String difficulty;
+    private String programmingLanguage;
+    private String title;
+    private String description;
+    private String sample;
+    private String playerName;
+    private int playerScore;
+    private Long playerId;
+    private String secondName;
+    private int secondScore;
+    private Long secondId;
+
+    public MatchStatusResponseMapper(String difficulty, String programmingLanguage, String title, String description, String sample, String playerName, int playerScore,Long playerId, String secondName, int secondScore , Long secondId) {
+        this.difficulty = difficulty;
+        this.programmingLanguage = programmingLanguage;
+        this.title = title;
+        this.description = description;
+        this.sample = sample;
+        this.playerName = playerName;
+        this.playerScore = playerScore;
+        this.playerId = playerId;
+        this.secondName = secondName;
+        this.secondScore = secondScore;
+        this.secondId = secondId;
     }
 
     public MatchStatusResponseMapper() {
     }
 
-    public Match getMatch() {
-        return match;
+    public String getDifficulty() {
+        return difficulty;
     }
 
-    public void setMatch(Match match) {
-        this.match = match;
+    public void setDifficulty(String difficulty) {
+        this.difficulty = difficulty;
     }
 
-    public Challenge getCurrentChallenge() {
-        return currentChallenge;
+    public String getProgrammingLanguage() {
+        return programmingLanguage;
     }
 
-    public void setCurrentChallenge(Challenge currentChallenge) {
-        this.currentChallenge = currentChallenge;
+    public void setProgrammingLanguage(String programmingLanguage) {
+        this.programmingLanguage = programmingLanguage;
     }
 
-    public UserPlayMatch getUserPlayMatch1() {
-        return userPlayMatch1;
+    public String getTitle() {
+        return title;
     }
 
-    public void setUserPlayMatch1(UserPlayMatch userPlayMatch1) {
-        this.userPlayMatch1 = userPlayMatch1;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public UserPlayMatch getUserPlayMatch2() {
-        return userPlayMatch2;
+    public String getDescription() {
+        return description;
     }
 
-    public void setUserPlayMatch2(UserPlayMatch userPlayMatch2) {
-        this.userPlayMatch2 = userPlayMatch2;
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getSample() {
+        return sample;
+    }
+
+    public void setSample(String sample) {
+        this.sample = sample;
+    }
+
+    public String getPlayerName() {
+        return playerName;
+    }
+
+    public void setPlayerName(String playerName) {
+        this.playerName = playerName;
+    }
+
+    public int getPlayerScore() {
+        return playerScore;
+    }
+
+    public void setPlayerScore(int playerScore) {
+        this.playerScore = playerScore;
+    }
+
+    public Long getPlayerId() {
+        return playerId;
+    }
+
+    public void setPlayerId(Long playerId) {
+        this.playerId = playerId;
+    }
+
+    public String getSecondName() {
+        return secondName;
+    }
+
+    public void setSecondName(String secondName) {
+        this.secondName = secondName;
+    }
+
+    public int getSecondScore() {
+        return secondScore;
+    }
+
+    public void setSecondScore(int secondScore) {
+        this.secondScore = secondScore;
+    }
+
+    public Long getSecondId() {
+        return secondId;
+    }
+
+    public void setSecondId(Long secondId) {
+        this.secondId = secondId;
     }
 
     @Override
     public String toString() {
         return "MatchStatusResponseMapper{" +
-                "match=" + match.toString() +
-                ", currentChallenge=" + currentChallenge.toString() +
-                ", userPlayMatch1=" + userPlayMatch1.toString() +
-                ", userPlayMatch2=" + userPlayMatch2.toString() +
+                "difficulty='" + difficulty + '\'' +
+                ", programmingLanguage='" + programmingLanguage + '\'' +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", sample='" + sample + '\'' +
+                ", playerName='" + playerName + '\'' +
+                ", playerScore=" + playerScore +
+                ", playerId=" + playerId +
+                ", secondName='" + secondName + '\'' +
+                ", secondScore=" + secondScore +
+                ", secondId=" + secondId +
                 '}';
     }
 }

@@ -74,7 +74,7 @@ public class MatchService {
         return wantedMatch;
     }
 
-    public void assignChallenge(Long matchId){
+    public Challenge assignChallenge(Long matchId){
 
         Match match = matchRepo.findById(matchId);
         String difficulty = match.getDifficulty();
@@ -82,6 +82,7 @@ public class MatchService {
         match.setCurrentChallengeId(randomChallenge.getChallengeID());
         logger.info("Assigning challenge with ID: {}, title : {} to match with ID: {} diffculty: {}", randomChallenge.getChallengeID(),randomChallenge.getTitle(), matchId, randomChallenge.getDifficulty());
         matchRepo.update(match);
+        return randomChallenge;
     }
 
     public void handleCorrectSubmmission(Long matchId, Long playerId, Long challengeId){
@@ -110,21 +111,7 @@ public class MatchService {
     }
 
     public MatchStatusResponseMapper getMatchStatus(Long matchId , Long playerId){
-        MatchStatusResponseMapper msrm = new MatchStatusResponseMapper();
-
-        Match match = matchRepo.findById(matchId);
-        msrm.setMatch(match);
-        try {
-            msrm.setCurrentChallenge(challengeRepo.findById(match.getCurrentChallengeId()));
-        } catch (EmptyResultDataAccessException e) {
-            msrm.setCurrentChallenge(null);
-        }
-        userPlayMatchRepo.findByMatchId(matchId).forEach(userPlayMatch -> {
-            if (userPlayMatch.getUserID() == playerId)
-                msrm.setUserPlayMatch1(userPlayMatch);
-            else
-                msrm.setUserPlayMatch2(userPlayMatch);
-        });
+        MatchStatusResponseMapper msrm = matchRepo.queryMatchStatus(matchId , playerId);
 
         return msrm;
     }
@@ -175,6 +162,10 @@ public class MatchService {
             return "0/0";
         }
 
+    }
+
+    public UserPlayMatch getTheOpponent(Long matchId , Long playerId){
+        return userPlayMatchRepo.findTheOpponent(playerId , matchId);
     }
 
 
