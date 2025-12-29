@@ -135,7 +135,7 @@
                             </label>
                             <a href="#">Forgot password ? </a>
                         </div>
-                            <button onclick="login()"  class="btn">Login</button>
+                            <button onclick="login(event)"  class="btn">Login</button>
                             <div class="logreg-link">
                                 <p>Don't have an account ? <a href="/"class = "register-link">register</a></p>
                             </div>
@@ -175,7 +175,7 @@
                             </label>
                             
                         </div>
-                            <button class="btn" onclick="register()">Register</button>
+                            <button class="btn" onclick="register(event)">Register</button>
                             <div class="logreg-link">
                                 <p>Do you have account <a href="#"class = "login-link">Log in</a></p>
                             </div>
@@ -189,9 +189,19 @@
     <script>
 
 
-        async function login() {
-
+        async function login(event) {
             event.preventDefault();
+
+            // Validate form before submission
+            if (!window.validateLoginForm) {
+                // Validation script not loaded yet
+                showGameError('Validation system not ready. Please refresh the page.');
+                return;
+            }
+
+            if (!window.validateLoginForm()) {
+                return; // Validation failed, error already shown
+            }
 
             const username = document.getElementById("usernameLogin").value
             const password = document.getElementById("passwordLogin").value;
@@ -207,21 +217,36 @@
                 });
 
                 if (response.ok) {
+                    showGameSuccess('Login successful! Redirecting...');
                     setTimeout(() => {
                         window.location.href = '/MineMenu.html';
-                    }, 50);
+                    }, 1000);
                 } else {
-                    alert("Bad Credntials")
+                    const errorData = await response.json().catch(() => ({ message: response.statusText }));
+                    showGameError(errorData.message || 'Invalid credentials. Please check your username and password.');
                 }
             } catch (error) {
-                showError('Error: ' + error.message);
+                showGameError('Connection error: ' + error.message);
             }
         }
-        async function register() {
+        
+        async function register(event) {
+            event.preventDefault();
+
+            // Validate form before submission
+            if (!window.validateRegisterForm) {
+                // Validation script not loaded yet
+                showGameError('Validation system not ready. Please refresh the page.');
+                return;
+            }
+
+            if (!window.validateRegisterForm()) {
+                return; // Validation failed, error already shown
+            }
+
             const username = document.getElementById("usernameRegister").value;
             const email = document.getElementById("emailRegister").value;
             const password = document.getElementById("passwordRegister").value;
-
 
             try {
                 const response = await fetch('/api/auth/register', {
@@ -237,18 +262,29 @@
                 });
 
                 if (response.ok || response.status === 201) {
-                    alert("User Registered Successfully !!")
-                    window.location.href = '/MineMenu.html';
+                    showGameSuccess('🎉 Registration Successful! Please log in to continue.', 5000);
+                    // Clear the form
+                    document.getElementById("usernameRegister").value = '';
+                    document.getElementById("emailRegister").value = '';
+                    document.getElementById("passwordRegister").value = '';
+                    // Switch to login form
+                    const wrapper = document.querySelector('.wrapper');
+                    if (wrapper) {
+                        wrapper.classList.remove('activeR');
+                        wrapper.classList.add('active');
+                    }
                 } else {
-                    alert(response.statusText);
+                    const errorData = await response.json().catch(() => ({ message: response.statusText }));
+                    showGameError(errorData.message || 'Registration failed. Please try again.');
                 }
             } catch (error) {
-                showError('Error: ' + error.message);
+                showGameError('Connection error: ' + error.message);
             }
 
         }
         
     </script>
+<script src="./Script/FormValidation.js"></script>
 <script src="./Script/PasswordLogic.js"></script>
 <script src="./Script/LogReg.js"></script>
 <script src="./Script/Sounds.js"></script>
@@ -257,3 +293,4 @@
 
 </body>
 </html>
+

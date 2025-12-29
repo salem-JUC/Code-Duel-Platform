@@ -1,19 +1,13 @@
-
-    const passwordInput = document.getElementByClassName('password');
+document.addEventListener('DOMContentLoaded', () => {
+    const passwordInput = document.getElementById('passwordRegister');
     const passwordHelp = document.getElementById('passwordHelp');
 
-    const pattern = /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$/;
+    if (!passwordInput || !passwordHelp) return;
 
+    // This will be handled by FormValidation.js, but we keep this for backward compatibility
+    // The validation rules are now in FormValidation.js
     passwordInput.addEventListener('input', function() {
-        const value = passwordInput.value;
-        if (pattern.test(value)) {
-            passwordHelp.textContent = "Password is strong.";
-            passwordHelp.classList.add('valid');
-            passwordHelp.classList.remove('invalid');
-        } else {
-            passwordHelp.textContent = "Password Must have at least 8 characters, one uppercase letter, one number, and one special character.";
-            passwordHelp.classList.add('invalid');
-            passwordHelp.classList.remove('valid');
-        }
+        // Validation is now handled by FormValidation.js
+        // This script can be used for additional password strength indicators if needed
     });
-
+});
