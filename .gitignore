@@ -1,0 +1,11 @@
+.idea
+/target/classes
+/target/generated-sources
+/target/maven-archiver
+/target/maven-status
+/target/surefire-reports
+/target/test-classes
+/target/code-duel-0.0.1-SNAPSHOT.jar.original
+.mvn
+mvnw
+mvnw.cmd
