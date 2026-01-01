@@ -9,55 +9,73 @@
     <script src="https://cdn.jsdelivr.net/npm/sockjs-client/dist/sockjs.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js" integrity="sha512-iKDtgDyTHjAitUDdLljGhenhPwrbBfqTKWO1mkhSFH3A7blITC9MhYon6SjnMhp4o0rADGw9yAC6EW4t5a4K3g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-    <title>CodeDuel</title>
+    <title>CodeFight</title>
 </head>
 <body>
 
-    <div class="Q-container">
-        <div id="challengeDiv" class="Q-text">
+    <!-- Challenge Section - Top Center -->
+    <div class="challenge-section">
+        <!-- Challenge Container - Left Side -->
+        <div class="Q-container">
+            <div id="challengeDiv" class="Q-text">
+            </div>
+        </div>
+        <!-- Sample Container - Right Side -->
+        <div class="sample-container">
+            <div class="sample-box">
+                <div id="sampleContent" class="sample-content">
+                    input : 15
+                    <br>
+                    <br>
+                    output : true
+                </div>
+            </div>
         </div>
     </div>
-    <!--Player 1-->
-    <div id="p1UsernameDiv" class="player-label">BOB</div>
-    <div id="p1HealthDiv" class="health-bar player1"></div>
-    
-    <!-- Player 2 or oppopsit-->
-    <div id="p2UsernameDiv" class="player-label-2">M7</div>
-    <div id="p2HealthDiv" class="health-bar enemy">
-    </div>
 
-    <!-- إضافة المربعات الجانبية -->
-
-    <div class="left-box">
-      <div>
-          <p>Language: </p>
-          <p><span id="language"></span></p>
-      </div>
-      <br>
-      <div>
-          <p>Difficulty: </p>
-          <p><span id="difficulty"></span></p>
-      </div>
-        <input type="button" id="quitBtn" value="Quit" class="submit">
-  </div>
-  
-        <div class="right-box">
-            <p><span id="message"></span></p>
-        </div>
-
-    </div>
-
-    <!-- الكانفا -->
-    <div class="game-container">
-        <canvas class="game-canvas" width="352" height="198"></canvas>
-    </div>
-
-    <div class="text-container">
-        <form>
+    <!-- Left Side: Code Editor and Duel Button -->
+    <div class="left-side">
+        <div class="text-container">
             <textarea id="codeEditor" placeholder="Start Coding"></textarea>
-            <input type="button" id="submitBtn" value="Duel" class="submit">
+        </div>
+        <input type="button" id="submitBtn" value="Duel" class="duel-button">
+    </div>
 
-        </form>
+    <!-- Right Side: Game Area -->
+    <div class="right-side">
+        <!-- Players Section - Above Canvas -->
+        <div class="players-section">
+            <div class="player-info player1-info">
+                <div id="p1UsernameDiv" class="player-label">BOB</div>
+                <div id="p1HealthDiv" class="health-bar player1">
+                    <div class="health-fill"></div>
+                </div>
+            </div>
+            <div class="player-info player2-info">
+                <div id="p2UsernameDiv" class="player-label-2">M7</div>
+                <div id="p2HealthDiv" class="health-bar enemy">
+                    <div class="health-fill"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Game Canvas - Middle Right -->
+        <div class="game-container">
+            <canvas class="game-canvas" width="352" height="198"></canvas>
+        </div>
+
+        <!-- Match Info Section - Below Canvas -->
+        <div class="match-info-section">
+            <div class="match-info-box">
+                <div class="info-item">
+                    <p>Language: <span id="language"></span></p>
+                </div>
+                <div class="info-item">
+                    <p>Difficulty: <span id="difficulty"></span></p>
+                </div>
+            </div>
+            <input type="button" id="quitBtn" value="Quit" class="quit-btn">
+        </div>
     </div>
       <div class="settings-container">
         <button class="settings-btn-1" id="settingsBtn" onclick="playSFXByName('click')">
@@ -141,13 +159,13 @@
             <button class="return-btn" onclick="window.location.href = 'index.html'">Return to Main Page</button>
         </div>
     </div>
+    <script src="./Script/FormValidation.js"></script>
     <script src="./Script/LogReg.js"></script>
- <script src="./Script/GameFildSound.js"></script>
-    <script src="./Script/GF.js"></script>
+    <script src="./Script/GameFildSound.js"></script>
     <script src="./Script/Overworld.js"></script>
     <script src="./Script/GameObject.js"></script>
     <script src="./Script/Sprite.js"></script>
     <script src="./Script/init.js"></script>
-    <script src="/Script/GameLogic.js"></script>
+    <script src="./Script/GameLogic.js"></script>
 </body>
 </html>

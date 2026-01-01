@@ -17,18 +17,19 @@ function startCountdown() {
     });
 
     const updateCountdown = () => {
-        countdownElement.textContent = count;
         const urlParams = new URLSearchParams(window.location.search);
         matchId = urlParams.get('matchId');
-        if (count <= 0) {
+        
+        if (count > 0) {
+            countdownElement.textContent = count;
+            count--;
+            setTimeout(updateCountdown, 1000);
+        } else {
             countdownElement.textContent = 'GO!';
             setTimeout(() => {
                 window.location.href = `GameField.html?matchId=${matchId}`; // بعد العد، ننتقل للعبة
             }, 1000);
-            return;
         }
-        count--;
-        setTimeout(updateCountdown, 1000);
     };
 
     updateCountdown();

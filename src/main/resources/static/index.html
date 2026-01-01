@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./Style/landingPage.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <title>Code Fight - Welcome</title>
+</head>
+<body>
+    <!-- Header -->
+    <header class="landing-header">
+        <div class="header-content">
+            <img src="./Asset/Logo.png" alt="Code Fight Logo" class="header-logo">
+            <nav class="header-nav">
+                <a href="#about" class="nav-link">About</a>
+                <a href="#features" class="nav-link">Features</a>
+                <a href="#demo" class="nav-link">Demo</a>
+                <a href="./AboutUs.html" class="nav-link">Team</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="landing-main">
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="hero-content">
+                <h1 class="hero-title">CODE FIGHT</h1>
+                <p class="hero-subtitle">Where Learning to Code is Fun and Competitive!</p>
+                <p class="hero-description">
+                    A platform built by students, for students. Practice coding through 
+                    real-time duels, challenges, and friendly competition.
+                </p>
+                <button class="start-button" onclick="window.location.href='./Login.html'">
+                    <span>START FIGHT</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="content-section">
+            <div class="section-container">
+                <h2 class="section-title">About Code Fight</h2>
+                <div class="about-content">
+                    <p class="section-text">
+                        Welcome to Code-Fight, a platform built by programmers, where learning to code is fun and competitive!
+                    </p>
+                    <h3 class="subsection-title">The Mission</h3>
+                    <p class="section-text">
+                        We help make coding engaging by combining learning with friendly competition. 
+                        Whether you're a beginner just starting out or someone derusting their skills, 
+                        Code-Fight helps you through hands-on practice.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Demo Video Section -->
+        <section id="demo" class="content-section video-section">
+            <div class="section-container">
+                <h2 class="section-title">See It In Action</h2>
+                <p class="section-text" style="text-align: center; margin-bottom: 30px;">
+                    Watch a demo of Code Fight in action!
+                </p>
+                <div class="video-container">
+                    <iframe 
+                        src="https://www.youtube.com/embed/FrGSjDTre4Q" 
+                        title="Code Fight Demo" 
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                        allowfullscreen
+                        class="demo-video">
+                    </iframe>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section id="features" class="content-section">
+            <div class="section-container">
+                <h2 class="section-title">What We Offer</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <i class='bx bx-code-alt feature-icon'></i>
+                        <h3 class="feature-title">Programming Challenges</h3>
+                        <p class="feature-text">A growing library of programming challenges to test your skills</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class='bx bx-trophy feature-icon'></i>
+                        <h3 class="feature-title">Real-Time Duels</h3>
+                        <p class="feature-text">Compete with your friends in live coding fights</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class='bx bx-check-circle feature-icon'></i>
+                        <h3 class="feature-title">Fast Evaluation</h3>
+                        <p class="feature-text">Automated code evaluation with instant feedback</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Why Section -->
+        <section class="content-section">
+            <div class="section-container">
+                <h2 class="section-title">Why We Built This</h2>
+                <p class="section-text">
+                    We noticed that most coding platforms were either too advanced or too boring for new learners. 
+                    So we created Code-Fight as a class project — a lightweight, interactive environment that makes 
+                    it easy to practice coding while having fun.
+                </p>
+            </div>
+        </section>
+
+        <!-- Creator Section -->
+        <section id="creator" class="content-section creator-section">
+            <div class="section-container">
+                <h2 class="section-title">Meet the Creators</h2>
+                <div class="creator-card">
+                    <div class="creator-info">
+                        <h3 class="creator-name">Salem Alsairi</h3>
+                        <p class="creator-bio">
+                            Software Developer
+                        </p>
+                        <p class="creator-description">
+                            Computer Science graduate passionate about building scalable backend systems
+                            and solving real-world problems. I enjoy creating efficient solutions that make an impact.
+                        </p>
+                        <div class="creator-links">
+                            <a href="https://x.com/KillerQueen4O4" target="_blank" rel="noopener noreferrer" class="social-link">
+                                <i class='bx bxl-twitter'></i>
+                                <span>Follow on X</span>
+                            </a>
+                            <a href="https://github.com/salem-JUC" target="_blank" rel="noopener noreferrer" class="social-link">
+                                <i class='bx bxl-github'></i>
+                                <span>View on GitHub</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="landing-footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3 class="footer-title">Code Fight</h3>
+                <p class="footer-text">Built by passionate Computer Science students</p>
+            </div>
+            <div class="footer-section">
+                <h4 class="footer-subtitle">Quick Links</h4>
+                <a href="#about" class="footer-link">About</a>
+                <a href="#features" class="footer-link">Features</a>
+                <a href="./AboutUs.html" class="footer-link">Team</a>
+                <a href="./Login.html" class="footer-link">Login</a>
+            </div>
+            <div class="footer-section">
+                <h4 class="footer-subtitle">Team</h4>
+                <p class="footer-text">MOHAMMED ALGHAMDI</p>
+                <p class="footer-text">OMAR ALGHAMDI</p>
+                <p class="footer-text">SALEM ALSAIRI</p>
+                <p class="footer-text">ALI ALSADAH</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Code Fight. Built with Java, Spring Boot, HTML/CSS, and creativity.</p>
+        </div>
+    </footer>
+</body>
+</html>
+

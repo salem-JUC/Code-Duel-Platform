@@ -1,4 +1,4 @@
-// Form Validation System for Code Duel Platform
+// Form Validation System for Code Fight Platform
 
 document.addEventListener('DOMContentLoaded', () => {
     // Validation Rules

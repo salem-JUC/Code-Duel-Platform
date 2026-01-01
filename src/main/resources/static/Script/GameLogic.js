@@ -25,6 +25,19 @@ class GameLogic {
     init(user) {
         this.getMatchInfo(user)
         this.setupWebSocket();
+        // let status = {
+        //     title : "Even or Odd",
+        //     description : "Write a function that adds two numbers",
+        //     sample : "5,7",
+        //     expectedOutput : "12",
+        //     difficulty : "Easy",
+        //     programmingLanguage : "java",
+        //     playerName : "BOB",
+        //     secondName : "M7",
+        //     playerScore : 3,
+        //     secondScore : 3
+        // }
+
         this.setupUIEvents();
         this.updateUI();
     }
@@ -57,7 +70,7 @@ class GameLogic {
             this.sendReadyNotification();
         }, (error) => {
             console.error('WebSocket error:', error);
-            this.showError('Connection lost. Reconnecting...');
+            this.showGameError('Connection lost. Reconnecting...');
             setTimeout(() => this.setupWebSocket(), 500000);
         });
     }
@@ -97,7 +110,7 @@ class GameLogic {
         // Error messages
         this.stompClient.subscribe(`/user/queue/errors`, (message) => {
             const error = JSON.parse(message.body);
-            this.showError(error);
+            this.showGameError(error.message || error);
         });
     }
 
@@ -137,10 +150,10 @@ class GameLogic {
     handleSubmit() {
         
         if (!this.isGameActive) return;
-        this.showMessage("⌛ Your submission is being evaluated");
+        this.showGameSuccess("⌛ Your submission is being evaluated");
         const code = document.getElementById('codeEditor').value.trim();
         if (!code) {
-            this.showError("Please write some code first!");
+            this.showGameError("Please write some code first!");
             document.getElementById("submitBtn").disabled = false;
             return;
         }
@@ -162,13 +175,13 @@ class GameLogic {
         
         // Play animations
         if (isAttacker) {
-            this.showMessage("👊 You attacked " + this.opponentUsername)
+            this.showGameSuccess("👊 You attacked " + this.opponentUsername)
             overworld.Player.performAttackP(overworld.Oponent);
             gameSounds.playSFX('hit');
             this.playerHealth = hit.player1Health;
             this.opponentHealth = hit.player2Health;
         } else {
-            this.showMessage("⚠️ "+this.opponentUsername + " attacked you")
+            this.showGameError("⚠️ "+this.opponentUsername + " attacked you")
             overworld.Player.performAttackO(overworld.Oponent);
             gameSounds.playSFX('hit');
             this.playerHealth = hit.player2Health;
@@ -188,9 +201,9 @@ class GameLogic {
     handleSubmissionResponse(response) {
         if (response.accepted) {
             console.log("submission correct")
-            this.showMessage("✅️ Correct solution");
+            this.showGameSuccess("✅️ Correct solution");
         } else {
-            this.showMessage( "❌ Wrong solution" + response.message);
+            this.showGameError("❌ Wrong solution" + (response.message ? ": " + response.message : ""));
         }
     }
 
@@ -202,19 +215,15 @@ class GameLogic {
 
     // Handle match end
     handleMatchEnd(result) {
-        let message;
-
         if (result.winnerId === this.playerId) {
             overworld.Player.WinnerP(overworld.Oponent);
-            message = "You won the match!";
+            this.showGameSuccess("🎉 You won the match!", 6000);
             gameSounds.playSFX('win');
-
         } else if (result.winnerName) {
             overworld.Player.opponentWin(overworld.Oponent);
-            message = "You have Lost !! ";
+            this.showGameError("You have Lost !!", 6000);
         }
         
-        this.showMessage(message);
         this.isGameActive = false;
         
         setTimeout(() => {
@@ -235,14 +244,15 @@ class GameLogic {
 
     updateChallengeDisplay() {
         if (!this.currentChallenge) return;
-        
+        this.currentChallenge.sample = this.currentChallenge.sample.replace(/Input : /g, 'input : <br><br>').replace(/Output : /g, 'output : ');
         const challengeDiv = document.getElementById('challengeDiv');
         challengeDiv.innerHTML = `
             <h3>${this.currentChallenge.title}</h3>
             <br>
             <p>${this.currentChallenge.description}</p>
-            <br>
-            <div class="sample">${this.currentChallenge.sample}</div>
+        `;
+        document.getElementById('sampleContent').innerHTML = `
+            ${this.currentChallenge.sample}
         `;
     }
     quit(){
@@ -253,12 +263,72 @@ class GameLogic {
   
 
     // Notification Methods
-    showMessage(message) {
-        document.getElementById("message").textContent = message
+    showGameSuccess(message, duration = 4000) {
+        // Remove existing success message if any
+        const existingSuccess = document.querySelector('.game-message-success');
+        if (existingSuccess) {
+            existingSuccess.remove();
+        }
+
+        // Create success message element
+        const successDiv = document.createElement('div');
+        successDiv.className = 'game-message-success';
+        successDiv.innerHTML = `
+            <div class="game-message-icon">✓</div>
+            <div class="game-message-text">${message}</div>
+            <button class="game-message-close" onclick="this.parentElement.remove()">×</button>
+        `;
+
+        document.body.appendChild(successDiv);
+
+        // Animate in
+        setTimeout(() => {
+            successDiv.classList.add('show');
+        }, 10);
+
+        // Auto remove after duration
+        setTimeout(() => {
+            successDiv.classList.remove('show');
+            setTimeout(() => {
+                if (successDiv.parentElement) {
+                    successDiv.remove();
+                }
+            }, 300);
+        }, duration);
     }
 
-    showError(message) {
-        alert(message)
+    showGameError(message, duration = 5000) {
+        // Remove existing error message if any
+        const existingError = document.querySelector('.game-message-error');
+        if (existingError) {
+            existingError.remove();
+        }
+
+        // Create error message element
+        const errorDiv = document.createElement('div');
+        errorDiv.className = 'game-message-error';
+        errorDiv.innerHTML = `
+            <div class="game-message-icon">⚠</div>
+            <div class="game-message-text">${message}</div>
+            <button class="game-message-close" onclick="this.parentElement.remove()">×</button>
+        `;
+
+        document.body.appendChild(errorDiv);
+
+        // Animate in
+        setTimeout(() => {
+            errorDiv.classList.add('show');
+        }, 10);
+
+        // Auto remove after duration
+        setTimeout(() => {
+            errorDiv.classList.remove('show');
+            setTimeout(() => {
+                if (errorDiv.parentElement) {
+                    errorDiv.remove();
+                }
+            }, 300);
+        }, duration);
     }
 
     // Event Listeners
@@ -274,11 +344,13 @@ class GameLogic {
     }
 }
 
+
+
+
 let game = null;
 //Initialize game when page loads
 window.onload = async () => {
     game = new GameLogic();
-    
     const user = await fetchCurrentUser()
     game.init(user);
     if (!user) {
