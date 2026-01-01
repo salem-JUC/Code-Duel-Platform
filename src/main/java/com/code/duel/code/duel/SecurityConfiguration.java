@@ -38,7 +38,7 @@ public class SecurityConfiguration {
                     });
                 })
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/", "/Login.html").permitAll()
+                        .requestMatchers("/", "/Login.html" , "/index.html").permitAll()
                         .requestMatchers("/api/auth/**").permitAll()
                         .anyRequest().authenticated()
                 )
