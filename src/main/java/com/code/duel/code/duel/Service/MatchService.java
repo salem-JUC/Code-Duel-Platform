@@ -17,6 +17,7 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class MatchService {
@@ -168,6 +169,8 @@ public class MatchService {
         return userPlayMatchRepo.findTheOpponent(playerId , matchId);
     }
 
-
+    public Long getOnlyRunningMatchIdOfUser(Long userId){
+        return matchRepo.findRunningMatchOfUser(userId);
+    }
 
 }

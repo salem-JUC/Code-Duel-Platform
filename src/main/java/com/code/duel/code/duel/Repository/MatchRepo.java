@@ -12,8 +12,10 @@ import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Repository;
 
+import javax.sql.RowSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.OptionalLong;
 
 
 @Repository
@@ -199,6 +201,16 @@ public class MatchRepo {
             else
                 return null; // Return null if match not found
         }, playerId, playerId, matchId);
+    }
+
+    public Long findRunningMatchOfUser(Long userId){
+        String sql = "select m.MATCHID from \"match\" as m\n" +
+                "join USER_PLAY_MATCH as upm ON upm.MATCHID = m.MATCHID AND upm.USERID = ? AND m.STATUS = 'RUNNING';";
+        SqlRowSet rs = jdbcTemplate.queryForRowSet(sql , userId);
+        if (rs.next()){
+            return rs.getLong("MATCHID");
+        }
+        return null;
     }
 
 }
