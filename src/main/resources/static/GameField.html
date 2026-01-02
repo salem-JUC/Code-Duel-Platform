@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.jsdelivr.net/npm/sockjs-client/dist/sockjs.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js" integrity="sha512-iKDtgDyTHjAitUDdLljGhenhPwrbBfqTKWO1mkhSFH3A7blITC9MhYon6SjnMhp4o0rADGw9yAC6EW4t5a4K3g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
+    <script src="/monaco/vs/loader.js"></script>
     <title>CodeFight</title>
 </head>
 <body>
@@ -36,9 +36,9 @@
     <!-- Left Side: Code Editor and Duel Button -->
     <div class="left-side">
         <div class="text-container">
-            <textarea id="codeEditor" placeholder="Start Coding"></textarea>
+            <div id="codeEditor" ></div>
+            <input type="button" id="submitBtn" value="Duel" class="duel-button">
         </div>
-        <input type="button" id="submitBtn" value="Duel" class="duel-button">
     </div>
 
     <!-- Right Side: Game Area -->
@@ -159,8 +159,7 @@
             <button class="return-btn" onclick="window.location.href = 'index.html'">Return to Main Page</button>
         </div>
     </div>
-    <script src="./Script/FormValidation.js"></script>
-    <script src="./Script/LogReg.js"></script>
+    <script src="./Script/MonacoHandler.js"></script>
     <script src="./Script/GameFildSound.js"></script>
     <script src="./Script/Overworld.js"></script>
     <script src="./Script/GameObject.js"></script>

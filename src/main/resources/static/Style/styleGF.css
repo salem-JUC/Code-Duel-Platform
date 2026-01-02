@@ -97,31 +97,15 @@ body {
     flex-direction: column;
 }
 
-.sample-title {
-    font-family: 'PF Tempesta Five', sans-serif;
-    font-size: 18px;
-    color: #ff1717;
-    margin: 0 0 15px 0;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    border-bottom: 2px solid rgba(255, 23, 23, 0.3);
-    padding-bottom: 8px;
-}
-
 .sample-content {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
     flex: 1;
     overflow-y: auto;
     font-family: 'Public Pixel', sans-serif;
     font-size: 14px;
     color: #ffffff;
     font-weight: bold;
+    line-height: 1.8;
 }
-
-
-
 
 /* Custom Scrollbar for Sample Box */
 .sample-content::-webkit-scrollbar {
@@ -149,11 +133,14 @@ body {
     left: 20px;
     top: 120px;
     bottom: 20px;
-    width: 55%;
-    max-width: 800px;
+    width: calc(50% - 30px);
+    max-width: min(800px, calc(50vw - 30px));
+    min-width: 300px;
     display: flex;
     flex-direction: column;
     z-index: 50;
+    overflow: hidden;
+    box-sizing: border-box;
 }
 
 .text-container {
@@ -161,27 +148,30 @@ body {
     display: flex;
     flex-direction: column;
     margin-bottom: 15px;
+    min-height: 0;
+    overflow: hidden;
 }
 
-.text-container textarea {
+.text-container #codeEditor {
     width: 100%;
     height: 100%;
-    min-height: 500px;
-    font-size: 18px;
+    min-height: 0;
+    max-width: 100%;
+    max-height: 100%;
+    overflow: hidden;
     font-family: 'Courier New', 'Consolas', 'Monaco', monospace;
-    background: rgba(0, 0, 0, 0.95);
-    color: #00ff00;
-    padding: 20px;
-    border: 3px solid #ff1717;
-    border-radius: 8px;
-    resize: none;
-    line-height: 1.8;
-    box-shadow: 0 0 30px rgba(255, 23, 23, 0.4);
-    tab-size: 4;
-    overflow-y: auto;
 }
 
-/* Custom Scrollbar Styling for Code Editor */
+/* Monaco Editor Container Constraints */
+.text-container #codeEditor .monaco-editor {
+    width: 100% !important;
+    height: 100% !important;
+    max-width: 100% !important;
+    max-height: 100% !important;
+    overflow: hidden !important;
+}
+
+/* 
 .text-container textarea::-webkit-scrollbar {
     width: 12px;
 }
@@ -205,7 +195,7 @@ body {
 }
 
 /* Firefox Scrollbar Styling */
-.text-container textarea {
+/* .text-container textarea {
     scrollbar-width: thin;
     scrollbar-color: #ff1717 rgba(0, 0, 0, 0.8);
 }
@@ -218,7 +208,7 @@ body {
 
 .text-container textarea::placeholder {
     color: rgba(0, 255, 0, 0.5);
-}
+} */ 
 
 /* Duel Button - Under Code Editor */
 .duel-button {

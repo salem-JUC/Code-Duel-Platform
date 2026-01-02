@@ -1,4 +1,3 @@
-// GameLogic.js - Real-time competitive coding duel
 
 
 class GameLogic {
@@ -46,11 +45,11 @@ class GameLogic {
     getMatchInfo(user) {
         const urlParams = new URLSearchParams(window.location.search);
         this.matchId = urlParams.get('matchId');
-        console.log("Match Id is : ", this.matchId)
         this.playerId = user.userID;
         this.playerUsername = user.username;
-        console.log("Player : " , user)
+        
         if (this.matchId == null || this.playerId == null) {
+            console.error('Missing matchId or playerId. Redirecting to login.');
             window.location.href = '/Login.html';
         }
     }
@@ -65,11 +64,11 @@ class GameLogic {
         type : "MATCH"
         ,userId:this.playerId
         ,matchId : this.matchId}, (frame) => {
-            console.log('Connected to WebSocket');
+            console.log('WebSocket connected successfully');
             this.subscribeToChannels();
             this.sendReadyNotification();
         }, (error) => {
-            console.error('WebSocket error:', error);
+            console.error('WebSocket connection error:', error);
             this.showGameError('Connection lost. Reconnecting...');
             setTimeout(() => this.setupWebSocket(), 500000);
         });
@@ -121,16 +120,6 @@ class GameLogic {
 
     // Handle initial game state
     handleGameStart(status) {
-        // "difficulty": "Easy",
-        // "programmingLanguage": "Java",
-        // "title": "Even or Odd",
-        // "description": "Reada number then print if an integer is even or odd.",
-        // "sample": "Input: 4 Output: Even",
-        // "playerName": "SalemX",
-        // "playerScore": 3,
-        // "secondName": "MohX",
-        // "secondScore": 3
-        console.log("Starting Status" , status)
         this.currentChallenge.title = status.title;
         this.currentChallenge.description = status.description;
         this.currentChallenge.sample = status.sample;
@@ -142,17 +131,21 @@ class GameLogic {
         this.playerHealth = status.playerScore;
         this.opponentHealth = status.secondScore;
         this.isGameActive = true;
+        defineLanguage(this.language);
         this.updateUI();
         this.updateChallengeDisplay();
     }
 
     // Handle code submission
     handleSubmit() {
+        if (!this.isGameActive) {
+            console.warn('Submission attempted but game is not active');
+            return;
+        }
         
-        if (!this.isGameActive) return;
         this.showGameSuccess("⌛ Your submission is being evaluated");
-        const code = document.getElementById('codeEditor').value.trim();
-        if (!code) {
+        const code = window.editor.getValue();
+        if (!code || code.trim().length === 0) {
             this.showGameError("Please write some code first!");
             document.getElementById("submitBtn").disabled = false;
             return;
@@ -162,15 +155,10 @@ class GameLogic {
             challengeId: this.currentChallenge.id,
             code: code
         }));
-        
-        // Clear editor but keep it enabled for next attempt
-        document.getElementById('codeEditor').value = ""
-
     }
 
     // Process hit event
     handleHitEvent(hit) {
-        console.log(hit)
         const isAttacker = hit.hittingPlayerId === this.playerId;
         
         // Play animations
@@ -180,14 +168,16 @@ class GameLogic {
             gameSounds.playSFX('hit');
             this.playerHealth = hit.player1Health;
             this.opponentHealth = hit.player2Health;
+            resetEditor();
         } else {
             this.showGameError("⚠️ "+this.opponentUsername + " attacked you")
             overworld.Player.performAttackO(overworld.Oponent);
             gameSounds.playSFX('hit');
             this.playerHealth = hit.player2Health;
             this.opponentHealth = hit.player1Health;
+            resetEditor();
         }
-        document.getElementById('codeEditor').value = ""
+        
         
         this.updateUI();
         
@@ -200,31 +190,33 @@ class GameLogic {
     // Handle submission response
     handleSubmissionResponse(response) {
         if (response.accepted) {
-            console.log("submission correct")
+            console.log('Submission accepted: Correct solution');
             this.showGameSuccess("✅️ Correct solution");
         } else {
+            console.log('Submission rejected:', response.message || 'Wrong solution');
             this.showGameError("❌ Wrong solution" + (response.message ? ": " + response.message : ""));
         }
     }
 
     attack(){
-        console.log("attack animation function")
-        
+        // Attack animation handler
     }
 
 
     // Handle match end
     handleMatchEnd(result) {
+        this.isGameActive = false;
+        
         if (result.winnerId === this.playerId) {
+            console.log('Match ended: Player won');
             overworld.Player.WinnerP(overworld.Oponent);
             this.showGameSuccess("🎉 You won the match!", 6000);
             gameSounds.playSFX('win');
         } else if (result.winnerName) {
+            console.log('Match ended: Player lost. Winner:', result.winnerName);
             overworld.Player.opponentWin(overworld.Oponent);
             this.showGameError("You have Lost !!", 6000);
         }
-        
-        this.isGameActive = false;
         
         setTimeout(() => {
             window.location.href = '/MatchMakingMenu.html';
@@ -256,6 +248,7 @@ class GameLogic {
         `;
     }
     quit(){
+        console.log('Player quitting match');
         this.stompClient.send(`/app/match/${this.matchId}/quit`);
     }
 
@@ -335,53 +328,54 @@ class GameLogic {
     setupUIEvents() {
         document.getElementById('submitBtn').addEventListener('click', () => this.handleSubmit());
         document.getElementById('quitBtn').addEventListener('click', () => this.quit());
-        // Allow Ctrl+Enter to submit
-        document.getElementById('codeEditor').addEventListener('keydown', (e) => {
-            if (e.ctrlKey && e.key === 'Enter') {
-                this.handleSubmit();
-            }
-        });
+
+        
     }
 }
-
 
 
 
 let game = null;
 //Initialize game when page loads
 window.onload = async () => {
-    game = new GameLogic();
-    const user = await fetchCurrentUser()
-    game.init(user);
-    if (!user) {
-        console.warn("No user found , Redirecting to login page ...")
-        window.location.href = '/login';
-        return;
+    try {
+        game = new GameLogic();
+        const user = await fetchCurrentUser();
+        
+        if (!user) {
+            console.warn('No user found. Redirecting to login page.');
+            window.location.href = '/login';
+            return;
+        }
+        
+        game.init(user);
+        console.log('Game initialized successfully');
+    } catch (error) {
+        console.error('Error initializing game:', error);
+        window.location.href = '/Login.html';
     }
-    
 };
 
 
 
 
 async function fetchCurrentUser() {
-    console.log("fetching user")
-    try {
-      const response = await fetch('/api/auth/me', {
-        credentials: 'include' 
-      });
-      
-      if (!response.ok) {
+   try {
+     const response = await fetch('/api/auth/me', {
+       credentials: 'include'
+     });
 
-        window.location.href = '/login'; // Redirect if unauthorized
-        return;
-      }
-      const user = await response.json();
-      console.log("from fucnction : " , user);
-      return user;
-    } catch (error) {
-      console.error('Error fetching user:', error);
-      return null;
-    }
+     if (!response.ok) {
+       console.warn('User authentication failed. Redirecting to login.');
+       window.location.href = '/login';
+       return null;
+     }
+     
+     const user = await response.json();
+     return user;
+   } catch (error) {
+     console.error('Error fetching current user:', error);
+     return null;
+   }
 }
 
