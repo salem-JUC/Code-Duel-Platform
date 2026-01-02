@@ -39,8 +39,7 @@
                 window.location.href = `/CountBeforeGameFaild.html?matchId=${matchId}`;
             });
     
-        // Tell server we're waiting
-        stompClient.send(`/app/match/${matchId}/wait`);
+
     });
 </script>
 

@@ -156,20 +156,6 @@ public class MatchWebSocketController {
                 status
         );
     }
-    @MessageMapping("/match/{matchId}/wait")
-    public void handleWaitingRoomSubscription(@DestinationVariable Long matchId, Principal principal) {
-        User user = (User) ((Authentication) principal).getPrincipal();
-        // Check match status every second
-        ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
-        scheduler.scheduleAtFixedRate(() -> {
-            if (matchService.isMatchReady(matchId)) {
-                messagingTemplate.convertAndSend(
-                        "/topic/match/" + matchId + "/ready",
-                        matchId
-                );
-                scheduler.shutdown();
-            }
-        }, 0, 1, TimeUnit.SECONDS);
-    }
+
 
 }

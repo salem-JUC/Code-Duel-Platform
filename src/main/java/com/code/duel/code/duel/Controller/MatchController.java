@@ -9,6 +9,7 @@ import com.code.duel.code.duel.Model.User;
 import com.code.duel.code.duel.Service.MatchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.messaging.simp.user.SimpUser;
 import org.springframework.messaging.simp.user.SimpUserRegistry;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -24,8 +25,9 @@ public class MatchController {
 
     @Autowired
     MatchService matchService;
+
     @Autowired
-    private SimpUserRegistry simpUserRegistry;
+    private SimpMessagingTemplate messagingTemplate;
 
     @PostMapping("/create")
     public ResponseEntity<Long> createMatch(
@@ -49,8 +51,19 @@ public class MatchController {
             return ResponseEntity.notFound().build();
         }
 
+        sendNotificationToWaiters(joinedMatch.getMatchID());
+
         return ResponseEntity.ok(joinedMatch.getMatchID());
     }
+
+    private void sendNotificationToWaiters(Long matchId) {
+        messagingTemplate.convertAndSend(
+                "/topic/match/" + matchId + "/ready",
+                matchId
+        );
+
+    }
+
     @GetMapping("/status/{matchId}/{userId}")
     public ResponseEntity<MatchStatusResponseMapper> getMatchStatus(@PathVariable Long matchId , @PathVariable Long userId){
         MatchStatusResponseMapper matchStatus = matchService.getMatchStatus(matchId , userId);
