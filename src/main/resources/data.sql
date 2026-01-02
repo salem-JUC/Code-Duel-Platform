@@ -1,6 +1,7 @@
 INSERT INTO "user" (userID, Username, Email, Password, Role, Score)
 VALUES
-(3, 'SalemX', 'salem@example.com', '{noop}123456', 'PLAYER', 0);
+(3, 'SalemX', 'salem@example.com', '{noop}123456', 'PLAYER', 0),
+(4, 'SalehX', 'saleh@example.com', '{noop}123456', 'PLAYER', 0);
 
 INSERT INTO Challenge (ChallengeID, Title, Description, Difficulty, Sample)
 VALUES
